@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import BestSellers from './components/bestSellers';
 import CarouselComp from './components/carouselComp';
 import Footer from './components/footer';
 import Navbar from './components/navbar';
@@ -11,7 +12,8 @@ function App() {
       <Navbar />
       <CarouselComp />
       <TopFragrance />
-      <Footer />
+      <BestSellers />
+      <Footer />   
     </div>
   );
 }
