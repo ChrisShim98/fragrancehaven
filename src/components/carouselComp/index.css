@@ -1,0 +1,6 @@
+.photo {
+    height: 60vh;
+    width: auto;
+    overflow: hidden;
+    object-fit: cover;
+  }
