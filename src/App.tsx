@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import BestSellers from './components/bestSellers';
 import CarouselComp from './components/carouselComp';
+import FeaturedProduct from './components/featuredProduct';
 import Footer from './components/footer';
 import Navbar from './components/navbar';
 import TopFragrance from './components/topFragrance';
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <CarouselComp />
       <TopFragrance />
+      <FeaturedProduct />
       <BestSellers />
       <Footer />   
     </div>
