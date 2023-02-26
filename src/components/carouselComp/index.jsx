@@ -9,7 +9,7 @@ import './index.css'
 const CarouselComp = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
   return (
-    <div className="h-screen w-screen">
+    <div className="h-[40vh] w-screen">
         <Carousel 
                 infiniteLoop 
                 useKeyboardArrows 

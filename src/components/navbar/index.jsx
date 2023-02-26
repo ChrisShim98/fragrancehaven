@@ -5,9 +5,9 @@ import Logo from './Logo.png'
 const Navbar = () => {
   return (
     <div className="w-screen h-16 fixed grid grid-flow-col bg-dark text-light place-items-center z-20">
-      <img src={Logo} alt="Logo" className="h-16" />
+      <img src={Logo} alt="Logo" className="h-16 py-1" />
       <div className="flex">
-        <input type="text" className="rounded-l-md h-8 w-[50vw] text-dark px-2" />
+        <input type="text" className="rounded-l-md h-8 w-[50vw] text-dark px-2" placeholder="Search" />
         <div
           className="bg-accent h-8 w-8 flex place-items-center justify-center rounded-r-md
                 hover:cursor-pointer hover:bg-[#fff6f6] hover:text-[#202020]"
@@ -15,9 +15,8 @@ const Navbar = () => {
           <BsSearch />
         </div>
       </div>
-      <ul className="flex gap-2">
+      <ul className="md:flex gap-2 hidden">
         <li>Sign In</li>
-        <li>Help</li>
         <h1 className="flex place-items-center"><BsCart />Cart</h1>    
       </ul>
     </div>

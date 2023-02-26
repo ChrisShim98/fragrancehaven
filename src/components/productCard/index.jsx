@@ -47,15 +47,18 @@ const ProductCard = () => {
                         <span className="text-gray-400 whitespace-nowrap mr-3">
                           4.60
                         </span>
-                        <span className="mr-2 text-gray-400">Jamaica</span>
+                        <span className="mr-2 text-gray-400">Avaliable for pickup</span>
                       </div>
                       <div className="flex items-center w-full justify-between min-w-0 ">
                         <h2 className="text-lg mr-auto cursor-pointer text-gray-200 hover:text-[#d2b48c] truncate">
-                          Holder Perfume
+                          Holder Perfume Name
                         </h2>
-                        <div className="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-md">
+                        <div className="flex items-center bg-light text-dark text-xs px-2 py-1 ml-3 rounded-md">
                           INSTOCK
                         </div>
+                      </div>
+                      <div>
+                        <h1 className="text-gray-400">By Company Name</h1>
                       </div>
                     </div>
                     <div className="text-xl text-white font-semibold mt-1">
