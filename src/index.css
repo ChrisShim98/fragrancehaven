@@ -2,11 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.navbar {
+    animation: navbarAnimation 1s ease-in-out; 
+}
+@keyframes navbarAnimation {
+    0%   {top: -15rem; opacity: 0%;}
+    100% {top: 0rem; opacity: 100%;}
+  }
+  
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #fff6f6 #ffffff;
+    scrollbar-color: #E4A0F7 #ffffff;
 }
 
 /* Chrome, Edge, and Safari */
@@ -19,33 +30,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #fff6f6;
+    background-color: #E4A0F7;
     border-radius: 10px;
-    border: 1px solid #202020;
-}
-
-/* Colors */
-
-.bg-dark {
-    background: #202020;
-}
-
-.bg-light {
-    background: #fff6f6;
-}
-
-.bg-accent {
-    background: #d2b48c;
-}
-
-.text-dark {
-    color: #202020;
-}
-
-.text-light {
-    color: #fff6f6;
-}
-
-.text-accent {
-    color: #d2b48c;
+    border: 3px solid #ffffff;
 }
