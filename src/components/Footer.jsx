@@ -1,5 +1,11 @@
 import React from "react";
-import { FaTwitter, FaInstagram, FaFacebookSquare   } from "react-icons/fa";
+import {
+  FaTwitter,
+  FaInstagram,
+  FaFacebookSquare,
+  FaYoutube,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,113 +14,113 @@ const Footer = () => {
         <div className="grid row-gap-10 mb-8 lg:grid-cols-6 gap-8 lg:gap-4">
           <div className="grid grid-cols-2 gap-4 row-gap-8 lg:col-span-4 md:grid-cols-3">
             <div>
-              <p className="font-medium tracking-wide">Category</p>
+              <p className="font-medium tracking-wide">About Us</p>
               <ul className="mt-2 space-y-2 text-sm">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/aboutUs#about"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    News
-                  </a>
+                    Who We Are
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/aboutUs#storeLocation"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    World
-                  </a>
+                    Store Location
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/aboutUs#ourPeople"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Games
-                  </a>
+                    Our People
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/aboutUs#contactUs"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    References
-                  </a>
+                    Contact Us
+                  </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="font-medium tracking-wide">Apples</p>
+              <p className="font-medium tracking-wide">USEFUL LINKS</p>
               <ul className="mt-2 space-y-2 text-sm">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Web
-                  </a>
+                    Home
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    eCommerce
-                  </a>
+                    All Products
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Business
-                  </a>
+                    Random Product
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Entertainment
-                  </a>
+                    FAQs
+                  </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="font-medium tracking-wide">Cherry</p>
+              <p className="font-medium tracking-wide">FOLLOW US</p>
               <ul className="mt-2 space-y-2 text-sm">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Media
-                  </a>
+                    Twitter
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Brochure
-                  </a>
+                    Instagram
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Nonprofit
-                  </a>
+                    Facebook
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
                   >
-                    Educational
-                  </a>
+                    Youtube
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -125,6 +131,8 @@ const Footer = () => {
             </span>
             <form className="flex flex-col mt-4 md:flex-row">
               <input
+                name="email"
+                autoComplete="true"
                 placeholder="Email"
                 required=""
                 type="text"
@@ -138,8 +146,8 @@ const Footer = () => {
               </button>
             </form>
             <p className="mt-4 text-sm">
-              Bacon ipsum dolor amet short ribs pig sausage prosciuto chicken
-              spare ribs salami.
+              Join Fragrance Haven's newsletter for exclusive scents, insider
+              tips, and irresistible offers. Elevate your senses with us!
             </p>
           </div>
         </div>
@@ -148,24 +156,30 @@ const Footer = () => {
             © Copyright 2024 Fragrance Haven. All rights reserved.
           </p>
           <div className="flex items-center mt-4 space-x-4 sm:mt-0">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
             >
               <FaTwitter />
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
             >
               <FaInstagram />
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
             >
               <FaFacebookSquare />
-            </a>
+            </Link>
+            <Link
+              to="/"
+              className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
+            >
+              <FaYoutube />
+            </Link>
           </div>
         </div>
       </div>

@@ -16,9 +16,8 @@ const FeaturedProduct = () => {
               <img
                 src={colognes[randomNumber].img}
                 className="w-full relative z-10"
-                alt=""
+                alt={colognes[randomNumber].name}
               />
-              <div className="border-4 border-gray-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
             </div>
           </div>
           <div className="w-full md:w-1/2 px-10">

@@ -3,6 +3,8 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Homepage from "./pages/Homepage";
+import AboutUs from "./pages/AboutUs";
+import ScrollToAnchor from "./helpers/ScrollToAnchor";
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -28,6 +30,7 @@ function App() {
       <Navbar display={scrollPosition > 200} />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
       </Routes>
       <Footer />
     </div>

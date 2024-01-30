@@ -2,7 +2,7 @@ import { topBrands } from "../constants/colognes.jsx";
 
 const TopFragrance = () => {
   return (
-    <div className="bg-gray-200  w-screen flex flex-col place-items-center py-24">
+    <div className="bg-gray-100 w-screen flex flex-col place-items-center py-24">
       <div className="grid place-items-center justify-center h-full gap-12">
         <h1 className="text-3xl font-medium">Top Cologne Brands</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center  pt-8 lg:pt-0">

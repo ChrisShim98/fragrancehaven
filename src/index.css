@@ -10,8 +10,7 @@
 @keyframes navbarAnimation {
     0%   {top: -15rem; opacity: 0%;}
     100% {top: 0rem; opacity: 100%;}
-  }
-  
+}
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
