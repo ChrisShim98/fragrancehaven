@@ -7,9 +7,9 @@ import BestSellers from '../components/BestSellers'
 const Homepage = () => {
   return (
     <div>
-        <CarouselComp />
-        <TopFragrance />
+        <CarouselComp />  
         <FeaturedProduct />
+        <TopFragrance />
         <BestSellers />
     </div>
   )
