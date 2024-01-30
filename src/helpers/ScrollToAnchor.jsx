@@ -13,8 +13,8 @@ function ScrollToAnchor() {
     }
 
     if (lastHash.current && document.getElementById(lastHash.current)) {
-      setTimeout(async () => {
-        await document.getElementById(lastHash.current)?.scrollIntoView({
+      setTimeout(() => {
+        document.getElementById(lastHash.current)?.scrollIntoView({
           behavior: "smooth",
           block: "start",
           inline: "nearest",

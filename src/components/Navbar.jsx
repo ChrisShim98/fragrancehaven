@@ -32,7 +32,7 @@ const Navbar = ({ display }) => {
               <BsSearch />
             </div>
           </div>
-          <div className="grid grid-flow-col justify-center gap-8">
+          <div className="grid grid-flow-col justify-center items-center gap-8 mr-12 xl:mr-28">
             <Link to="/" className="hover:text-primary hover:cursor-pointer">
               Home
             </Link>
