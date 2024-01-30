@@ -17,34 +17,22 @@ const Footer = () => {
               <p className="font-medium tracking-wide">About Us</p>
               <ul className="mt-2 space-y-2 text-sm">
                 <li>
-                  <Link
-                    to="/aboutUs#about"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/aboutUs#about" className="link">
                     Who We Are
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/aboutUs#storeLocation"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/aboutUs#storeLocation" className="link">
                     Store Location
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/aboutUs#ourPeople"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/aboutUs#ourPeople" className="link">
                     Our People
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/aboutUs#contactUs"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/aboutUs#contactUs" className="link">
                     Contact Us
                   </Link>
                 </li>
@@ -54,34 +42,22 @@ const Footer = () => {
               <p className="font-medium tracking-wide">USEFUL LINKS</p>
               <ul className="mt-2 space-y-2 text-sm">
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/allProducts" className="link">
                     All Products
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     Random Product
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     FAQs
                   </Link>
                 </li>
@@ -91,34 +67,22 @@ const Footer = () => {
               <p className="font-medium tracking-wide">FOLLOW US</p>
               <ul className="mt-2 space-y-2 text-sm">
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     Twitter
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     Instagram
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     Facebook
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="transition-colors duration-300 hover:text-deep-purple-accent-200 hover:text-primary"
-                  >
+                  <Link to="/" className="link">
                     Youtube
                   </Link>
                 </li>
@@ -136,11 +100,11 @@ const Footer = () => {
                 placeholder="Email"
                 required=""
                 type="text"
-                className="flex-grow w-full h-12 px-4 mb-3 transition duration-200 text-black bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                className="flex-grow w-full h-12 px-4 mb-3 transition duration-200 text-undertone bg-white rounded-lg md:mr-2 md:mb-0"
               />
               <button
                 type="submit"
-                className="inline-flex bg-white items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-primary focus:shadow-outline focus:outline-none"
+                className="btn btn-light h-12 px-6 font-medium"
               >
                 Subscribe
               </button>
@@ -155,29 +119,17 @@ const Footer = () => {
           <p className="text-sm">
             © Copyright 2024 Fragrance Haven. All rights reserved.
           </p>
-          <div className="flex items-center mt-4 space-x-4 sm:mt-0">
-            <Link
-              to="/"
-              className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
-            >
+          <div className="flex items-center mt-4 space-x-4 sm:mt-0 text-xl">
+            <Link to="/" className="link">
               <FaTwitter />
             </Link>
-            <Link
-              to="/"
-              className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
-            >
+            <Link to="/" className="link">
               <FaInstagram />
             </Link>
-            <Link
-              to="/"
-              className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
-            >
+            <Link to="/" className="link">
               <FaFacebookSquare />
             </Link>
-            <Link
-              to="/"
-              className="transition-colors duration-300 hover:text-teal-accent-400 text-xl hover:text-primary"
-            >
+            <Link to="/" className="link">
               <FaYoutube />
             </Link>
           </div>

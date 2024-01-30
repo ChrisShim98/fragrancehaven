@@ -46,7 +46,7 @@ const FeaturedProduct = () => {
                 </span>
               </div>
               <div className="inline-block align-bottom pt-4 md:pt-0">
-                <button className="transition ease-in duration-300 bg-undertone text-white hover:bg-primary hover:shadow-lg rounded-lg px-10 py-2 font-semibold">
+                <button className="btn btn-main px-10 py-2 font-semibold">
                   <i className="-ml-2 mr-2"></i> BUY NOW
                 </button>
               </div>

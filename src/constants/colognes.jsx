@@ -1,5 +1,6 @@
 export const colognes = [
   {
+    id: "1",
     name: "Eau de Parfum",
     scent: "Spicy, Woody",
     brand: "YVES SAINT LAURENT",
@@ -11,6 +12,7 @@ export const colognes = [
     rating: 4,
   },
   {
+    id: "2",
     name: "Bleu De Chanel",
     scent: "Citrus, Fresh",
     brand: "CHANEL",
@@ -22,6 +24,7 @@ export const colognes = [
     rating: 3,
   },
   {
+    id: "3",
     name: "Versace Eros",
     scent: "Eros",
     brand: "Versace",
@@ -33,6 +36,7 @@ export const colognes = [
     rating: 4.5,
   },
   {
+    id: "4",
     name: "The Alchemist's Garden",
     scent: "The Last Day of Summer",
     brand: "Gucci",
@@ -44,6 +48,7 @@ export const colognes = [
     rating: 4.8,
   },
   {
+    id: "5",
     name: "Luna Rossa Ocean",
     scent: "Lavender",
     brand: "Prada",
@@ -55,6 +60,7 @@ export const colognes = [
     rating: 2.5,
   },
   {
+    id: "6",
     name: "Sauvage Elixir",
     scent: "Fresh, Woody",
     brand: "Dior",
@@ -66,6 +72,7 @@ export const colognes = [
     rating: 5,
   },
   {
+    id: "7",
     name: "Acqua Di Gio",
     scent: "Fresh",
     brand: "GIORGIO ARMANI",
@@ -77,6 +84,7 @@ export const colognes = [
     rating: 3.8,
   },
   {
+    id: "8",
     name: "Dylan Blue",
     scent: "Versace Dylan Blue",
     brand: "Versace",
@@ -88,6 +96,7 @@ export const colognes = [
     rating: 3.5,
   },
   {
+    id: "9",
     name: "Polo Red",
     scent: "Woody, Spicy",
     brand: "Ralph Lauren",

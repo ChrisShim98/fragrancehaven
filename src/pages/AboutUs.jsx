@@ -8,8 +8,8 @@ const AboutUs = () => {
   return (
     <div className="w-full flex flex-col gap-12">
       <ScrollToAnchor />
-      <div className="w-full bg-gray-100 py-6 text-lg text-center scroll-mt-36" id="about">
-        <h1>About Us</h1>
+      <div className="w-full bg-gray-100 py-6 text-xl font-medium text-center scroll-mt-36" id="about">
+        <h1 className="tracking-wide">About Us</h1>
       </div>
       <div className="flex flex-col items-center gap-2 px-4 text-center">
         <h3 className="text-sm md:text-base">Who Are We</h3>

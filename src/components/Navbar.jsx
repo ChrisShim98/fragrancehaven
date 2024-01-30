@@ -28,35 +28,32 @@ const Navbar = ({ display }) => {
               className="rounded-l-md h-8 w-[50vw] px-2 outline-1 outline"
               placeholder="Search"
             />
-            <div className="bg-undertone text-white h-8 w-8 flex place-items-center justify-center rounded-r-md outline outline-1 outline-undertone hover:cursor-pointer hover:bg-primary hover:text-undertone">
+            <div className="grid place-content-center bg-undertone text-white h-8 w-8 transition-colors duration-300 rounded-r-md outline outline-1 outline-undertone hover:cursor-pointer hover:bg-primary hover:text-undertone">
               <BsSearch />
             </div>
           </div>
           <div className="grid grid-flow-col justify-center items-center gap-8 mr-12 xl:mr-28">
-            <Link to="/" className="hover:text-primary hover:cursor-pointer">
+            <Link to="/" className="link">
               Home
             </Link>
             <p>|</p>
-            <Link to="/" className="hover:text-primary hover:cursor-pointer">
+            <Link to="/allProducts" className="link">
               All Products
             </Link>
             <p>|</p>
-            <Link
-              to="/aboutUs"
-              className="hover:text-primary hover:cursor-pointer"
-            >
+            <Link to="/aboutUs" className="link">
               About Us
             </Link>
             <p>|</p>
-            <Link to="/" className="hover:text-primary hover:cursor-pointer">
+            <Link to="/" className="link">
               FAQs
             </Link>
           </div>
         </div>
 
         <ul className="lg:flex gap-2 hidden place-content-end">
-          <li className="hover:text-primary hover:cursor-pointer">Sign In</li>
-          <h1 className="flex place-items-center hover:text-primary gap-1 hover:cursor-pointer">
+          <li className="link">Sign In</li>
+          <h1 className="flex place-items-center gap-1 link">
             <BsCart />
             Cart
           </h1>
@@ -83,8 +80,8 @@ const Navbar = ({ display }) => {
       <div
         className={
           navOpened
-            ? "w-full bg-white text-black h-[12rem] overflow-hidden duration-1000 absolute top-24 shadow-lg"
-            : "w-full bg-white text-black h-0 overflow-hidden duration-1000 absolute top-24"
+            ? "w-full bg-white text-undertone h-[12rem] overflow-hidden duration-1000 absolute top-24 shadow-lg"
+            : "w-full bg-white text-undertone h-0 overflow-hidden duration-1000 absolute top-24"
         }
       >
         <ul className="lg:hidden gap-2 grid place-items-center text-lg">
@@ -92,7 +89,7 @@ const Navbar = ({ display }) => {
             onClick={() => {
               setNavOpened(false);
             }}
-            className="hover:text-primary hover:cursor-pointer"
+            className="link"
           >
             Sign In
           </li>
@@ -101,16 +98,16 @@ const Navbar = ({ display }) => {
             onClick={() => {
               setNavOpened(false);
             }}
-            className="hover:text-primary hover:cursor-pointer"
+            className="link"
           >
             Home
           </Link>
           <Link
-            to="/"
+            to="/allProducts"
             onClick={() => {
               setNavOpened(false);
             }}
-            className="hover:text-primary hover:cursor-pointer"
+            className="link"
           >
             All Products
           </Link>
@@ -119,7 +116,7 @@ const Navbar = ({ display }) => {
             onClick={() => {
               setNavOpened(false);
             }}
-            className="hover:text-primary hover:cursor-pointer"
+            className="link"
           >
             About Us
           </Link>
@@ -128,7 +125,7 @@ const Navbar = ({ display }) => {
             onClick={() => {
               setNavOpened(false);
             }}
-            className="hover:text-primary hover:cursor-pointer"
+            className="link"
           >
             FAQs
           </Link>
