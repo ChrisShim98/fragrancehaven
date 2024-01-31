@@ -4,9 +4,6 @@ import TopFragrance from '../components/TopFragrance'
 import FeaturedProduct from '../components/FeaturedProduct'
 import BestSellers from '../components/BestSellers'
 
-import { useSelector, useDispatch } from 'react-redux';
-import {selectCart} from '../redux/cartSlice'
-
 const Homepage = () => {
   return (
     <div>

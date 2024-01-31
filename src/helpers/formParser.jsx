@@ -26,3 +26,21 @@ export const cartTotalParse = (cart) => {
     maximumFractionDigits: 2,
   });
 };
+
+export const formTitleParser = (input) => {
+  if (input === "trn") {
+    return "TRN Number";
+  } else if (input === "cvv") {
+    return "CVV Code"
+  }
+  var words = input.split(/(?=[A-Z])/);
+  var result = words.map(function (word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  });
+
+  return result.join(" ").replace(/\bOr\b/g, "/");
+};
+
+export const removeTrailingSpaces = (form) => {
+  
+}
