@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import AboutUs from "./pages/AboutUs";
 import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import AllProducts from "./pages/AllProducts";
-import store from "./redux/store";
-import { Provider } from "react-redux";
+
+import Cart from "./pages/Cart";
 
 function App() {
   const { pathname } = useLocation();
@@ -48,20 +48,20 @@ function App() {
   };
 
   return (
-    <Provider store={store}>
-      <div className="overflow-x-hidden text-undertone font-Poppins min-w-[350px]">
-        <Navbar display={scrollPosition > 200} />
-        <div className={scrollPosition > 200 ? "h-24 flex w-full" : "hidden"} />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/productDetails/*" element={<ProductDetails />} />
-          <Route path="/allProducts" element={<AllProducts />} />
-        </Routes>
-        <Footer />
-        <ScrollToTop display={scrollPosition > 200} toTop={toTop} />
-      </div>
-    </Provider>
+    <div className="overflow-x-hidden text-undertone font-Poppins min-w-[350px]">
+      <Navbar display={scrollPosition > 200} />
+      <div className={scrollPosition > 200 ? "h-24 flex w-full" : "hidden"} />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/productDetails/*" element={<ProductDetails />} />
+        <Route path="/allProducts" element={<AllProducts />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/*" element={<Navigate to="/" />} />
+      </Routes>
+      <Footer />
+      <ScrollToTop display={scrollPosition > 200} toTop={toTop} />
+    </div>
   );
 }
 

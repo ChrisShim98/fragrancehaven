@@ -3,9 +3,14 @@ import { BsSearch, BsCart } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { addProduct, selectCart } from "../redux/cartSlice";
+import { cartAmountParse } from "../helpers/formParser";
 
 const Navbar = ({ display }) => {
   const [navOpened, setNavOpened] = useState(false);
+  const cart = useSelector(selectCart);
+
   return (
     <div
       className={
@@ -51,18 +56,38 @@ const Navbar = ({ display }) => {
           </div>
         </div>
 
-        <ul className="lg:flex gap-2 hidden place-content-end">
-          <li className="link">Sign In</li>
-          <h1 className="flex place-items-center gap-1 link">
+        <ul className="lg:flex gap-4 hidden place-content-end">
+          <Link to="/" className="link">
+            Sign In
+          </Link>
+          <Link to="/cart" className="flex place-items-center gap-1 link relative">
             <BsCart />
+            <p
+              className={
+                cart.length > 0
+                  ? "absolute top-[-4px] left-[-8px] text-xs bg-primary font-medium rounded-full px-1 w-4 h-4 flex items-center justify-center"
+                  : "hidden"
+              }
+            >
+              {cartAmountParse(cart)}
+            </p>
             Cart
-          </h1>
+          </Link>
         </ul>
         {/* Tablet View */}
         <div className="flex lg:hidden items-center gap-4 place-content-end">
-          <div className="flex">
+          <Link to="/cart" className="flex relative">
             <BsCart size={"1.5rem"} />
-          </div>
+            <p
+              className={
+                cart.length > 0
+                  ? "absolute top-[-4px] left-[-8px] text-xs bg-primary font-medium rounded-full px-1 w-4 h-4 flex items-center justify-center"
+                  : "hidden"
+              }
+            >
+              {cartAmountParse(cart)}
+            </p>
+          </Link>
           <div
             className="flex lg:hidden"
             onClick={() => {
@@ -84,15 +109,7 @@ const Navbar = ({ display }) => {
             : "w-full bg-white text-undertone h-0 overflow-hidden duration-1000 absolute top-24"
         }
       >
-        <ul className="lg:hidden gap-2 grid place-items-center text-lg">
-          <li
-            onClick={() => {
-              setNavOpened(false);
-            }}
-            className="link"
-          >
-            Sign In
-          </li>
+        <ul className="lg:hidden gap-2 grid place-items-center text-lg font-medium">
           <Link
             to="/"
             onClick={() => {
@@ -101,6 +118,15 @@ const Navbar = ({ display }) => {
             className="link"
           >
             Home
+          </Link>
+          <Link
+            to="/"
+            onClick={() => {
+              setNavOpened(false);
+            }}
+            className="link"
+          >
+            Sign In
           </Link>
           <Link
             to="/allProducts"

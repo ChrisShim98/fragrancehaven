@@ -3,14 +3,13 @@ import StoreLocation from "../components/StoreLocation";
 import OurPeople from "../components/OurPeople";
 import ContactUs from "../components/ContactUs";
 import ScrollToAnchor from "../helpers/ScrollToAnchor";
+import PageHeader from "../components/PageHeader";
 
 const AboutUs = () => {
   return (
     <div className="w-full flex flex-col gap-12">
       <ScrollToAnchor />
-      <div className="w-full bg-gray-100 py-6 text-xl font-medium text-center scroll-mt-36" id="about">
-        <h1 className="tracking-wide">About Us</h1>
-      </div>
+      <PageHeader pageHeader={"About Us"} id={"about"} />
       <div className="flex flex-col items-center gap-2 px-4 text-center">
         <h3 className="text-sm md:text-base">Who Are We</h3>
         <h2 className="font-medium text-xl sm:text-3xl pb-2">Welcome To Fragrance Haven</h2>

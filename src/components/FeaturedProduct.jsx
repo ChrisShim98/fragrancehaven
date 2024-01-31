@@ -27,12 +27,6 @@ const FeaturedProduct = () => {
               </h1>
               <p className="text-sm">
                 {colognes[randomNumber].description}{" "}
-                <a
-                  href="#"
-                  className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900"
-                >
-                  MORE
-                </a>
               </p>
             </div>
             <div className="flex flex-col gap-2">

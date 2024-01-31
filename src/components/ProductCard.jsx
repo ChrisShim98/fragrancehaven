@@ -1,6 +1,7 @@
 import { FaRegHeart, FaStar, FaEye } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
-import {addProduct, selectCart} from '../redux/cartSlice'
+import { addProduct, selectCart, addDetail} from '../redux/cartSlice'
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ cologne, isDetailed = false }) => {
   const count = useSelector(selectCart);
@@ -10,7 +11,7 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
       <div
         className={
           isDetailed
-            ? "w-[45rem] w-fullshadow-lg rounded-xl p-6"
+            ? "w-[90vw] sm:w-[640px] w-fullshadow-lg rounded-xl p-6"
             : "w-[20rem] w-fullshadow-lg rounded-xl p-6"
         }
       >
@@ -18,7 +19,7 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
           <div
             className={
               isDetailed
-                ? "relative h-72 w-[25rem] items-center flex"
+                ? "relative h-72 w-[100px] min-w-[100px] sm:w-[25rem] items-center flex"
                 : "relative h-72 w-full items-center flex"
             }
           >
@@ -57,7 +58,7 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
                 </span>
               </div>
               <div className="flex items-center w-full">
-                <h2 className="text-lg cursor-pointer truncate">
+                <h2 className="text-lg cursor-pointer">
                   {cologne.name}
                 </h2>
               </div>
@@ -92,11 +93,11 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
               {cologne.description}
             </div>
             <div className="flex text-sm font-medium justify-end items-center gap-2">
-              <button className="btn btn-main text-xl p-2">
+              <Link onClick={() => {dispatch(addDetail(cologne))}} to={`/productDetails/${cologne.id}`} className="btn btn-main text-xl p-2">
                 <FaEye />
-              </button>
-              <button onClick={() => {dispatch(addProduct(cologne))}} className="btn btn-main text-sm font-medium px-5 py-2">
-                Add Cart
+              </Link>
+              <button onClick={() => {dispatch(addProduct(cologne))}} className="btn btn-main text-sm font-medium px-5 py-2 whitespace-nowrap">
+                Add To Cart
               </button>
             </div>
           </div>
