@@ -45,8 +45,8 @@ const SignIn = () => {
           Register
         </button>
       </div>
-      <div className="w-full flex justify-center px-6">
-        <form className="border rounded-lg grid gap-4 py-12 px-12 mb-12 w-full max-w-[36rem]">
+      <div className="w-full flex justify-center px-4">
+        <form className="border rounded-lg grid gap-4 py-12 px-4 text-sm sm:texgt-base sm:px-12 mb-12 w-full max-w-[36rem]">
           {form !== undefined &&
             (isSignIn ?  loginForm : isForgetPassword ? forgetPasswordForm : registerForm).map((field) => {
               return (
