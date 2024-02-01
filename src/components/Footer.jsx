@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FaTwitter,
-  FaInstagram,
-  FaFacebookSquare,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -53,11 +48,11 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link to="/" className="link">
-                    Random Product
+                    Liked Products
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="link">
+                  <Link to="/faqs" className="link">
                     FAQs
                   </Link>
                 </li>
@@ -116,23 +111,32 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col justify-between pt-5 pb-10 border-t border-gray-800 sm:flex-row">
+          <div>
           <p className="text-sm">
             © Copyright 2024 Fragrance Haven. All rights reserved.
           </p>
-          <div className="flex items-center mt-4 space-x-4 sm:mt-0 text-xl">
-            <Link to="/" className="link">
-              <FaTwitter />
-            </Link>
-            <Link to="/" className="link">
-              <FaInstagram />
-            </Link>
-            <Link to="/" className="link">
-              <FaFacebookSquare />
-            </Link>
-            <Link to="/" className="link">
-              <FaYoutube />
-            </Link>
+          <p className="text-sm pt-2">By Christopher Shim 2024</p>
+          <div className="flex items-center mt-4 space-x-4 sm:mt-0 text-xl sm:pt-2">
+            <a
+              href="https://github.com/ChrisShim98"
+              target="_blank"
+              rel="noreferrer"
+              className="link"
+            >
+              <FaGithub />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/christopher-shim-bsc/"
+              target="_blank"
+              rel="noreferrer"
+              className="link"
+            >
+              <FaLinkedin />
+            </a>
           </div>
+          </div>
+          
+          
         </div>
       </div>
     </div>

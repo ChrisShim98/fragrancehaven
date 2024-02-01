@@ -4,7 +4,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { addProduct, selectCart } from "../redux/cartSlice";
+import { selectCart } from "../redux/cartSlice";
 import { cartAmountParse } from "../helpers/formParser";
 
 const Navbar = ({ display }) => {
@@ -37,7 +37,7 @@ const Navbar = ({ display }) => {
               <BsSearch />
             </div>
           </div>
-          <div className="grid grid-flow-col justify-center items-center gap-8 mr-12 xl:mr-28">
+          <div className="grid grid-flow-col font-medium justify-center items-center gap-8 mr-12 xl:mr-28">
             <Link to="/" className="link">
               Home
             </Link>
@@ -50,14 +50,14 @@ const Navbar = ({ display }) => {
               About Us
             </Link>
             <p>|</p>
-            <Link to="/" className="link">
+            <Link to="/faqs" className="link">
               FAQs
             </Link>
           </div>
         </div>
 
-        <ul className="lg:flex gap-4 hidden place-content-end">
-          <Link to="/" className="link">
+        <ul className="lg:flex gap-4 font-medium hidden place-content-end">
+          <Link to="/signIn" className="link">
             Sign In
           </Link>
           <Link to="/cart" className="flex place-items-center gap-1 link relative">
@@ -120,7 +120,7 @@ const Navbar = ({ display }) => {
             Home
           </Link>
           <Link
-            to="/"
+            to="/signIn"
             onClick={() => {
               setNavOpened(false);
             }}
@@ -147,7 +147,7 @@ const Navbar = ({ display }) => {
             About Us
           </Link>
           <Link
-            to="/"
+            to="/faqs"
             onClick={() => {
               setNavOpened(false);
             }}

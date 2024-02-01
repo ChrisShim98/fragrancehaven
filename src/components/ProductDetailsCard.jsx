@@ -35,10 +35,15 @@ const ProductDetailsCard = ({ cologne }) => {
         <div className="flex flex-col"></div>
         <div className="flex gap-4 py-6">
           <button
+            disabled={cologne.stock === 0}
             onClick={() => {
               dispatch(addProduct(cologne));
             }}
-            className="btn btn-main text-sm font-medium px-5 py-2 whitespace-nowrap"
+            className={
+              cologne.stock === 0
+                ? "btn-disabled text-sm font-medium px-5 py-2"
+                : "btn btn-main text-sm font-medium px-5 py-2"
+            }
           >
             Add To Cart
           </button>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { colognes } from "../constants/colognes";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartSlice";
 
 const FeaturedProduct = () => {
+  const dispatch = useDispatch();
   const [randomNumber, setRandomNumber] = useState(0);
   useEffect(() => {
     setRandomNumber(Math.floor(Math.random() * colognes.length));
@@ -25,9 +28,7 @@ const FeaturedProduct = () => {
               <h1 className="font-bold uppercase text-2xl mb-5">
                 {colognes[randomNumber].name}
               </h1>
-              <p className="text-sm">
-                {colognes[randomNumber].description}{" "}
-              </p>
+              <p className="text-sm">{colognes[randomNumber].description} </p>
             </div>
             <div className="flex flex-col gap-2">
               <div className="inline-block align-bottom">
@@ -40,8 +41,14 @@ const FeaturedProduct = () => {
                 </span>
               </div>
               <div className="inline-block align-bottom pt-4 md:pt-0">
-                <button className="btn btn-main px-10 py-2 font-semibold">
-                  <i className="-ml-2 mr-2"></i> BUY NOW
+                <button
+                  className={colognes[randomNumber].stock === 0 ? "btn-disabled px-10 py-2 font-semibold" : "btn btn-main px-10 py-2 font-semibold"}
+                  disabled={colognes[randomNumber].stock === 0}
+                  onClick={() => {
+                    dispatch(addProduct(colognes[randomNumber]));
+                  }}
+                >
+                  Add To Cart
                 </button>
               </div>
             </div>

@@ -40,3 +40,47 @@ export const billingDetailsForm = [
         colSpan: 1
     },
 ]
+
+export const loginForm = [
+    {
+        title: "username",
+        type: "text",
+        colSpan: 1
+    },
+    {
+        title: "password",
+        type: "password",
+        colSpan: 1
+    },
+]
+
+export const forgetPasswordForm = [
+    {
+        title: "email",
+        type: "email",
+        colSpan: 1
+    }
+]
+
+export const registerForm = [
+    {
+        title: "email",
+        type: "email",
+        colSpan: 1
+    },
+    {
+        title: "username",
+        type: "text",
+        colSpan: 1
+    },
+    {
+        title: "password",
+        type: "password",
+        colSpan: 1
+    },
+    {
+        title: "confirmPassword",
+        type: "password",
+        colSpan: 1
+    },
+]

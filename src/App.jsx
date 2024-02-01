@@ -7,9 +7,10 @@ import AboutUs from "./pages/AboutUs";
 import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import AllProducts from "./pages/AllProducts";
-
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import SignIn from "./pages/SignIn";
+import FAQs from "./pages/FAQs";
 
 function App() {
   const { pathname } = useLocation();
@@ -49,7 +50,7 @@ function App() {
   };
 
   return (
-    <div className="overflow-x-hidden text-undertone font-Poppins min-w-[350px]">
+    <div className="overflow-x-hidden text-undertone font-Poppins min-w-[320px]">
       <Navbar display={scrollPosition > 200} />
       <div className={scrollPosition > 200 ? "h-24 flex w-full" : "hidden"} />
       <div className="min-h-[80vh]">
@@ -60,6 +61,8 @@ function App() {
         <Route path="/allProducts" element={<AllProducts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/faqs" element={<FAQs />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
       </div>

@@ -19,7 +19,7 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
           <div
             className={
               isDetailed
-                ? "relative h-72 w-[100px] min-w-[100px] sm:w-[25rem] items-center flex"
+                ? "relative h-72 w-[100px] min-w-[75px] sm:w-[25rem] items-center flex"
                 : "relative h-72 w-full items-center flex"
             }
           >
@@ -96,7 +96,7 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
               <Link onClick={() => {dispatch(addDetail(cologne))}} to={`/productDetails/${cologne.id}`} className="btn btn-main text-xl p-2">
                 <FaEye />
               </Link>
-              <button onClick={() => {dispatch(addProduct(cologne))}} className="btn btn-main text-sm font-medium px-5 py-2 whitespace-nowrap">
+              <button disabled={cologne.stock === 0} onClick={() => {dispatch(addProduct(cologne))}} className={cologne.stock === 0 ? "btn-disabled text-sm font-medium px-5 py-2" : "btn btn-main text-sm font-medium px-5 py-2"}>
                 Add To Cart
               </button>
             </div>

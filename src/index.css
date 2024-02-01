@@ -12,13 +12,16 @@
     100% {top: 0rem; opacity: 100%;}
 }
 .btn {
-    @apply transition ease-in duration-300 tracking-wide hover:bg-primary rounded-lg hover:shadow-lg hover:text-white
+    @apply transition ease-in duration-300 tracking-wide hover:bg-primary rounded-lg hover:shadow-lg hover:text-white whitespace-nowrap
 }
 .btn-main {
     @apply text-white bg-undertone    
 }
 .btn-light {
     @apply text-undertone bg-white
+}
+.btn-disabled {
+    @apply text-undertone bg-gray-100 tracking-wide rounded-lg whitespace-nowrap
 }
 .link {
     @apply transition-colors duration-300 hover:text-primary hover:cursor-pointer
@@ -28,6 +31,12 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+}
+.lineClamp1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 /* ===== Scrollbar CSS ===== */
