@@ -38,6 +38,16 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
+.errorBox {
+    right: -15rem;
+    animation: errorBoxAnimation 9.1s ease-in-out infinite;
+  }
+  @keyframes errorBoxAnimation {
+    0%   {right: -15rem; opacity: 100%;}
+    15%  {right: 2rem;}
+    85%  {right: 2rem; opacity: 100%;}
+    100% {right: 2rem; opacity: 0%;}
+  }
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */

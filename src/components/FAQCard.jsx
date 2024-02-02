@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle } from "react-icons/io";
 
 const FAQCard = ({ faq }) => {
     const [opened, setOpened] = useState(false)
@@ -9,7 +9,7 @@ const FAQCard = ({ faq }) => {
         <b className="col-span-1 justify-self-center">Q:</b>
         <h1 className="col-span-7">{faq.question}</h1>
         <p className="col-span-1 text-xl place-self-center">
-          <IoMdArrowDropdownCircle />
+          {opened ? <IoMdArrowDropupCircle /> : <IoMdArrowDropdownCircle />}
         </p>
       </button>
       <div className={opened ? "grid grid-cols-9 text-left p-2" : "grid grid-cols-9 text-left p-0 h-0"}>

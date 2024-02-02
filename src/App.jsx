@@ -11,10 +11,14 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import SignIn from "./pages/SignIn";
 import FAQs from "./pages/FAQs";
+import Popup from "./components/Popup";
+import { useSelector } from "react-redux";
+import { selectPopup } from "./redux/popupSlice";
 
 function App() {
   const { pathname } = useLocation();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const popupDetails = useSelector(selectPopup);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -69,6 +73,7 @@ function App() {
       
       <Footer />
       <ScrollToTop display={scrollPosition > 200} toTop={toTop} />
+      {popupDetails.isOn && <Popup />}
     </div>
   );
 }

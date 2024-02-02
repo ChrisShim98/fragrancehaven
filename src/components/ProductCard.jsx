@@ -1,11 +1,27 @@
 import { FaRegHeart, FaStar, FaEye } from "react-icons/fa";
-import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, selectCart, addDetail} from '../redux/cartSlice'
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addProduct,
+  selectCart,
+  addDetail,
+  selectFavorites,
+  editFavorite,
+} from "../redux/cartSlice";
+import { closePopup, openPopup } from "../redux/popupSlice";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ cologne, isDetailed = false }) => {
-  const count = useSelector(selectCart);
+  const favorites = useSelector(selectFavorites);
+  const isFavorite = favorites.findIndex(
+    (favorite) => favorite.id === cologne.id
+  );
   const dispatch = useDispatch();
+  const addToCart = async () => {  
+    await dispatch(closePopup());
+    dispatch(openPopup(cologne.name + " added to cart"));
+    dispatch(addProduct(cologne));
+  };
+
   return (
     <div className="relative flex flex-col items-center justify-center">
       <div
@@ -24,7 +40,16 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
             }
           >
             <div className="absolute flex flex-col top-0 right-0 p-3">
-              <button className="transition ease-in duration-300 bg-white hover:text-pink-300 shadow hover:shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center">
+              <button
+                onClick={() => {
+                  dispatch(editFavorite(cologne));
+                }}
+                className={
+                  isFavorite !== -1
+                    ? "bg-white text-pink-300 shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center"
+                    : "transition ease-in duration-300 bg-white hover:text-pink-300 shadow hover:shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center"
+                }
+              >
                 <FaRegHeart />
               </button>
             </div>
@@ -58,9 +83,7 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
                 </span>
               </div>
               <div className="flex items-center w-full">
-                <h2 className="text-lg cursor-pointer">
-                  {cologne.name}
-                </h2>
+                <h2 className="text-lg cursor-pointer">{cologne.name}</h2>
               </div>
               <div>
                 <h1 className="text-gray-400 text-sm">{cologne.brand}</h1>
@@ -93,10 +116,26 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
               {cologne.description}
             </div>
             <div className="flex text-sm font-medium justify-end items-center gap-2">
-              <Link onClick={() => {dispatch(addDetail(cologne))}} to={`/productDetails/${cologne.id}`} className="btn btn-main text-xl p-2">
+              <Link
+                onClick={() => {
+                  dispatch(addDetail(cologne));
+                }}
+                to={`/productDetails/${cologne.id}`}
+                className="btn btn-main text-xl p-2"
+              >
                 <FaEye />
               </Link>
-              <button disabled={cologne.stock === 0} onClick={() => {dispatch(addProduct(cologne))}} className={cologne.stock === 0 ? "btn-disabled text-sm font-medium px-5 py-2" : "btn btn-main text-sm font-medium px-5 py-2"}>
+              <button
+                disabled={cologne.stock === 0}
+                onClick={() => {
+                  addToCart();
+                }}
+                className={
+                  cologne.stock === 0
+                    ? "btn-disabled text-sm font-medium px-5 py-2"
+                    : "btn btn-main text-sm font-medium px-5 py-2"
+                }
+              >
                 Add To Cart
               </button>
             </div>

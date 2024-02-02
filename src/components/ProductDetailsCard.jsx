@@ -1,10 +1,11 @@
 import React from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/cartSlice";
+import { addProduct, editFavorite } from "../redux/cartSlice";
 
-const ProductDetailsCard = ({ cologne }) => {
+const ProductDetailsCard = ({ cologne, isFavorite = false }) => {
   const dispatch = useDispatch();
+
   return (
     <div className="grid md:grid-cols-2 px-8 md:px-0 gap-8 py-4">
       <div>
@@ -47,7 +48,12 @@ const ProductDetailsCard = ({ cologne }) => {
           >
             Add To Cart
           </button>
-          <button className="btn btn-main text-xl p-2">
+          <button
+            onClick={() => {
+              dispatch(editFavorite(cologne));
+            }}
+            className={isFavorite ? "bg-primary rounded-lg text-xl p-2" : "btn btn-main text-xl p-2"}
+          >
             <FaRegHeart />
           </button>
         </div>
