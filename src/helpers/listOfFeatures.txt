@@ -1,0 +1,22 @@
+-- Account --
+Login
+Register
+
+-- Products --
+Create product
+Delete product by product id
+Update product by product id
+Get All products paginated
+Get All products by search query (product name)
+Add Image to product
+Delete Image from product
+
+-- Review --
+Add Review
+
+-- Transaction --
+Add Transaction
+
+-- User --
+Add to cart
+Add to favorite
