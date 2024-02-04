@@ -12,11 +12,13 @@ export const popupSlice = createSlice({
   reducers: {
     openPopup: (state, action) => {
       state.popupDetail.isOn = true;
-      state.popupDetail.message = action.payload;
+      state.popupDetail.message = action.payload?.message;
+      state.popupDetail.isError = action.payload?.isError;
     },
     closePopup: (state) => {
       state.popupDetail.isOn = false;
       state.popupDetail.message = "";
+      state.popupDetail.isError = false;
     },
   },
 });

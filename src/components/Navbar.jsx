@@ -10,6 +10,7 @@ import { cartAmountParse } from "../helpers/formParser";
 const Navbar = ({ display }) => {
   const [navOpened, setNavOpened] = useState(false);
   const cart = useSelector(selectCart);
+  let userLoggedIn = localStorage.getItem('token') !== null
 
   return (
     <div
@@ -57,8 +58,8 @@ const Navbar = ({ display }) => {
         </div>
 
         <ul className="lg:flex gap-4 font-medium hidden place-content-end">
-          <Link to="/signIn" className="link">
-            Sign In
+          <Link to={userLoggedIn ? "/myAccount" : "/signIn"} className="link">
+            {userLoggedIn ? "My Account" : "Sign In"}
           </Link>
           <Link to="/cart" className="flex place-items-center gap-1 link relative">
             <BsCart />
@@ -120,13 +121,13 @@ const Navbar = ({ display }) => {
             Home
           </Link>
           <Link
-            to="/signIn"
+            to={userLoggedIn ? "/myAccount" : "/signIn"}
             onClick={() => {
               setNavOpened(false);
             }}
             className="link"
           >
-            Sign In
+            {userLoggedIn ? "My Account" : "Sign In"}
           </Link>
           <Link
             to="/allProducts"

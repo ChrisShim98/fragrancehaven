@@ -2,9 +2,16 @@ import React from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addProduct, editFavorite } from "../redux/cartSlice";
+import { closePopup, openPopup } from "../redux/popupSlice";
 
 const ProductDetailsCard = ({ cologne, isFavorite = false }) => {
   const dispatch = useDispatch();
+  
+  const addToCart = async () => {  
+    await dispatch(closePopup());
+    dispatch(openPopup({message: cologne.name + " added to cart"}));
+    dispatch(addProduct(cologne));
+  };
 
   return (
     <div className="grid md:grid-cols-2 px-8 md:px-0 gap-8 py-4">
@@ -38,7 +45,7 @@ const ProductDetailsCard = ({ cologne, isFavorite = false }) => {
           <button
             disabled={cologne.stock === 0}
             onClick={() => {
-              dispatch(addProduct(cologne));
+              addToCart(cologne);
             }}
             className={
               cologne.stock === 0

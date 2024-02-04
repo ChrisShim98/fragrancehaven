@@ -14,6 +14,9 @@ import FAQs from "./pages/FAQs";
 import Popup from "./components/Popup";
 import { useSelector } from "react-redux";
 import { selectPopup } from "./redux/popupSlice";
+import MyAccount from "./pages/MyAccount";
+import ProtectedRoute from "./helpers/ProtectedRoute";
+import RedirectRoute from "./helpers/RedirectRoute";
 
 function App() {
   const { pathname } = useLocation();
@@ -58,19 +61,34 @@ function App() {
       <Navbar display={scrollPosition > 200} />
       <div className={scrollPosition > 200 ? "h-24 flex w-full" : "hidden"} />
       <div className="min-h-[80vh]">
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/productDetails/*" element={<ProductDetails />} />
-        <Route path="/allProducts" element={<AllProducts />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/*" element={<Navigate to="/" />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/productDetails/*" element={<ProductDetails />} />
+          <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/signIn"
+            element={
+              <RedirectRoute>
+                <SignIn />
+              </RedirectRoute>
+            }
+          />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route
+            path="/myAccount"
+            element={
+              <ProtectedRoute>
+                <MyAccount />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/*" element={<Navigate to="/" />} />
+        </Routes>
       </div>
-      
+
       <Footer />
       <ScrollToTop display={scrollPosition > 200} toTop={toTop} />
       {popupDetails.isOn && <Popup />}

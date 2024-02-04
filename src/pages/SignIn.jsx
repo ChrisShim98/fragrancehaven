@@ -4,11 +4,19 @@ import { loginForm, registerForm, forgetPasswordForm } from "../constants/formFi
 import { formTitleParser } from "../helpers/formParser";
 import { fieldValidator } from "../components/form/formValidator";
 import FormField from "../components/form/FormField";
+import { PostLogin, PostRegister } from "../api/accountRequests"
+import { useDispatch } from "react-redux";
+import { openPopup, closePopup } from "../redux/popupSlice";
+import { Navigate } from "react-router-dom";
+import { parseJWT } from "../helpers/parseJWT";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState(true);
   const [isForgetPassword, setIsForgetPassword] = useState(false);
   const [form, setForm] = useState();
+  const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
     let initialForm = {};
@@ -26,6 +34,56 @@ const SignIn = () => {
     updatedForm[key].value = value;
     setForm(updatedForm);
   };
+
+  const validateForm = (postFunction) => {
+    let isFormValid = true;
+    let updatedForm = { ...form };
+    for (let key in updatedForm) {
+      updatedForm[key].errorMessage = fieldValidator(
+        key,
+        updatedForm[key].value
+      );
+      updatedForm[key].errorMessage === ""
+        ? (isFormValid = true)
+        : (isFormValid = false);
+    }
+
+    if (isFormValid) {
+      postFunction();
+    }
+    setForm(() => {
+      return updatedForm;
+    });
+  }
+
+  const signIn = async (username, password) => {
+    setLoading(true)
+    let response = await PostLogin(username, password);
+    if (response?.error) {
+      await dispatch(closePopup());
+      dispatch(openPopup({message: response.message, isError: true}));
+    } else {
+      parseJWT(response?.token)
+      setRedirect(true)
+    }
+    setLoading(false)
+  }
+
+  const register = async (username, password, email) => {
+    setLoading(true)
+    let response = await PostRegister(username, password, email);
+    if (response?.error) {
+      await dispatch(closePopup());
+      dispatch(openPopup({message: response.message, isError: true}));
+    } else {
+      //localStorage.setItem('itemName', value)
+      parseJWT(response?.token)
+      await dispatch(closePopup());
+      dispatch(openPopup({message: "Successfully registered"}));
+      setRedirect(true)
+    }
+    setLoading(false)
+  }
 
   return (
     <div className="flex flex-col w-screen gap-8">
@@ -62,7 +120,9 @@ const SignIn = () => {
               );
             })}
           <button
-            onClick={() => {}}
+          type="button"
+          disabled={loading}
+            onClick={() => {isSignIn ? validateForm(() => {signIn(form.username.value, form.password.value)}) : validateForm(() => register(form.username.value, form.password.value, form.email.value))}}
             className="btn btn-main text-sm font-medium px-5 py-2 mt-4"
           >
             {isSignIn ? "Sign In" : isForgetPassword ? "Submit" : "Register"}
@@ -76,6 +136,7 @@ const SignIn = () => {
           </button>
         </form>
       </div>
+      {redirect && <Navigate to="/" replace />}
     </div>
   );
 };

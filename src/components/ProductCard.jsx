@@ -2,7 +2,6 @@ import { FaRegHeart, FaStar, FaEye } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addProduct,
-  selectCart,
   addDetail,
   selectFavorites,
   editFavorite,
@@ -16,9 +15,10 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
     (favorite) => favorite.id === cologne.id
   );
   const dispatch = useDispatch();
+
   const addToCart = async () => {  
     await dispatch(closePopup());
-    dispatch(openPopup(cologne.name + " added to cart"));
+    dispatch(openPopup({message: cologne.name + " added to cart"}));
     dispatch(addProduct(cologne));
   };
 
