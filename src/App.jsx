@@ -17,6 +17,8 @@ import { selectPopup } from "./redux/popupSlice";
 import MyAccount from "./pages/MyAccount";
 import ProtectedRoute from "./helpers/ProtectedRoute";
 import RedirectRoute from "./helpers/RedirectRoute";
+import AdminProtectedRoute from "./helpers/AdminProtectedRoute";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const { pathname } = useLocation();
@@ -83,6 +85,14 @@ function App() {
               <ProtectedRoute>
                 <MyAccount />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/adminDashboard/*"
+            element={
+              <AdminProtectedRoute>
+                <AdminDashboard />
+              </AdminProtectedRoute>
             }
           />
           <Route path="/*" element={<Navigate to="/" />} />

@@ -6,11 +6,15 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCart } from "../redux/cartSlice";
 import { cartAmountParse } from "../helpers/formParser";
+import { logout } from "../helpers/parseJWT";
 
 const Navbar = ({ display }) => {
   const [navOpened, setNavOpened] = useState(false);
   const cart = useSelector(selectCart);
-  let userLoggedIn = localStorage.getItem('token') !== null
+  let userLoggedIn = localStorage.getItem("token") !== null;
+  let adminCheck =
+    localStorage.getItem("role") !== null &&
+    localStorage.getItem("role") === "Admin";
 
   return (
     <div
@@ -20,25 +24,25 @@ const Navbar = ({ display }) => {
           : "w-full z-20 flex flex-col relative"
       }
     >
-      <div className="grid grid-flow-col items-center px-6">
+      <div className="grid grid-flow-col items-center px-6 py-1">
         <img
           src="/logo.png"
           alt="Logo"
-          className="h-24 relative left-[-0.8rem]"
+          className="h-24 relative left-[-0.5rem] pr-8"
         />
         {/* Desktop View */}
-        <div className="hidden lg:grid gap-2 mt-[30px] py-2">
+        <div className="hidden lg:grid gap-2 mt-[30px] py-2 justify-center">
           <div className="flex">
             <input
               type="text"
-              className="rounded-l-md h-8 w-[50vw] px-2 outline-1 outline"
+              className="rounded-l-md h-8 w-[50vw] max-w-[50rem] px-2 outline-1 outline"
               placeholder="Search"
             />
             <div className="grid place-content-center bg-undertone text-white h-8 w-8 transition-colors duration-300 rounded-r-md outline outline-1 outline-undertone hover:cursor-pointer hover:bg-primary hover:text-undertone">
               <BsSearch />
             </div>
           </div>
-          <div className="grid grid-flow-col font-medium justify-center items-center gap-8 mr-12 xl:mr-28">
+          <div className="grid grid-flow-col font-medium justify-center items-center gap-8">
             <Link to="/" className="link">
               Home
             </Link>
@@ -58,10 +62,26 @@ const Navbar = ({ display }) => {
         </div>
 
         <ul className="lg:flex gap-4 font-medium hidden place-content-end">
-          <Link to={userLoggedIn ? "/myAccount" : "/signIn"} className="link">
-            {userLoggedIn ? "My Account" : "Sign In"}
+          <Link
+            to={
+              adminCheck
+                ? "./adminDashboard"
+                : userLoggedIn
+                ? "/myAccount"
+                : "/signIn"
+            }
+            className="link"
+          >
+            {adminCheck
+              ? "Admin Dashboard"
+              : userLoggedIn
+              ? "My Account"
+              : "Sign In"}
           </Link>
-          <Link to="/cart" className="flex place-items-center gap-1 link relative">
+          <Link
+            to="/cart"
+            className="flex place-items-center gap-1 link relative"
+          >
             <BsCart />
             <p
               className={
@@ -74,6 +94,16 @@ const Navbar = ({ display }) => {
             </p>
             Cart
           </Link>
+          {userLoggedIn && (
+            <button
+              className="link"
+              onClick={() => {
+                logout();
+              }}
+            >
+              Logout
+            </button>
+          )}
         </ul>
         {/* Tablet View */}
         <div className="flex lg:hidden items-center gap-4 place-content-end">
@@ -105,7 +135,9 @@ const Navbar = ({ display }) => {
       </div>
       <div
         className={
-          navOpened
+          navOpened && userLoggedIn
+            ? "w-full bg-white text-undertone h-[14rem] overflow-hidden duration-1000 absolute top-24 shadow-lg"
+            : navOpened
             ? "w-full bg-white text-undertone h-[12rem] overflow-hidden duration-1000 absolute top-24 shadow-lg"
             : "w-full bg-white text-undertone h-0 overflow-hidden duration-1000 absolute top-24"
         }
@@ -121,13 +153,23 @@ const Navbar = ({ display }) => {
             Home
           </Link>
           <Link
-            to={userLoggedIn ? "/myAccount" : "/signIn"}
+            to={
+              adminCheck
+                ? "./adminDashboard"
+                : userLoggedIn
+                ? "/myAccount"
+                : "/signIn"
+            }
             onClick={() => {
               setNavOpened(false);
             }}
             className="link"
           >
-            {userLoggedIn ? "My Account" : "Sign In"}
+            {adminCheck
+              ? "Admin Dashboard"
+              : userLoggedIn
+              ? "My Account"
+              : "Sign In"}
           </Link>
           <Link
             to="/allProducts"
@@ -156,6 +198,16 @@ const Navbar = ({ display }) => {
           >
             FAQs
           </Link>
+          {userLoggedIn && (
+            <button
+              className="link"
+              onClick={() => {
+                logout();
+              }}
+            >
+              Logout
+            </button>
+          )}
         </ul>
       </div>
     </div>
