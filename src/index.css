@@ -42,11 +42,19 @@
     right: -15rem;
     animation: errorBoxAnimation 9.1s ease-in-out infinite;
   }
-  @keyframes errorBoxAnimation {
+@keyframes errorBoxAnimation {
     0%   {right: -15rem; opacity: 100%;}
     15%  {right: 2rem;}
     85%  {right: 2rem; opacity: 100%;}
     100% {right: 2rem; opacity: 0%;}
+  }
+
+.loading {
+    animation: loadingAnimation 1s ease-in-out infinite;
+  }
+  @keyframes loadingAnimation {
+    0%   {rotate: 0deg}
+    100% {rotate: 360deg}
   }
 
 /* ===== Scrollbar CSS ===== */

@@ -9,8 +9,8 @@ const ScrollToTop = ({ display, toTop }) => {
       }}
       className={
         display
-          ? "fixed bottom-6 right-6 w-10 h-10 rounded-full bg-undertone hover:bg-primary text-white grid place-content-center transition ease-in duration-300 opacity-100"
-          : "fixed bottom-6 right-6 w-10 h-10 rounded-full bg-undertone hover:bg-primary text-white grid place-content-center transition ease-in duration-300 opacity-0"
+          ? "fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-undertone hover:bg-primary hover:cursor-pointer text-white grid place-content-center transition ease-in duration-300 opacity-100"
+          : "fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-undertone hover:bg-primary hover:cursor-pointer text-white grid place-content-center transition ease-in duration-300 opacity-0"
       }
     >
       <FaArrowUp />{" "}

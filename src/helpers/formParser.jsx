@@ -27,11 +27,30 @@ export const cartTotalParse = (cart) => {
   });
 };
 
+export const priceParse = (price) => {
+  return parseFloat(price).toFixed(2).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
+
+export const dateParse = (date) => {
+  const formattedDate = new Date(date);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+  return formattedDate.toLocaleString("en-US", options);
+};
+
 export const formTitleParser = (input) => {
   if (input === "trn") {
     return "TRN Number";
   } else if (input === "cvv") {
-    return "CVV Code"
+    return "CVV Code";
   }
   var words = input.split(/(?=[A-Z])/);
   var result = words.map(function (word) {
@@ -41,6 +60,4 @@ export const formTitleParser = (input) => {
   return result.join(" ").replace(/\bOr\b/g, "/");
 };
 
-export const removeTrailingSpaces = (form) => {
-  
-}
+export const removeTrailingSpaces = (form) => {};

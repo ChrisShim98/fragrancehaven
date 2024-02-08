@@ -14,6 +14,12 @@ export const phoneNumberValidation = (phoneNumber) => {
   return result;
 };
 
+export const notNegativeNumberValidation = (number) => {
+  let result;
+  number > 0 ? result = "" : result = "Number should be greater than zero"
+  return result;
+}
+
 export const passwordValidation = (password) => {
   let result;
   /^(?=.*[0-9])(?=.*[!@#$%^&*-])[a-zA-Z0-9!@#$%^&*-]{8,}$/.test(password)
@@ -29,7 +35,10 @@ export const fieldValidator = (fieldName, value) => {
         return emailValidation(value)
     } else if (fieldName === "phone") {
         return phoneNumberValidation(value)
-    } else {
+    } else if (fieldName === "stock" || fieldName === "price") {
+      return notNegativeNumberValidation(value)
+    } 
+    else {
         return ""
     }
 }

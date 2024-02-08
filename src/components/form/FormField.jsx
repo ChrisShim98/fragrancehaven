@@ -9,6 +9,7 @@ const FormField = ({
   type = "text",
   step = null,
   textArea = false,
+  value = ""
 }) => {
   return (
     <div
@@ -20,12 +21,17 @@ const FormField = ({
       {textArea ? (
         <textarea
           id={keyValue}
+          defaultValue={value}
+          onChange={(e) => {
+            fieldUpdate(keyValue, e.target.value);
+          }}
           className="rounded-lg border py-2 px-4"
           rows="4"
         />
       ) : (
         <input
           id={keyValue}
+          defaultValue={value}
           step={step}
           onChange={(e) => {
             fieldUpdate(keyValue, e.target.value);

@@ -5,17 +5,18 @@ import { formTitleParser } from "../helpers/formParser";
 import { fieldValidator } from "../components/form/formValidator";
 import FormField from "../components/form/FormField";
 import { PostLogin, PostRegister } from "../api/accountRequests"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openPopup, closePopup } from "../redux/popupSlice";
 import { Navigate } from "react-router-dom";
 import { parseJWT } from "../helpers/parseJWT";
+import { setLoading, selectLoading } from "../redux/loadingSlice";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const loadingDetails = useSelector(selectLoading);
   const [isSignIn, setIsSignIn] = useState(true);
   const [isForgetPassword, setIsForgetPassword] = useState(false);
   const [form, setForm] = useState();
-  const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const SignIn = () => {
   };
 
   const validateForm = (postFunction) => {
+    dispatch(setLoading(true));
     let isFormValid = true;
     let updatedForm = { ...form };
     for (let key in updatedForm) {
@@ -43,21 +45,22 @@ const SignIn = () => {
         key,
         updatedForm[key].value
       );
-      updatedForm[key].errorMessage === ""
-        ? (isFormValid = true)
-        : (isFormValid = false);
+      if (updatedForm[key].errorMessage !== "") {
+        isFormValid = false
+      }
     }
 
     if (isFormValid) {
       postFunction();
+    } else {
+      dispatch(setLoading(false));
     }
     setForm(() => {
       return updatedForm;
     });
   }
 
-  const signIn = async (username, password) => {
-    setLoading(true)
+  const signIn = async (username, password) => { 
     let response = await PostLogin(username, password);
     if (response?.error) {
       await dispatch(closePopup());
@@ -66,23 +69,21 @@ const SignIn = () => {
       parseJWT(response?.token)
       setRedirect(true)
     }
-    setLoading(false)
+    dispatch(setLoading(false));
   }
 
   const register = async (username, password, email) => {
-    setLoading(true)
     let response = await PostRegister(username, password, email);
     if (response?.error) {
       await dispatch(closePopup());
       dispatch(openPopup({message: response.message, isError: true}));
     } else {
-      //localStorage.setItem('itemName', value)
       parseJWT(response?.token)
       await dispatch(closePopup());
       dispatch(openPopup({message: "Successfully registered"}));
       setRedirect(true)
     }
-    setLoading(false)
+    dispatch(setLoading(false));
   }
 
   return (
@@ -120,17 +121,17 @@ const SignIn = () => {
               );
             })}
           <button
-          type="button"
-          disabled={loading}
+            type="button"
+            disabled={loadingDetails.loading}
             onClick={() => {isSignIn ? validateForm(() => {signIn(form.username.value, form.password.value)}) : validateForm(() => register(form.username.value, form.password.value, form.email.value))}}
-            className="btn btn-main text-sm font-medium px-5 py-2 mt-4"
+            className={loadingDetails.loading ? "btn-disabled text-sm font-medium px-5 py-2 mt-4" : "btn btn-main text-sm font-medium px-5 py-2 mt-4"}
           >
             {isSignIn ? "Sign In" : isForgetPassword ? "Submit" : "Register"}
           </button>
           <button
-          type="button"
+            type="button"
             onClick={() => {setIsSignIn(false); setIsForgetPassword(true); setForm();}}
-            className={isSignIn ? "text-sm font-medium px-5 py-2" : "hidden"}
+            className={isSignIn ? "text-sm font-medium px-5 py-2 link" : "hidden"}
           >
             Forgot Password?
           </button>

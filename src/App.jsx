@@ -19,11 +19,14 @@ import ProtectedRoute from "./helpers/ProtectedRoute";
 import RedirectRoute from "./helpers/RedirectRoute";
 import AdminProtectedRoute from "./helpers/AdminProtectedRoute";
 import AdminDashboard from "./pages/AdminDashboard";
+import Loading from "./components/Loading";
+import { selectLoading } from "./redux/loadingSlice";
 
 function App() {
   const { pathname } = useLocation();
   const [scrollPosition, setScrollPosition] = useState(0);
   const popupDetails = useSelector(selectPopup);
+  const loadingDetails = useSelector(selectLoading);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -59,7 +62,8 @@ function App() {
   };
 
   return (
-    <div className="overflow-x-hidden text-undertone font-Poppins min-w-[320px]">
+    <div className="overflow-x-hidden relative text-undertone font-Poppins min-w-[320px]">
+      {loadingDetails.loading && <Loading />}
       <Navbar display={scrollPosition > 200} />
       <div className={scrollPosition > 200 ? "h-24 flex w-full" : "hidden"} />
       <div className="min-h-[80vh]">

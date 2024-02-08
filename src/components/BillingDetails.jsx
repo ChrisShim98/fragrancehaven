@@ -32,9 +32,9 @@ const BillingDetails = ({ placeOrder, setPlaceOrder = () => {} }) => {
         key,
         updatedForm[key].value
       );
-      updatedForm[key].errorMessage === ""
-        ? (isFormValid = true)
-        : (isFormValid = false);
+      if (updatedForm[key].errorMessage !== "") {
+        isFormValid = false
+      }
     }
 
     setPlaceOrder(false);
