@@ -5,7 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     products: [],
     productDetail: {},
-    favorites: []
+    liked: [],
   },
   reducers: {
     addProduct: (state, action) => {
@@ -41,26 +41,27 @@ export const cartSlice = createSlice({
       }
     },
     addDetail: (state, action) => {
-      state.productDetail = action.payload
+      state.productDetail = action.payload;
     },
-    editFavorite: (state, action) => {
-      let favoritesIndex = state.favorites.findIndex(
-        (favorites) => favorites.id === action.payload?.id
+    editLiked: (state, action) => {
+      let likedIndex = state.liked.findIndex(
+        (liked) => liked.id === action.payload?.id
       );
 
-      if (favoritesIndex === -1) {
-        state.favorites.push(action.payload);
+      if (likedIndex === -1) {
+        state.liked.push(action.payload);
       } else {
-        state.favorites.splice(favoritesIndex, 1);
+        state.liked.splice(likedIndex, 1);
       }
     },
   },
 });
 
-export const { addProduct, deleteProduct, deleteAll, addDetail, editFavorite } = cartSlice.actions;
+export const { addProduct, deleteProduct, deleteAll, addDetail, editLiked } =
+  cartSlice.actions;
 
 export const selectCart = (state) => state.cart.products;
 export const selectProductDetail = (state) => state.cart.productDetail;
-export const selectFavorites = (state) => state.cart.favorites;
+export const selectLiked = (state) => state.cart.liked;
 
 export default cartSlice.reducer;

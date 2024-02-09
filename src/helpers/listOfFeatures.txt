@@ -19,7 +19,7 @@ Add Transaction
 
 -- User --
 Add to cart
-Add to favorite
+Add to liked
 
 -- UAT Features --
 

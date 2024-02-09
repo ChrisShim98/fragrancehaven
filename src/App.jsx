@@ -59,7 +59,7 @@ function App() {
     <div className="overflow-x-hidden relative text-undertone font-Poppins min-w-[320px]">
       {loadingDetails.loading && <Loading />}
       <Navbar display={scrollPosition > 200} />
-      <div className={scrollPosition > 200 ? "h-24 flex w-full" : "hidden"} />
+      <div className={scrollPosition > 200 ? "h-16 md:h-20 lg:h-24 py-1 flex w-full" : "hidden"} />
       <div className="min-h-[80vh]">
         <Routes>
           <Route path="/" element={<Homepage />} />

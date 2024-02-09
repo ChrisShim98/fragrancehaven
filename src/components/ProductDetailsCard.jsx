@@ -7,13 +7,13 @@ import {
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { PostReview } from "../api/productRequests";
-import { addProduct, editFavorite } from "../redux/cartSlice";
+import { addProduct, editLiked } from "../redux/cartSlice";
 import { setLoading } from "../redux/loadingSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import Reviews from "./Reviews";
 import { priceParse, parseRating } from "../helpers/formParser";
 
-const ProductDetailsCard = ({ product, isFavorite = false }) => {
+const ProductDetailsCard = ({ product, isLiked = false }) => {
   const dispatch = useDispatch();
   let userLoggedIn = localStorage.getItem("token") !== null;
   const [currentImage, setCurrentImage] = useState(0);
@@ -134,10 +134,10 @@ const ProductDetailsCard = ({ product, isFavorite = false }) => {
           </button>
           <button
             onClick={() => {
-              dispatch(editFavorite(product));
+              dispatch(editLiked(product));
             }}
             className={
-              isFavorite
+              isLiked
                 ? "bg-primary rounded-lg text-xl p-2"
                 : "btn btn-main text-xl p-2"
             }

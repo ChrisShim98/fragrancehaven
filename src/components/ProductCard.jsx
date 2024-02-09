@@ -10,8 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addProduct,
   addDetail,
-  selectFavorites,
-  editFavorite,
+  selectLiked,
+  editLiked,
 } from "../redux/cartSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import { Link } from "react-router-dom";
@@ -19,10 +19,8 @@ import { priceParse, parseRating } from "../helpers/formParser";
 
 const ProductCard = ({ product, isDetailed = false }) => {
   const [currentImage, setCurrentImage] = useState(0);
-  const favorites = useSelector(selectFavorites);
-  const isFavorite = favorites.findIndex(
-    (favorite) => favorite.id === product.id
-  );
+  const liked = useSelector(selectLiked);
+  const isLiked = liked.findIndex((liked) => liked.id === product.id);
   const dispatch = useDispatch();
 
   const addToCart = async () => {
@@ -36,12 +34,16 @@ const ProductCard = ({ product, isDetailed = false }) => {
       <div
         className={
           isDetailed
-            ? "w-[90vw] sm:w-[640px] lg:w-[840px] rounded-xl p-6"
+            ? "w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6"
             : "w-[20rem] h-full rounded-xl p-6"
         }
       >
         <div
-          className={isDetailed ? "grid sm:grid-flow-col gap-4" : "grid grid-rows-2 h-full gap-4"}
+          className={
+            isDetailed
+              ? "grid sm:grid-flow-col gap-4"
+              : "grid grid-rows-2 h-full gap-4"
+          }
         >
           <div className="grid grid-cols-6 place-items-center gap-4 text-3xl relative">
             <button
@@ -88,10 +90,10 @@ const ProductCard = ({ product, isDetailed = false }) => {
             <div className="absolute top-0 sm:top-[5%] right-[5%] sm:right-[10%]">
               <button
                 onClick={() => {
-                  dispatch(editFavorite(product));
+                  dispatch(editLiked(product));
                 }}
                 className={
-                  isFavorite !== -1
+                  isLiked !== -1
                     ? "bg-white text-pink-300 shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center text-sm"
                     : "transition ease-in duration-300 bg-white hover:text-pink-300 shadow hover:shadow-md rounded-full text-sm w-8 h-8 text-center p-1 grid place-content-center"
                 }
@@ -111,7 +113,9 @@ const ProductCard = ({ product, isDetailed = false }) => {
               >
                 <div className="flex items-center mr-auto gap-1">
                   <FaStar className="text-yellow-300 relative top-[-1px]" />
-                  <span className="text-gray-400 whitespace-nowrap">{parseRating(product.reviews)}</span>
+                  <span className="text-gray-400 whitespace-nowrap">
+                    {parseRating(product.reviews)}
+                  </span>
                 </div>
                 <span className="text-gray-400">
                   {isDetailed

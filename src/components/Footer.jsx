@@ -1,8 +1,24 @@
 import React from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setfilter } from "../redux/filterSlice";
+import { scrollToTop } from "../helpers/scrollToTop";
 
 const Footer = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const likedProducts = () => {
+    dispatch(
+      setfilter({
+        filterName: "isLiked",
+        isFilterOn: true,
+      })
+    );
+    navigate("/allProducts");
+    scrollToTop();
+  };
+
   return (
     <div className="bg-undertone text-white mt-auto">
       <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -46,10 +62,13 @@ const Footer = () => {
                     All Products
                   </Link>
                 </li>
-                <li>
-                  <Link to="/" className="link">
-                    Liked Products
-                  </Link>
+                <li
+                  onClick={() => {
+                    likedProducts();
+                  }}
+                  className="link"
+                >
+                  Liked Products
                 </li>
                 <li>
                   <Link to="/faqs" className="link">
@@ -112,31 +131,29 @@ const Footer = () => {
         </div>
         <div className="flex flex-col justify-between pt-5 pb-10 border-t border-gray-800 sm:flex-row">
           <div>
-          <p className="text-sm">
-            © Copyright 2024 Fragrance Haven. All rights reserved.
-          </p>
-          <p className="text-sm pt-2">By Christopher Shim 2024</p>
-          <div className="flex items-center mt-4 space-x-4 sm:mt-0 text-xl sm:pt-2">
-            <a
-              href="https://github.com/ChrisShim98"
-              target="_blank"
-              rel="noreferrer"
-              className="link"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/christopher-shim-bsc/"
-              target="_blank"
-              rel="noreferrer"
-              className="link"
-            >
-              <FaLinkedin />
-            </a>
+            <p className="text-sm">
+              © Copyright 2024 Fragrance Haven. All rights reserved.
+            </p>
+            <p className="text-sm pt-2">By Christopher Shim 2024</p>
+            <div className="flex items-center mt-4 space-x-4 sm:mt-0 text-xl sm:pt-2">
+              <a
+                href="https://github.com/ChrisShim98"
+                target="_blank"
+                rel="noreferrer"
+                className="link"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/christopher-shim-bsc/"
+                target="_blank"
+                rel="noreferrer"
+                className="link"
+              >
+                <FaLinkedin />
+              </a>
+            </div>
           </div>
-          </div>
-          
-          
         </div>
       </div>
     </div>

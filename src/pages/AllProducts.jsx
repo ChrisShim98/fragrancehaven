@@ -8,6 +8,8 @@ import { openPopup, closePopup } from "../redux/popupSlice";
 import { selectSearch } from "../redux/searchSlice";
 import { setLoading, selectLoading } from "../redux/loadingSlice";
 import { scrollToTop } from "../helpers/scrollToTop";
+import { selectfilter } from "../redux/filterSlice";
+import { selectLiked } from "../redux/cartSlice";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -15,6 +17,8 @@ const AllProducts = () => {
   const loadingDetails = useSelector(selectLoading);
   const searchDetails = useSelector(selectSearch);
   const [pagination, setPagination] = useState({});
+  const filterDetails = useSelector(selectfilter);
+  const likedDetails = useSelector(selectLiked);
 
   const getAllProducts = async (pageNumber = 1, searchQuery = "") => {
     dispatch(setLoading(true));
@@ -71,16 +75,30 @@ const AllProducts = () => {
   return (
     <div className="flex flex-col items-center w-screen gap-8">
       <PageHeader pageHeader={"All Products"} />
-      <div className="py-8 grid lg:grid-cols-6 gap-8">
-        <div className="min-w-[300px] lg:w-full px-8 lg:px-0 lg:col-span-1">
+      <div className="py-8 grid lg:grid-cols-8 gap-8">
+        <div className="min-w-[300px] lg:min-w-0 lg:w-full px-8 lg:px-0 lg:col-span-2">
           <Filter />
         </div>
-        <div className="flex flex-col lg:col-span-5 gap-6">
-          <p className="text-xs px-8">Showing page {pagination.currentPage} of {pagination.totalPages}</p>
+        <div className="flex flex-col lg:col-span-6 gap-6">
+          {!filterDetails.isLiked && (
+            <p className="text-xs px-8">
+              Showing page {pagination.currentPage} of {pagination.totalPages}
+            </p>
+          )}
           <div className="grid gap-4">
             {loadingDetails.loading === false &&
-              (products.length === 0 ? (
-                <p className="text-center">Nothing to show here</p>
+              (filterDetails.isLiked && likedDetails.length === 0 ? (
+                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">Nothing to show here</p>
+              ) : filterDetails.isLiked && likedDetails.length > 0 ? (
+                likedDetails.map((product) => {
+                  return (
+                    <div key={product.id}>
+                      <ProductCard product={product} isDetailed={true} />
+                    </div>
+                  );
+                })
+              ) : products.length === 0 ? (
+                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">Nothing to show here</p>
               ) : (
                 products.map((product) => {
                   return (
@@ -91,7 +109,11 @@ const AllProducts = () => {
                 })
               ))}
           </div>
-          <div className="flex gap-2 px-8 py-12">{setPaginationButtons()}</div>
+          {!filterDetails.isLiked && (
+            <div className="flex gap-2 px-8 py-12">
+              {setPaginationButtons()}
+            </div>
+          )}
         </div>
       </div>
     </div>
