@@ -34,3 +34,16 @@ export const PostRegister = (username, password, email) => {
       return errorHandling(error);
     });
 };
+
+export const PostUpdatePassword = (updatePasswordForm) => {
+  let url = `${BASE_URL}/account/updatePassword`;
+
+  return axios
+    .post(url, updatePasswordForm)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};

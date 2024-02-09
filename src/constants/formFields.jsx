@@ -84,3 +84,27 @@ export const registerForm = [
         colSpan: 1
     },
 ]
+
+export const updatePasswordForm = [
+    {
+        title: "username",
+        type: "text",
+        isDisabled: true,
+        colSpan: 1
+    },
+    {
+        title: "currentPassword",
+        type: "password",
+        colSpan: 1
+    },
+    {
+        title: "newPassword",
+        type: "password",
+        colSpan: 1
+    },
+    {
+        title: "confirmPassword",
+        type: "password",
+        colSpan: 1
+    },
+]

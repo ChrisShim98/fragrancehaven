@@ -87,6 +87,7 @@ const SignIn = () => {
       dispatch(openPopup({ message: response.message, isError: true }));
     } else {
       parseJWT(response?.token);
+      localStorage.setItem("email", response?.email);
       setRedirect(true);
     }
     dispatch(setLoading(false));
@@ -99,6 +100,7 @@ const SignIn = () => {
       dispatch(openPopup({ message: response.message, isError: true }));
     } else {
       parseJWT(response?.token);
+      localStorage.setItem("email", response?.email);
       await dispatch(closePopup());
       dispatch(openPopup({ message: "Successfully registered" }));
       setRedirect(true);

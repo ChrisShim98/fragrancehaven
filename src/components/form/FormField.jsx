@@ -9,7 +9,8 @@ const FormField = ({
   type = "text",
   step = null,
   textArea = false,
-  value = ""
+  value = "",
+  isDisabled = false
 }) => {
   return (
     <div
@@ -22,6 +23,7 @@ const FormField = ({
         <textarea
           id={keyValue}
           defaultValue={value}
+          disabled={isDisabled}
           onChange={(e) => {
             fieldUpdate(keyValue, e.target.value);
           }}
@@ -33,6 +35,7 @@ const FormField = ({
           id={keyValue}
           defaultValue={value}
           step={step}
+          disabled={isDisabled}
           onChange={(e) => {
             fieldUpdate(keyValue, e.target.value);
           }}

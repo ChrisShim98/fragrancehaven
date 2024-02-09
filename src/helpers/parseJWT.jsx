@@ -12,5 +12,6 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
   localStorage.removeItem("role");
+  localStorage.removeItem("email");
   window.location.reload(false);
 };

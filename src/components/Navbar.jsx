@@ -8,6 +8,8 @@ import { selectCart } from "../redux/cartSlice";
 import { setSearch } from "../redux/searchSlice";
 import { cartAmountParse } from "../helpers/formParser";
 import { logout } from "../helpers/parseJWT";
+import { clearFilters } from "../redux/filterSlice";
+import { scrollToTop } from "../helpers/scrollToTop";
 
 const Navbar = ({ display }) => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const Navbar = ({ display }) => {
     localStorage.getItem("role") === "Admin";
 
   const searchProducts = async () => {
+    await dispatch(clearFilters());
     if (searchWord === "") {
       await dispatch(
         setSearch({
@@ -38,6 +41,7 @@ const Navbar = ({ display }) => {
       );
     }
     navigate("/allProducts");
+    scrollToTop();
   };
 
   return (
@@ -154,7 +158,14 @@ const Navbar = ({ display }) => {
               <BsSearch size={"1.5rem"} />
             )}
           </div>
-          <Link to="/cart" className="flex relative top-[-1px]">
+          <Link
+            onClick={() => {
+              setSearchOpened(false);
+              setNavOpened(false);
+            }}
+            to="/cart"
+            className="flex relative top-[-1px]"
+          >
             <BsCart size={"1.5rem"} />
             <p
               className={

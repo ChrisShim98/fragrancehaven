@@ -15,6 +15,7 @@ import {
 } from "../redux/cartSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "../helpers/scrollToTop";
 import { priceParse, parseRating } from "../helpers/formParser";
 
 const ProductCard = ({ product, isDetailed = false }) => {
@@ -162,6 +163,7 @@ const ProductCard = ({ product, isDetailed = false }) => {
               <Link
                 onClick={() => {
                   dispatch(addDetail(product));
+                  scrollToTop();
                 }}
                 to={`/productDetails/${product.id}`}
                 className="btn btn-main text-xl p-2"
