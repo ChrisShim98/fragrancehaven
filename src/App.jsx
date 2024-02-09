@@ -21,6 +21,7 @@ import AdminProtectedRoute from "./helpers/AdminProtectedRoute";
 import AdminDashboard from "./pages/AdminDashboard";
 import Loading from "./components/Loading";
 import { selectLoading } from "./redux/loadingSlice";
+import { scrollToTop } from "./helpers/scrollToTop";
 
 function App() {
   const { pathname } = useLocation();
@@ -42,16 +43,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.documentElement.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
-  }, [pathname]);
-
-  useEffect(() => {
+    scrollToTop();
     window.history.scrollRestoration = "manual";
-  }, []);
+  }, [pathname]);
 
   const toTop = () => {
     document.documentElement.scrollTo({

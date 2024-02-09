@@ -1,4 +1,11 @@
-import { FaRegHeart, FaStar, FaEye } from "react-icons/fa";
+import React, { useState } from "react";
+import {
+  FaStar,
+  FaArrowAltCircleLeft,
+  FaArrowAltCircleRight,
+  FaEye,
+  FaRegHeart,
+} from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addProduct,
@@ -8,56 +15,90 @@ import {
 } from "../redux/cartSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import { Link } from "react-router-dom";
+import { priceParse } from "../helpers/formParser";
 
-const ProductCard = ({ cologne, isDetailed = false }) => {
+const ProductCard = ({ product, isDetailed = false }) => {
+  const [currentImage, setCurrentImage] = useState(0);
   const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.findIndex(
-    (favorite) => favorite.id === cologne.id
+    (favorite) => favorite.id === product.id
   );
   const dispatch = useDispatch();
 
-  const addToCart = async () => {  
+  const addToCart = async () => {
     await dispatch(closePopup());
-    dispatch(openPopup({message: cologne.name + " added to cart"}));
-    dispatch(addProduct(cologne));
+    dispatch(openPopup({ message: product.name + " added to cart" }));
+    dispatch(addProduct(product));
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <div className="relative flex flex-col items-center justify-center h-full">
       <div
         className={
           isDetailed
-            ? "w-[90vw] sm:w-[640px] w-fullshadow-lg rounded-xl p-6"
-            : "w-[20rem] w-fullshadow-lg rounded-xl p-6"
+            ? "w-[90vw] sm:w-[640px] lg:w-[840px] rounded-xl p-6"
+            : "w-[20rem] h-full rounded-xl p-6"
         }
       >
-        <div className={isDetailed ? "flex gap-6" : "flex flex-col"}>
-          <div
-            className={
-              isDetailed
-                ? "relative h-72 w-[100px] min-w-[75px] sm:w-[25rem] items-center flex"
-                : "relative h-72 w-full items-center flex"
-            }
-          >
-            <div className="absolute flex flex-col top-0 right-0 p-3">
+        <div
+          className={isDetailed ? "grid sm:grid-flow-col gap-4" : "grid grid-rows-2 h-full gap-4"}
+        >
+          <div className="grid grid-cols-6 place-items-center gap-4 text-3xl relative">
+            <button
+              disabled={currentImage === 0}
+              onClick={() => {
+                setCurrentImage(currentImage - 1);
+              }}
+              className={
+                currentImage === 0
+                  ? "col-span-1 text-gray-300"
+                  : "col-span-1 link"
+              }
+            >
+              <FaArrowAltCircleLeft />
+            </button>
+
+            <img
+              src={
+                product.photos.length > 0
+                  ? product.photos[currentImage].url
+                  : "/noImage.png"
+              }
+              className="w-full relative col-span-4"
+              alt={product.name}
+            />
+
+            <button
+              disabled={
+                currentImage === product.photos.length - 1 ||
+                product.photos.length === 0
+              }
+              onClick={() => {
+                setCurrentImage(currentImage + 1);
+              }}
+              className={
+                currentImage === product.photos.length - 1 ||
+                product.photos.length === 0
+                  ? "col-span-1 text-gray-300"
+                  : "col-span-1 link"
+              }
+            >
+              <FaArrowAltCircleRight />
+            </button>
+            <div className="absolute top-0 sm:top-[5%] right-[5%] sm:right-[10%]">
               <button
                 onClick={() => {
-                  dispatch(editFavorite(cologne));
+                  dispatch(editFavorite(product));
                 }}
                 className={
                   isFavorite !== -1
-                    ? "bg-white text-pink-300 shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center"
-                    : "transition ease-in duration-300 bg-white hover:text-pink-300 shadow hover:shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center"
+                    ? "bg-white text-pink-300 shadow-md rounded-full w-8 h-8 text-center p-1 grid place-content-center text-sm"
+                    : "transition ease-in duration-300 bg-white hover:text-pink-300 shadow hover:shadow-md rounded-full text-sm w-8 h-8 text-center p-1 grid place-content-center"
                 }
               >
                 <FaRegHeart />
               </button>
             </div>
-            <img
-              src={cologne.img}
-              alt={cologne.name}
-              className="w-full object-fill rounded-lg"
-            />
           </div>
           <div className="flex flex-col gap-2 w-full">
             <div className="flex flex-col w-full">
@@ -70,34 +111,32 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
               >
                 <div className="flex items-center mr-auto gap-1">
                   <FaStar className="text-yellow-300 relative top-[-1px]" />
-                  <span className="text-gray-400 whitespace-nowrap">
-                    {cologne.rating}
-                  </span>
+                  <span className="text-gray-400 whitespace-nowrap">0</span>
                 </div>
                 <span className="text-gray-400">
                   {isDetailed
                     ? ""
-                    : cologne.stock > 0
+                    : product.stock > 0
                     ? "Avaliable for pickup"
                     : "OUT OF STOCK"}
                 </span>
               </div>
               <div className="flex items-center w-full">
-                <h2 className="text-lg cursor-pointer">{cologne.name}</h2>
+                <h2 className="text-lg cursor-pointer">{product.name}</h2>
               </div>
               <div>
-                <h1 className="text-gray-400 text-sm">{cologne.brand}</h1>
+                <h1 className="text-gray-400 text-sm">{product.brand.name}</h1>
               </div>
               <div
                 className={isDetailed ? "text-xl font-semibold mt-1" : "hidden"}
               >
-                ${cologne.price}
+                ${priceParse(product.price)}
               </div>
             </div>
             <div className="flex items-center text-xs rounded-md">
-              {isDetailed && cologne.stock > 0
-                ? cologne.stock + " Available"
-                : cologne.stock > 0
+              {isDetailed && product.stock > 0
+                ? product.stock + " Available"
+                : product.stock > 0
                 ? "INSTOCK"
                 : "OUT OF STOCK"}
             </div>
@@ -106,32 +145,32 @@ const ProductCard = ({ cologne, isDetailed = false }) => {
                 isDetailed ? "hidden" : "text-xl font-semibold mt-1 text-end"
               }
             >
-              ${cologne.price}
+              ${priceParse(product.price)}
             </div>
             <div
               className={
                 isDetailed ? "text-sm mt-1 text-start lineClamp" : "hidden"
               }
             >
-              {cologne.description}
+              {product.description}
             </div>
             <div className="flex text-sm font-medium justify-end items-center gap-2">
               <Link
                 onClick={() => {
-                  dispatch(addDetail(cologne));
+                  dispatch(addDetail(product));
                 }}
-                to={`/productDetails/${cologne.id}`}
+                to={`/productDetails/${product.id}`}
                 className="btn btn-main text-xl p-2"
               >
                 <FaEye />
               </Link>
               <button
-                disabled={cologne.stock === 0}
+                disabled={product.stock === 0}
                 onClick={() => {
                   addToCart();
                 }}
                 className={
-                  cologne.stock === 0
+                  product.stock === 0
                     ? "btn-disabled text-sm font-medium px-5 py-2"
                     : "btn btn-main text-sm font-medium px-5 py-2"
                 }

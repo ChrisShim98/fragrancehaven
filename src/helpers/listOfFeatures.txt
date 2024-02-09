@@ -20,3 +20,31 @@ Add Transaction
 -- User --
 Add to cart
 Add to favorite
+
+-- UAT Features --
+
+-- Site Visitor --
+Navbar - Cart, Login, Search bar, Logo
+ - Search should bring the user to the all products page with only the products matching the search query displayed
+View Home page - Image Carosel, Featured Product, Top Brands, Best sellers
+ - Should be able to add any product on page to cart or liked list
+ - Should be able to navigate to the details page by clikcing on the eye icon
+View All Products page - Should be 10 items per page, pagination at the bottow to switch pages
+ - Should be able to add products to cart and like products from this page
+About Us Page - Who Are We, Store Location, Our People, Contact Us form
+ - Contact Us form should have validation and indication that it was successfully sent
+FAQs Page - should be able to open and close each question to view the answer
+Signin Page, Register Page, Forget Password
+ - All forms should have validations
+ - Forms can be submitted by hitting the enter button
+
+-- Site Account User -- 
+Register
+Login
+Add Products to cart
+Checkout with products
+Like products
+Liked products are retained
+View liked products list
+
+-- Site Admin User --

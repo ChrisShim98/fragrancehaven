@@ -16,15 +16,18 @@ const ProductDetails = () => {
       <div className="w-full bg-gray-100 py-6 text-xl font-medium text-center">
         <h1 className="tracking-wide">Product Details</h1>
       </div>
+      <div className="px-12">
       <Routes>
         <Route
           path={`/${product.id}`}
           element={
-            <ProductDetailsCard cologne={product} isFavorite={isFavorite !== -1} />
+            <ProductDetailsCard product={product} isFavorite={isFavorite !== -1} />
           }
         />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
+      </div>
+      
     </div>
   );
 };

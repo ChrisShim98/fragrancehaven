@@ -22,7 +22,7 @@ const Cart = () => {
               : "hidden"
           }
         >
-          <div className="w-full grid py-4 place-items-center">
+          <div className="w-full grid p-4 place-items-center">
             <div className="grid md:grid-cols-10 md:place-items-center gap-2">
               <p className="p-2 w-full">IMAGE</p>
               <p className="col-span-3">PRODUCT NAME</p>
@@ -42,7 +42,7 @@ const Cart = () => {
           cart.map((cartItem) => {
             return (
               <div className="md:border" key={cartItem.id}>
-                <CartTile cologne={cartItem} />
+                <CartTile product={cartItem} />
               </div>
             );
           })

@@ -19,7 +19,6 @@ const ModifyProductCard = ({
   setMainPhoto = () => {},
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
-
   const editProduct = () => {
     setProductToEdit(product);
     setEditModalOpened(true);
@@ -54,7 +53,7 @@ const ModifyProductCard = ({
                 ? product.photos[currentImage].url
                 : "/noImage.png"
             }
-            className="w-full relative z-10 col-span-4"
+            className="w-full relative col-span-4"
             alt={product.name}
           />
 
@@ -80,7 +79,7 @@ const ModifyProductCard = ({
               deletePhoto(product.id, currentImage);
             }}
             className={
-              (product.photos.length > 0 && !product.photos[currentImage].isMain)
+              product.photos.length > 0 && !product.photos[currentImage].isMain
                 ? "absolute top-0 sm:top-[20%] right-[10%] sm:right-[20%] z-10 text-xl sm:text-2xl bg-white rounded-full shadow-md hover:shadow-xl hover:text-primary duration-1000 p-2"
                 : "hidden"
             }
@@ -88,7 +87,7 @@ const ModifyProductCard = ({
             <ImBin />
           </button>
         </div>
-        <div className="flex items-center gap-1">
+        {product.photos.length > 0 && <div className="flex items-center gap-1">
           <input
             disabled={product.photos[currentImage].isMain}
             onChange={() => {
@@ -98,7 +97,7 @@ const ModifyProductCard = ({
             type="checkbox"
           />
           <p className="text-sm">Is main photo?</p>
-        </div>
+        </div>}
       </div>
 
       <div className="flex flex-col sm:pr-4">

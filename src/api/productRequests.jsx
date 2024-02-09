@@ -2,25 +2,24 @@ import axios from "axios";
 import { BASE_URL } from "./base";
 import { errorHandling } from "./errorHandling";
 
-export const GetAllProducts = () => {
-  let url = `${BASE_URL}/product`;
+export const GetAllProducts = (
+  pageNumber = 1,
+  searchQuery = "",
+  orderBy = ""
+) => {
+  let url = `${BASE_URL}/product?${
+    searchQuery === "" ? "" : `SearchQuery=${searchQuery}&`
+  }PageNumber=${pageNumber}${orderBy === "" ? "" : `&OrderBy=${orderBy}`}`;
 
   return axios
     .get(url)
     .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return errorHandling(error);
-    });
-};
-
-export const GetProductsBySearch = (searchQuery) => {
-  let url = `${BASE_URL}/product?SearchQuery=${searchQuery}`;
-
-  return axios
-    .get(url)
-    .then((response) => {
+      if (response.headers?.pagination) {
+        return {
+          data: response.data,
+          pagination: JSON.parse(response.headers.pagination),
+        };
+      }
       return response.data;
     })
     .catch((error) => {
@@ -102,6 +101,19 @@ export const PutSetMainPhoto = (productId, photoId) => {
 
   return axios
     .put(url)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};
+
+export const PostReview = (productId, review) => {
+  let url = `${BASE_URL}/product/${productId}/addReview`;
+
+  return axios
+    .post(url, review)
     .then((response) => {
       return response.data;
     })

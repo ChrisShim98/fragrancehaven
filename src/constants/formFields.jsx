@@ -66,7 +66,7 @@ export const registerForm = [
     {
         title: "email",
         type: "email",
-        colSpan: 2
+        colSpan: 1
     },
     {
         title: "username",

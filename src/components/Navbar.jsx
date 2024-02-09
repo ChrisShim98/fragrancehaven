@@ -28,7 +28,7 @@ const Navbar = ({ display }) => {
         <img
           src="/logo.png"
           alt="Logo"
-          className="h-24 relative left-[-0.5rem] pr-8"
+          className="h-16 md:h-20 lg:h-24 relative left-[-0.5rem] pr-8"
         />
         {/* Desktop View */}
         <div className="hidden lg:grid gap-2 mt-[30px] py-2 justify-center">
@@ -136,10 +136,10 @@ const Navbar = ({ display }) => {
       <div
         className={
           navOpened && userLoggedIn
-            ? "w-full bg-white text-undertone h-[14rem] overflow-hidden duration-1000 absolute top-24 shadow-lg"
+            ? "w-full bg-white text-undertone h-[14rem] overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
             : navOpened
-            ? "w-full bg-white text-undertone h-[12rem] overflow-hidden duration-1000 absolute top-24 shadow-lg"
-            : "w-full bg-white text-undertone h-0 overflow-hidden duration-1000 absolute top-24"
+            ? "w-full bg-white text-undertone h-[12rem] overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
+            : "w-full bg-white text-undertone h-0 overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
         }
       >
         <ul className="lg:hidden gap-2 grid place-items-center text-lg font-medium">
