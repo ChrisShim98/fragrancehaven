@@ -7,7 +7,7 @@ import {
   FaCamera,
 } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
-import { priceParse, dateParse } from "../../helpers/formParser";
+import { priceParse, dateParse, parseRating } from "../../helpers/formParser";
 
 const ModifyProductCard = ({
   product,
@@ -106,7 +106,7 @@ const ModifyProductCard = ({
           <h2 className="text-xl font-medium">${priceParse(product.price)}</h2>
           <div className="flex gap-1 items-center">
             <FaStar className="text-yellow-300 relative top-[-1px]" />
-            <h2>No Rating</h2>
+            <h2>{parseRating(product.reviews)}</h2>
           </div>
           <p className="py-4">{product.description}</p>
           <div className="grid grid-cols-3">

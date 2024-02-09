@@ -61,3 +61,18 @@ export const formTitleParser = (input) => {
 };
 
 export const removeTrailingSpaces = (form) => {};
+
+export const parseRating = (reviews = []) => {
+  let amountOfReviews = reviews.length;
+  if (reviews.length === 0) {
+    return 0;
+  }
+
+  let finalRating = 0;
+
+  for (let i = 0; i < amountOfReviews; i++) {
+    finalRating += reviews[i].rating;
+  }
+  finalRating /= amountOfReviews;
+  return parseFloat(finalRating).toFixed(2);
+};

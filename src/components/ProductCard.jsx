@@ -15,7 +15,7 @@ import {
 } from "../redux/cartSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import { Link } from "react-router-dom";
-import { priceParse } from "../helpers/formParser";
+import { priceParse, parseRating } from "../helpers/formParser";
 
 const ProductCard = ({ product, isDetailed = false }) => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -111,7 +111,7 @@ const ProductCard = ({ product, isDetailed = false }) => {
               >
                 <div className="flex items-center mr-auto gap-1">
                   <FaStar className="text-yellow-300 relative top-[-1px]" />
-                  <span className="text-gray-400 whitespace-nowrap">0</span>
+                  <span className="text-gray-400 whitespace-nowrap">{parseRating(product.reviews)}</span>
                 </div>
                 <span className="text-gray-400">
                   {isDetailed

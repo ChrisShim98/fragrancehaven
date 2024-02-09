@@ -23,12 +23,8 @@ export const popupSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { openPopup, closePopup } = popupSlice.actions;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const selectPopup = (state) => state.popup.popupDetail;
 
 export default popupSlice.reducer;

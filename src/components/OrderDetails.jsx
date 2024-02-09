@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCart } from "../redux/cartSlice";
 import { cartTotalParse, totalUnitParse } from "../helpers/formParser";
 
-const OrderDetails = () => {
+const   OrderDetails = () => {
   const cart = useSelector(selectCart);
   return (
     <div className="flex flex-col gap-4">

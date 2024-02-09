@@ -11,7 +11,7 @@ import { addProduct, editFavorite } from "../redux/cartSlice";
 import { setLoading } from "../redux/loadingSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import Reviews from "./Reviews";
-import { priceParse } from "../helpers/formParser";
+import { priceParse, parseRating } from "../helpers/formParser";
 
 const ProductDetailsCard = ({ product, isFavorite = false }) => {
   const dispatch = useDispatch();
@@ -106,7 +106,7 @@ const ProductDetailsCard = ({ product, isFavorite = false }) => {
           <h2 className="text-xl font-medium">${priceParse(product.price)}</h2>
           <div className="flex gap-1 items-center">
             <FaStar className="text-yellow-300 relative top-[-1px]" />
-            <h2>0</h2>
+            <h2>{parseRating(product.reviews)}</h2>
           </div>
           <p className="py-4">{product.description}</p>
           <div className="grid grid-cols-3">
