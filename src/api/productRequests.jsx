@@ -42,9 +42,14 @@ export const GetProductById = (productId) => {
 
 export const PostAddProduct = (product) => {
   let url = `${BASE_URL}/product`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .post(url, product)
+    .post(url, product, { headers })
     .then((response) => {
       return response.data;
     })
@@ -55,9 +60,14 @@ export const PostAddProduct = (product) => {
 
 export const DeleteProduct = (productId) => {
   let url = `${BASE_URL}/product/${productId}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .delete(url)
+    .delete(url, { headers })
     .then((response) => {
       return response.data;
     })
@@ -68,9 +78,14 @@ export const DeleteProduct = (productId) => {
 
 export const PutEditProduct = (product, productId) => {
   let url = `${BASE_URL}/product/${productId}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .put(url, product)
+    .put(url, product, { headers })
     .then((response) => {
       return response.data;
     })
@@ -81,13 +96,15 @@ export const PutEditProduct = (product, productId) => {
 
 export const PostAddPhotoToProduct = (productId, file) => {
   let url = `${BASE_URL}/product/${productId}/addPhoto`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "multipart/form-data",
+  };
 
   return axios
-    .post(url, file, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
+    .post(url, file, { headers })
     .then((response) => {
       return response.data;
     })
@@ -98,9 +115,14 @@ export const PostAddPhotoToProduct = (productId, file) => {
 
 export const DeletePhoto = (productId, photoId) => {
   let url = `${BASE_URL}/product/${productId}/deletePhoto/${photoId}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .delete(url)
+    .delete(url, { headers })
     .then((response) => {
       return response.data;
     })
@@ -111,9 +133,14 @@ export const DeletePhoto = (productId, photoId) => {
 
 export const PutSetMainPhoto = (productId, photoId) => {
   let url = `${BASE_URL}/product/${productId}/mainPhoto/${photoId}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .put(url)
+    .put(url, null, { headers })
     .then((response) => {
       return response.data;
     })
@@ -124,9 +151,14 @@ export const PutSetMainPhoto = (productId, photoId) => {
 
 export const PostReview = (productId, review) => {
   let url = `${BASE_URL}/product/${productId}/addReview`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .post(url, review)
+    .post(url, review, { headers })
     .then((response) => {
       return response.data;
     })
@@ -137,9 +169,32 @@ export const PostReview = (productId, review) => {
 
 export const DeleteReview = (productId, reviewId) => {
   let url = `${BASE_URL}/product/${productId}/deleteReview/${reviewId}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .delete(url)
+    .delete(url, { headers })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};
+
+export const PostSale = (productId, saleAmount) => {
+  let url = `${BASE_URL}/product/${productId}/addSale/${saleAmount}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  return axios
+    .post(url, null, { headers })
     .then((response) => {
       return response.data;
     })

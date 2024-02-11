@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaStar,
   FaArrowAltCircleLeft,
@@ -7,11 +7,7 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addDetail,
-  selectLiked,
-  editLiked,
-} from "../redux/cartSlice";
+import { addDetail, selectLiked, editLiked } from "../redux/cartSlice";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../helpers/scrollToTop";
 import { priceParse, parseRating } from "../helpers/formParser";
@@ -23,6 +19,14 @@ const ProductCard = ({ product, isDetailed = false }) => {
   const isLiked = liked.findIndex((liked) => liked.id === product.id);
   const dispatch = useDispatch();
   const { addToCart } = useCartFunctions();
+
+  useEffect(() => {
+    for (let i = 0; i < product.photos.length; i++) {
+      if (product.photos[i].isMain) {
+        setCurrentImage(i);
+      }
+    }
+  }, []);
 
   return (
     <div className="relative flex flex-col items-center justify-center h-full">
@@ -64,7 +68,11 @@ const ProductCard = ({ product, isDetailed = false }) => {
               className="w-full relative col-span-4"
               alt={product.name}
             />
-
+            {product.salePercentage > 0 && (
+              <div className="absolute top-0 left-[5%] rotate-[-20deg] bg-primary shadow-md px-8 font-semibold">
+                Sale!
+              </div>
+            )}
             <button
               disabled={
                 currentImage === product.photos.length - 1 ||
@@ -129,7 +137,19 @@ const ProductCard = ({ product, isDetailed = false }) => {
               <div
                 className={isDetailed ? "text-xl font-semibold mt-1" : "hidden"}
               >
-                ${priceParse(product.price)}
+                <h2 className="text-xl font-medium">
+                  $
+                  {product.salePercentage > 0 ? (
+                    <span>
+                      {priceParse(product.salePrice)}
+                      <span className="text-primary relative line-through ml-2">
+                        ${priceParse(product.price)}
+                      </span>
+                    </span>
+                  ) : (
+                    priceParse(product.price)
+                  )}
+                </h2>
               </div>
             </div>
             <div className="flex items-center text-xs rounded-md">
@@ -144,7 +164,19 @@ const ProductCard = ({ product, isDetailed = false }) => {
                 isDetailed ? "hidden" : "text-xl font-semibold mt-1 text-end"
               }
             >
-              ${priceParse(product.price)}
+              <h2 className="text-xl font-medium">
+                $
+                {product.salePercentage > 0 ? (
+                  <span>
+                    {priceParse(product.salePrice)}
+                    <span className="text-primary relative line-through ml-2">
+                      ${priceParse(product.price)}
+                    </span>
+                  </span>
+                ) : (
+                  priceParse(product.price)
+                )}
+              </h2>
             </div>
             <div
               className={

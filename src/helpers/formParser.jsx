@@ -19,7 +19,11 @@ export const cartAmountParse = (cart) => {
 export const cartTotalParse = (cart) => {
   let amount = 0;
   for (let i = 0; i < cart.length; i++) {
-    amount += cart[i].amount * cart[i].price;
+    if (cart[i].salePercentage > 0) {
+      amount += cart[i].amount * cart[i].salePrice;
+    } else {
+      amount += cart[i].amount * cart[i].price;
+    }
   }
   return parseFloat(amount).toFixed(2).toLocaleString(undefined, {
     minimumFractionDigits: 2,

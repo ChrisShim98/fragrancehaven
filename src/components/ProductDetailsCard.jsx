@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaRegHeart,
   FaStar,
@@ -32,6 +32,14 @@ const ProductDetailsCard = ({ product, isLiked = false, loadPage }) => {
     setRating(1);
   };
 
+  useEffect(() => {
+    for (let i = 0; i < product.photos.length; i++) {
+      if (product.photos[i].isMain) {
+        setCurrentImage(i);
+      }
+    }
+  }, []);
+
   return (
     <div className="grid md:grid-cols-2 gap-8 py-10 place-items-start">
       <div className="grid grid-cols-6 place-items-center gap-4 text-3xl relative col-span-2 md:col-span-1">
@@ -56,7 +64,11 @@ const ProductDetailsCard = ({ product, isLiked = false, loadPage }) => {
           className="w-full relative col-span-4"
           alt={product.name}
         />
-
+        {product.salePercentage > 0 && (
+          <div className="absolute top-0 left-[5%] xl:left-[10%] rotate-[-20deg] bg-primary shadow-md px-8 font-semibold">
+            Sale!
+          </div>
+        )}
         <button
           disabled={
             currentImage === product.photos.length - 1 ||
@@ -78,7 +90,19 @@ const ProductDetailsCard = ({ product, isLiked = false, loadPage }) => {
       <div className="flex flex-col sm:pr-8 col-span-2 md:col-span-1">
         <div className="flex flex-col border-b border-gray-200 py-4 mb-6 md:pr-4">
           <h2 className="text-2xl font-medium">{product.name}</h2>
-          <h2 className="text-xl font-medium">${priceParse(product.price)}</h2>
+          <h2 className="text-xl font-medium">
+            $
+            {product.salePercentage > 0 ? (
+              <span>
+                {priceParse(product.salePrice)}
+                <span className="text-primary relative line-through ml-2">
+                  ${priceParse(product.price)}
+                </span>
+              </span>
+            ) : (
+              priceParse(product.price)
+            )}
+          </h2>
           <div className="flex gap-1 items-center">
             <FaStar className="text-yellow-300 relative top-[-1px]" />
             <h2>{parseRating(product.reviews)}</h2>

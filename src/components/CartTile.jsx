@@ -35,10 +35,20 @@ const CartTile = ({ product }) => {
         <p className="md:col-span-3">{product.name}</p>
 
         <p className="flex md:hidden">Price:</p>
-        <p className="md:col-span-2">${priceParse(product.price)}</p>
+        <p className="md:col-span-2">$
+            {product.salePercentage > 0 ? (
+              <span>
+                {priceParse(product.salePrice)}
+                <span className="text-primary relative line-through ml-2">
+                  ${priceParse(product.price)}
+                </span>
+              </span>
+            ) : (
+              priceParse(product.price)
+            )}</p>
 
         <p className="flex md:hidden">Amount:</p>
-        <div className="flex items-center col-span-2">
+        <div className="flex items-center md:col-span-2">
           <button
             onClick={() => {
               deleteFromCart(product);
@@ -60,7 +70,7 @@ const CartTile = ({ product }) => {
 
         <p className="flex md:hidden">Total:</p>
         <p className="md:col-span-2">
-          ${totalUnitParse(product.price, product.amount)}
+          ${product.salePercentage > 0 ? totalUnitParse(product.salePrice, product.amount) : totalUnitParse(product.price, product.amount)}
         </p>
       </div>
     </div>

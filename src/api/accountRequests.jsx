@@ -37,9 +37,14 @@ export const PostRegister = (username, password, email) => {
 
 export const PostUpdatePassword = (updatePasswordForm) => {
   let url = `${BASE_URL}/account/updatePassword`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .post(url, updatePasswordForm)
+    .post(url, updatePasswordForm, { headers })
     .then((response) => {
       return response.data;
     })
@@ -50,9 +55,14 @@ export const PostUpdatePassword = (updatePasswordForm) => {
 
 export const GetUserCart = (username) => {
   let url = `${BASE_URL}/account/cart?username=${username}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .get(url)
+    .get(url, { headers })
     .then((response) => {
       return response.data;
     })
@@ -63,9 +73,14 @@ export const GetUserCart = (username) => {
 
 export const PutUserCart = (username, productId, addProduct) => {
   let url = `${BASE_URL}/account/cart/${productId}?username=${username}&addProduct=${addProduct}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .put(url)
+    .put(url, null, { headers })
     .then((response) => {
       return response.data;
     })
@@ -76,9 +91,14 @@ export const PutUserCart = (username, productId, addProduct) => {
 
 export const DeleteUserCart = (username) => {
   let url = `${BASE_URL}/account/cart?username=${username}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   return axios
-    .delete(url)
+    .delete(url, { headers })
     .then((response) => {
       return response.data;
     })

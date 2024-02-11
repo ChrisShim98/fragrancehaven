@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaStar,
   FaArrowAltCircleLeft,
@@ -29,6 +29,14 @@ const ModifyProductCard = ({
     setPhotoModalOpened(true);
   };
 
+  useEffect(() => {
+    for (let i = 0; i < product.photos.length; i++) {
+      if (product.photos[i].isMain) {
+        setCurrentImage(i);
+      }
+    }
+  }, []);
+
   return (
     <div className="grid md:grid-cols-2 gap-8 py-4">
       <div className="flex flex-col items-center py-8 gap-4">
@@ -56,6 +64,11 @@ const ModifyProductCard = ({
             className="w-full relative col-span-4"
             alt={product.name}
           />
+          {product.salePercentage > 0 && (
+            <div className="absolute top-0 left-[5%] rotate-[-20deg] bg-primary shadow-md px-8 font-semibold">
+              Sale!
+            </div>
+          )}
 
           <button
             disabled={
@@ -87,29 +100,43 @@ const ModifyProductCard = ({
             <ImBin />
           </button>
         </div>
-        {product.photos.length > 0 && <div className="flex items-center gap-1">
-          <input
-            disabled={product.photos[currentImage].isMain}
-            onChange={() => {
-              setMainPhoto(product.id, currentImage);
-            }}
-            checked={product.photos[currentImage].isMain}
-            type="checkbox"
-          />
-          <p className="text-sm">Is main photo?</p>
-        </div>}
+        {product.photos.length > 0 && (
+          <div className="flex items-center gap-1">
+            <input
+              disabled={product.photos[currentImage].isMain}
+              onChange={() => {
+                setMainPhoto(product.id, currentImage);
+              }}
+              checked={product.photos[currentImage].isMain}
+              type="checkbox"
+            />
+            <p className="text-sm">Is main photo?</p>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col sm:pr-4">
         <div className="flex flex-col border-b border-gray-200 py-4">
           <h2 className="text-2xl font-medium">{product.name}</h2>
-          <h2 className="text-xl font-medium">${priceParse(product.price)}</h2>
+          <h2 className="text-xl font-medium">
+            $
+            {product.salePercentage > 0 ? (
+              <span>
+                {priceParse(product.salePrice)}
+                <span className="text-primary relative line-through ml-2">
+                  ${priceParse(product.price)}
+                </span>
+              </span>
+            ) : (
+              priceParse(product.price)
+            )}
+          </h2>
           <div className="flex gap-1 items-center">
             <FaStar className="text-yellow-300 relative top-[-1px]" />
             <h2>{parseRating(product.reviews)}</h2>
           </div>
-          <p className="py-4">{product.description}</p>
-          <div className="grid grid-cols-3">
+          <p className="text-sm md:text-base py-4">{product.description}</p>
+          <div className="text-sm md:text-base grid grid-cols-3 gap-1">
             <p>Brand: </p>
             <p className="col-span-2">{product.brand.name}</p>
             <p>Scent: </p>
@@ -120,6 +147,8 @@ const ModifyProductCard = ({
             <p className="col-span-2">{dateParse(product.dateAdded)}</p>
             <p>Amount Sold: </p>
             <p className="col-span-2">{product.amountSold}</p>
+            <p>Sale Percentage: </p>
+            <p className="col-span-2">{product.salePercentage}%</p>
           </div>
         </div>
         <div className="flex flex-col"></div>

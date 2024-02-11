@@ -29,6 +29,11 @@ export const addProductForm = [
         title: "description",
         type: "text",
         textArea: true,
-        colSpan: 1
+        colSpan: 2
+    }, 
+    {
+        title: "salePercentage",
+        type: "int",
+        colSpan: 2
     }
 ]

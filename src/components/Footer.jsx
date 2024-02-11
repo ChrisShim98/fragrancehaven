@@ -117,7 +117,7 @@ const Footer = () => {
                 className="flex-grow w-full h-12 px-4 mb-3 transition duration-200 text-undertone bg-white rounded-lg md:mr-2 md:mb-0"
               />
               <button
-                type="submit"
+                type="reset"
                 className="btn btn-light h-12 px-6 font-medium"
               >
                 Subscribe

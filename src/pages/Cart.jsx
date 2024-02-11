@@ -23,7 +23,7 @@ const Cart = () => {
           }
         >
           <div className="w-full grid p-4 place-items-center">
-            <div className="grid md:grid-cols-10 md:place-items-center gap-2">
+            <div className="w-full grid md:grid-cols-10 md:place-items-center gap-2">
               <p className="p-2 w-full">IMAGE</p>
               <p className="col-span-3">PRODUCT NAME</p>
               <p className="col-span-2">UNIT PRICE</p>
