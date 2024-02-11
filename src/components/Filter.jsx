@@ -58,19 +58,6 @@ const Filter = () => {
           <input disabled={false} onChange={() => {}} type="checkbox" />
           <p>In Stock</p>
         </div>
-        <div className="flex gap-1">
-          <input disabled={false} onChange={() => {}} type="checkbox" />
-          <p>New</p>
-        </div>
-        <button
-          className="hover:text-primary flex gap-1 items-center"
-          onClick={() => {
-            clearSearch();
-          }}
-        >
-          <p>Clear All Filters</p>
-          <IoIosClose size={20} />
-        </button>
       </div>
     </div>
   );

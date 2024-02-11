@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   FaRegHeart,
   FaStar,
@@ -6,15 +6,14 @@ import {
   FaArrowAltCircleRight,
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { PostReview } from "../api/productRequests";
 import { editLiked } from "../redux/cartSlice";
-import { setLoading } from "../redux/loadingSlice";
-import { closePopup, openPopup } from "../redux/popupSlice";
 import Reviews from "./Reviews";
 import { priceParse, parseRating } from "../helpers/formParser";
 import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
+import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
 
-const ProductDetailsCard = ({ product, isLiked = false }) => {
+const ProductDetailsCard = ({ product, isLiked = false, loadPage }) => {
+  const { submitReview } = useApiCallFunctions();
   const dispatch = useDispatch();
   let userLoggedIn = localStorage.getItem("token") !== null;
   const [currentImage, setCurrentImage] = useState(0);
@@ -31,26 +30,6 @@ const ProductDetailsCard = ({ product, isLiked = false }) => {
     setShowReviewSection(false);
     setReview("");
     setRating(1);
-  };
-
-  const submitReview = async () => {
-    dispatch(setLoading(true));
-    let productReview = {
-      message: review,
-      rating: rating,
-      reviewerName: localStorage.getItem("username"),
-    };
-
-    let response = await PostReview(product.id, productReview);
-    if (response?.error) {
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: response.message, isError: true }));
-    } else {
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: response }));
-      resetReview();
-    }
-    dispatch(setLoading(false));
   };
 
   return (
@@ -154,9 +133,11 @@ const ProductDetailsCard = ({ product, isLiked = false }) => {
           </button>
         </div>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            submitReview();
+            await submitReview(review, rating, product.id);
+            resetReview();
+            loadPage();
           }}
           className={showReviewSection ? "flex flex-col gap-6" : "hidden"}
         >
@@ -194,7 +175,11 @@ const ProductDetailsCard = ({ product, isLiked = false }) => {
         </form>
       </div>
       <span className="w-full col-span-2 border-gray-200 border-t-[1px]" />
-      <Reviews reviews={product.reviews} />
+      <Reviews
+        reviews={product.reviews}
+        productId={product.id}
+        loadPage={loadPage}
+      />
     </div>
   );
 };

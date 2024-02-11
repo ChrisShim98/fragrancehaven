@@ -1,8 +1,14 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import { dateParse } from "../helpers/formParser";
+import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
 
-const Reviews = ({ reviews = [] }) => {
+const Reviews = ({ reviews = [], productId, loadPage }) => {
+  const { deleteReview } = useApiCallFunctions();
+  let adminCheck =
+    localStorage.getItem("role") !== null &&
+    localStorage.getItem("role") === "Admin";
+
   return (
     <div className="col-span-2 flex flex-col items-center gap-2 sm:px-4 text-center place-self-center text-sm md:text-base">
       <h2 className="font-medium text-xl sm:text-2xl pb-2">Reviews</h2>
@@ -41,6 +47,19 @@ const Reviews = ({ reviews = [] }) => {
                 </div>
                 <p>Date Posted:</p>
                 <p>{dateParse(review.dateAdded)}</p>
+                {adminCheck && (
+                  <div className="flex w-full justify-end col-span-2">
+                    <button
+                      onClick={async () => {
+                        await deleteReview(productId, review.id);
+                        loadPage();
+                      }}
+                      className="bg-red-500 rounded-lg text-white p-2 hover:bg-red-600 transition-colors duration-500"
+                    >
+                      Delete Review
+                    </button>
+                  </div>
+                )}
               </div>
             );
           })}

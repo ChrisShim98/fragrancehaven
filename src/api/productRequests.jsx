@@ -27,6 +27,19 @@ export const GetAllProducts = (
     });
 };
 
+export const GetProductById = (productId) => {
+  let url = `${BASE_URL}/product/${productId}`;
+
+  return axios
+    .get(url)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};
+
 export const PostAddProduct = (product) => {
   let url = `${BASE_URL}/product`;
 
@@ -114,6 +127,19 @@ export const PostReview = (productId, review) => {
 
   return axios
     .post(url, review)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};
+
+export const DeleteReview = (productId, reviewId) => {
+  let url = `${BASE_URL}/product/${productId}/deleteReview/${reviewId}`;
+
+  return axios
+    .delete(url)
     .then((response) => {
       return response.data;
     })

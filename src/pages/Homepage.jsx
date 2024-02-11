@@ -14,7 +14,11 @@ const Homepage = () => {
 
   const getAllProducts = async (pageNumber = 1, searchQuery = "") => {
     dispatch(setLoading(true));
-    let response = await GetAllProducts(pageNumber, searchQuery, "amountSold");
+    let response = await GetAllProducts(
+      pageNumber,
+      searchQuery,
+      "amountSold_desc"
+    );
     if (response?.error) {
       await dispatch(closePopup());
       dispatch(openPopup({ message: response.message, isError: true }));
@@ -27,15 +31,16 @@ const Homepage = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
-  console.log(products)
+  
   return (
-    products.length > 0 &&
-    <div>
-      <CarouselComp />
-      <FeaturedProduct products={products} />
-      <TopProduct products={products} />
-      <BestSellers products={products} />
-    </div>
+    products.length > 0 && (
+      <div>
+        <CarouselComp />
+        <FeaturedProduct products={products} />
+        <TopProduct products={products} />
+        <BestSellers products={products} />
+      </div>
+    )
   );
 };
 
