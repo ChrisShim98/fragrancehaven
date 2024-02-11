@@ -14,6 +14,7 @@ import { openPopup, closePopup } from "../redux/popupSlice";
 import { Navigate } from "react-router-dom";
 import { parseJWT } from "../helpers/parseJWT";
 import { setLoading, selectLoading } from "../redux/loadingSlice";
+import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isForgetPassword, setIsForgetPassword] = useState(false);
   const [form, setForm] = useState();
-  const [redirect, setRedirect] = useState(false);
+  const { signIn, register } = useApiCallFunctions();
 
   useEffect(() => {
     let initialForm = {};
@@ -78,34 +79,6 @@ const SignIn = () => {
     setForm(() => {
       return updatedForm;
     });
-  };
-
-  const signIn = async (username, password) => {
-    let response = await PostLogin(username, password);
-    if (response?.error) {
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: response.message, isError: true }));
-    } else {
-      parseJWT(response?.token);
-      localStorage.setItem("email", response?.email);
-      setRedirect(true);
-    }
-    dispatch(setLoading(false));
-  };
-
-  const register = async (username, password, email) => {
-    let response = await PostRegister(username, password, email);
-    if (response?.error) {
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: response.message, isError: true }));
-    } else {
-      parseJWT(response?.token);
-      localStorage.setItem("email", response?.email);
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: "Successfully registered" }));
-      setRedirect(true);
-    }
-    dispatch(setLoading(false));
   };
 
   return (
@@ -205,7 +178,6 @@ const SignIn = () => {
           </button>
         </form>
       </div>
-      {redirect && <Navigate to="/" replace />}
     </div>
   );
 };

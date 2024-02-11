@@ -27,9 +27,8 @@ const Cart = () => {
               <p className="p-2 w-full">IMAGE</p>
               <p className="col-span-3">PRODUCT NAME</p>
               <p className="col-span-2">UNIT PRICE</p>
-              <p className="px-8">QUANTITY</p>
+              <p className="px-8 col-span-2">QUANTITY</p>
               <p className="col-span-2">SUBTOTAL</p>
-              <p>ACTION</p>
             </div>
           </div>
         </div>

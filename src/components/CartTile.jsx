@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { totalUnitParse } from "../helpers/formParser";
 import { useDispatch } from "react-redux";
-import { addProduct, deleteProduct, deleteAll } from "../redux/cartSlice";
+import { priceParse } from "../helpers/formParser";
+import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
 
 const CartTile = ({ product }) => {
   const dispatch = useDispatch();
   const [mainPhoto, setMainPhoto] = useState(0);
+  const { addToCart, deleteFromCart } = useCartFunctions();
 
   useEffect(() => {
     for (let i = 0; i < product.photos.length; i++) {
@@ -34,13 +35,13 @@ const CartTile = ({ product }) => {
         <p className="md:col-span-3">{product.name}</p>
 
         <p className="flex md:hidden">Price:</p>
-        <p className="md:col-span-2">${product.price}</p>
+        <p className="md:col-span-2">${priceParse(product.price)}</p>
 
         <p className="flex md:hidden">Amount:</p>
-        <div className="flex items-center">
+        <div className="flex items-center col-span-2">
           <button
             onClick={() => {
-              dispatch(deleteProduct(product));
+              deleteFromCart(product);
             }}
             className="px-2 border"
           >
@@ -49,7 +50,7 @@ const CartTile = ({ product }) => {
           <p className="px-6 border">{product.amount ? product.amount : 1}</p>
           <button
             onClick={() => {
-              dispatch(addProduct(product));
+              addToCart(product);
             }}
             className="px-2 border"
           >
@@ -61,15 +62,6 @@ const CartTile = ({ product }) => {
         <p className="md:col-span-2">
           ${totalUnitParse(product.price, product.amount)}
         </p>
-
-        <p className="flex md:hidden">Action:</p>
-        <button
-          onClick={() => {
-            dispatch(deleteAll(product));
-          }}
-        >
-          <RiDeleteBinLine size={"1.5rem"} />
-        </button>
       </div>
     </div>
   );

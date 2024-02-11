@@ -22,12 +22,14 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Loading from "./components/Loading";
 import { selectLoading } from "./redux/loadingSlice";
 import { scrollToTop } from "./helpers/scrollToTop";
+import { useCartFunctions } from "./helpers/customHooks/CartFunctions";
 
 function App() {
   const { pathname } = useLocation();
   const [scrollPosition, setScrollPosition] = useState(0);
   const popupDetails = useSelector(selectPopup);
   const loadingDetails = useSelector(selectLoading);
+  const { getCart } = useCartFunctions();
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -35,6 +37,12 @@ function App() {
   };
 
   useEffect(() => {
+    // Update Cart if user is logged in
+    let username = localStorage.getItem("username");
+    if (username !== null) {
+      getCart(username);
+    }
+
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -59,7 +67,13 @@ function App() {
     <div className="overflow-x-hidden relative text-undertone font-Poppins min-w-[320px]">
       {loadingDetails.loading && <Loading />}
       <Navbar display={scrollPosition > 200} />
-      <div className={scrollPosition > 200 ? "h-16 md:h-20 lg:h-24 py-1 flex w-full" : "hidden"} />
+      <div
+        className={
+          scrollPosition > 200
+            ? "h-16 md:h-20 lg:h-24 py-1 flex w-full"
+            : "hidden"
+        }
+      />
       <div className="min-h-[80vh]">
         <Routes>
           <Route path="/" element={<Homepage />} />

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { colognes } from "../constants/colognes";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/cartSlice";
+import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
+import { priceParse } from "../helpers/formParser";
 
-const FeaturedProduct = () => {
-  const dispatch = useDispatch();
+const FeaturedProduct = ({ products }) => {
+  const { addToCart } = useCartFunctions();
   const [randomNumber, setRandomNumber] = useState(0);
   useEffect(() => {
-    setRandomNumber(Math.floor(Math.random() * colognes.length));
+    setRandomNumber(Math.floor(Math.random() * products.length));
   }, []);
 
   return (
@@ -17,35 +16,43 @@ const FeaturedProduct = () => {
           <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
             <div className="relative">
               <img
-                src={colognes[randomNumber].img}
+                src={
+                  products[randomNumber].photos.length > 0
+                    ? products[randomNumber].photos[0].url
+                    : "/noImage.png"
+                }
                 className="w-full relative z-10"
-                alt={colognes[randomNumber].name}
+                alt={products[randomNumber].name}
               />
             </div>
           </div>
           <div className="w-full md:w-1/2 px-10">
             <div className="mb-10">
               <h1 className="font-bold uppercase text-2xl mb-5">
-                {colognes[randomNumber].name}
+                {products[randomNumber].name}
               </h1>
-              <p className="text-sm">{colognes[randomNumber].description} </p>
+              <p className="text-sm">{products[randomNumber].description} </p>
             </div>
             <div className="flex flex-col gap-2">
               <div className="inline-block align-bottom">
                 <span className="text-2xl leading-none align-baseline">$</span>
                 <span className="font-bold text-5xl leading-none align-baseline">
-                  {colognes[randomNumber].price.slice(0, -3)}
+                  {priceParse(products[randomNumber].price).slice(0, -3)}
                 </span>
                 <span className="text-2xl leading-none align-baseline">
-                  {colognes[randomNumber].price.slice(-3)}
+                  {priceParse(products[randomNumber].price).slice(-3)}
                 </span>
               </div>
               <div className="inline-block align-bottom pt-4 md:pt-0">
                 <button
-                  className={colognes[randomNumber].stock === 0 ? "btn-disabled px-10 py-2 font-semibold" : "btn btn-main px-10 py-2 font-semibold"}
-                  disabled={colognes[randomNumber].stock === 0}
+                  className={
+                    products[randomNumber].stock === 0
+                      ? "btn-disabled px-10 py-2 font-semibold"
+                      : "btn btn-main px-10 py-2 font-semibold"
+                  }
+                  disabled={products[randomNumber].stock === 0}
                   onClick={() => {
-                    dispatch(addProduct(colognes[randomNumber]));
+                    addToCart(products[randomNumber]);
                   }}
                 >
                   Add To Cart

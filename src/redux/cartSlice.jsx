@@ -8,6 +8,9 @@ export const cartSlice = createSlice({
     liked: [],
   },
   reducers: {
+    addCart: (state, action) => {
+      state.products = action.payload;
+    },
     addProduct: (state, action) => {
       let productIndex = state.products.findIndex(
         (product) => product.id === action.payload?.id
@@ -32,13 +35,8 @@ export const cartSlice = createSlice({
         }
       }
     },
-    deleteAll: (state, action) => {
-      let productIndex = state.products.findIndex(
-        (product) => product.id === action.payload?.id
-      );
-      if (productIndex !== -1) {
-        state.products.splice(productIndex, 1);
-      }
+    deleteAll: (state) => {
+      state.products = [];
     },
     addDetail: (state, action) => {
       state.productDetail = action.payload;
@@ -57,7 +55,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addProduct, deleteProduct, deleteAll, addDetail, editLiked } =
+export const { addCart, addProduct, deleteProduct, deleteAll, addDetail, editLiked } =
   cartSlice.actions;
 
 export const selectCart = (state) => state.cart.products;

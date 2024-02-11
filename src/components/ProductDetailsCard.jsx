@@ -7,11 +7,12 @@ import {
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { PostReview } from "../api/productRequests";
-import { addProduct, editLiked } from "../redux/cartSlice";
+import { editLiked } from "../redux/cartSlice";
 import { setLoading } from "../redux/loadingSlice";
 import { closePopup, openPopup } from "../redux/popupSlice";
 import Reviews from "./Reviews";
 import { priceParse, parseRating } from "../helpers/formParser";
+import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
 
 const ProductDetailsCard = ({ product, isLiked = false }) => {
   const dispatch = useDispatch();
@@ -20,12 +21,7 @@ const ProductDetailsCard = ({ product, isLiked = false }) => {
   const [showReviewSection, setShowReviewSection] = useState(false);
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(1);
-
-  const addToCart = async () => {
-    await dispatch(closePopup());
-    dispatch(openPopup({ message: product.name + " added to cart" }));
-    dispatch(addProduct(product));
-  };
+  const { addToCart } = useCartFunctions();
 
   const handleStarClick = (starValue) => {
     setRating(starValue);

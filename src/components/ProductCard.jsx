@@ -8,27 +8,21 @@ import {
 } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addProduct,
   addDetail,
   selectLiked,
   editLiked,
 } from "../redux/cartSlice";
-import { closePopup, openPopup } from "../redux/popupSlice";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../helpers/scrollToTop";
 import { priceParse, parseRating } from "../helpers/formParser";
+import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
 
 const ProductCard = ({ product, isDetailed = false }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const liked = useSelector(selectLiked);
   const isLiked = liked.findIndex((liked) => liked.id === product.id);
   const dispatch = useDispatch();
-
-  const addToCart = async () => {
-    await dispatch(closePopup());
-    dispatch(openPopup({ message: product.name + " added to cart" }));
-    dispatch(addProduct(product));
-  };
+  const { addToCart } = useCartFunctions();
 
   return (
     <div className="relative flex flex-col items-center justify-center h-full">
@@ -173,7 +167,7 @@ const ProductCard = ({ product, isDetailed = false }) => {
               <button
                 disabled={product.stock === 0}
                 onClick={() => {
-                  addToCart();
+                  addToCart(product);
                 }}
                 className={
                   product.stock === 0
