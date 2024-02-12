@@ -1,0 +1,632 @@
+{
+	"info": {
+		"_postman_id": "81d622a2-8b24-407c-a1c0-4cc3eebd0a7f",
+		"name": "FragranceHaven",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"Pa$$w0rd\",\r\n    \"email\": \"chrisshim123@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/account/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Tester\",\r\n    \"currentPassword\": \"Fail-123\",\r\n    \"newPassword\": \"Test-123\",\r\n    \"confirmPassword\": \"Test-123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/account/updatePassword",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/account/cart?username=tester",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "tester"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Product In Cart",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/account/cart/3?username=tester&addProduct=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"cart",
+								"3"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "tester"
+								},
+								{
+									"key": "addProduct",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty User Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/account/cart?username=tester",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "tester"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxOCIsInVuaXF1ZV9uYW1lIjoiamVubmlmZXI4OTAxIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzA3NjQyNDExLCJleHAiOjE3MDgyNDcyMTEsImlhdCI6MTcwNzY0MjQxMX0.ezoxpJDZD7ERfAs2uKg0UEjmArRF_3oMohPzGvEg337PQWBEKuQO0eyTbAy6_Nlf1TtZyXSfsSrSEElrn8rJhA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "SearchQuery",
+								"value": "Dyl",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "SearchQuery",
+								"value": "Dyl",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "SearchQuery",
+								"value": "Dyl",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product?SearchQuery=dyl",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "SearchQuery",
+									"value": "dyl"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"scent\": \"Versace Dylan Blue\",\r\n    \"brandName\": \"Versace\",\r\n    \"price\": \"77.30\",\r\n    \"stock\": 5,\r\n    \"description\":\r\n      \"Versace Pour Homme Dylan Blue is a fresh and vibrant fragrance for men. It is a blend of citrus notes, including bergamot, grapefruit, and lemon, which create a sparkling and energetic opening. The heart of the fragrance is a blend of lavender, geranium, and cardamom, which add depth and complexity to the scent. The base of the fragrance is a blend of vetiver, cedarwood, and oakmoss, which provide a warm and woody finish. This fragrance is perfect for any occasion, whether it's a day at the office or a night out on the town. It is a versatile fragrance that can be worn year-round and is sure to turn heads.\",\r\n    \"img\": \"https://res.cloudinary.com/dhpo94oka/image/upload/v1706579964/FragranceHaven/Dev/bpwy5d9k7ixerh9v68wy.webp\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Main Photo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/product/1/mainPhoto/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"mainPhoto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Aqua\",\r\n    \"scent\": \"Versace Dylan Blue\",\r\n    \"brandName\": \"Gucci\",\r\n    \"price\": \"77.30\",\r\n    \"stock\": 5,\r\n    \"description\":\r\n      \"Versace Pour Homme Dylan Blue is a fresh and vibrant fragrance for men. It is a blend of citrus notes, including bergamot, grapefruit, and lemon, which create a sparkling and energetic opening. The heart of the fragrance is a blend of lavender, geranium, and cardamom, which add depth and complexity to the scent. The base of the fragrance is a blend of vetiver, cedarwood, and oakmoss, which provide a warm and woody finish. This fragrance is perfect for any occasion, whether it's a day at the office or a night out on the town. It is a versatile fragrance that can be worn year-round and is sure to turn heads.\",\r\n    \"img\": \"https://res.cloudinary.com/dhpo94oka/image/upload/v1706579964/FragranceHaven/Dev/bpwy5d9k7ixerh9v68wy.webp\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Review to Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"This is a test\",\r\n    \"rating\": \"2\",\r\n    \"reviewerName\": \"tester\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product/1/addReview",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"addReview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Photo to Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Chris/Desktop/images/Vesace 2.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/product/1/addPhoto",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"addPhoto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Sale to Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/product/1/addSale/10",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"addSale",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/product/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/product/1/deletePhoto/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"deletePhoto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review from Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/product/1/deleteReview/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"deleteReview",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Get All Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/transaction",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"productsPurchased\": [\r\n            {\r\n                \"id\": 12,\r\n                \"name\": \"Eau de Parfum\",\r\n                \"scent\": \"Spicy, Woody\",\r\n                \"brandId\": 12,\r\n                \"brand\": {\r\n                    \"id\": 0,\r\n                    \"name\": null\r\n                },\r\n                \"price\": 87.99,\r\n                \"stock\": 5,\r\n                \"description\": \"Yves Saint Laurent Y for Men Eau De Parfum Spray 3.3 Fl Ounce (Pack of 1), Clean\",\r\n                \"photos\": [],\r\n                \"reviews\": [],\r\n                \"amount\": 1,\r\n                \"amountSold\": 23,\r\n                \"dateAdded\": \"2024-02-11T15:32:05.8525376\",\r\n                \"salePercentage\": 0,\r\n                \"salePrice\": 87.99\r\n            }\r\n        ],\r\n        \"totalSpent\": 87.99,\r\n        \"userId\": 27,\r\n        \"user\": null,\r\n        \"datePurchased\": \"2024-02-11T20:32:05.8525104\",\r\n        \"lastFourOfCard\": 1234,\r\n        \"status\": \"Paid\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/transaction",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Transactions for User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJqb2huMTIzIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzA3NjkyMTY5LCJleHAiOjE3MDgyOTY5NjksImlhdCI6MTcwNzY5MjE2OX0.Ve2CkzXQ3AH_uiJil0XqV_3j9xqwm8EesooY4jPxAyCmCeTpSah9Lq2OS_RqGJQl05k9OnLUfn6JVT7ZBzxbsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/transaction/jane456",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"transaction",
+								"jane456"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
