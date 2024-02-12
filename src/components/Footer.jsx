@@ -62,13 +62,10 @@ const Footer = () => {
                     All Products
                   </Link>
                 </li>
-                <li
-                  onClick={() => {
-                    likedProducts();
-                  }}
-                  className="link"
-                >
-                  Liked Products
+                <li>
+                  <Link to="/myAccount" className="link">
+                    My Account
+                  </Link>
                 </li>
                 <li>
                   <Link to="/faqs" className="link">

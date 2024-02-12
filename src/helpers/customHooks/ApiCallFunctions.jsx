@@ -9,12 +9,17 @@ import {
   DeleteReview,
   GetProductById,
 } from "../../api/productRequests";
+import { GetTransaction } from "../../api/transactionRequests";
 import { useNavigate } from "react-router-dom";
+import { PostTransaction } from "../../api/transactionRequests";
+import { selectCart, addTransaction } from "../../redux/cartSlice";
+import { cartTotalParse } from "../formParser";
 
 export function useApiCallFunctions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { getCart } = useCartFunctions();
+  const cart = useSelector(selectCart);
 
   const signIn = async (username, password) => {
     let response = await PostLogin(username, password);
@@ -84,5 +89,46 @@ export function useApiCallFunctions() {
     dispatch(setLoading(false));
   };
 
-  return { signIn, register, submitReview, deleteReview, getProduct };
+  const submitOrder = async (billingDetailsForm) => {
+    console.log(cart, billingDetailsForm);
+    // Setup transaction object
+    let transaction = {
+      productsPurchased: cart,
+      totalSpent: cartTotalParse(cart),
+      userName: localStorage.getItem("username"),
+      lastFourOfCard: billingDetailsForm.cardNumber.value.slice(-4),
+    };
+
+    let response = await PostTransaction(transaction);
+    if (response?.error) {
+      await dispatch(closePopup());
+      dispatch(openPopup({ message: response.message, isError: true }));
+    } else {
+      await dispatch(addTransaction(response));
+      await getCart(localStorage.getItem("username")); 
+      navigate("/paymentSuccessful");
+    }
+    dispatch(setLoading(false));
+  };
+
+  const getTransactionsForUser = async (username) => {
+    let response = await GetTransaction(username);
+    if (response?.error) {
+      await dispatch(closePopup());
+      dispatch(openPopup({ message: response.message, isError: true }));
+    } else {
+      await getCart(username);
+      return response;
+    }
+    dispatch(setLoading(false));
+  };
+  return {
+    signIn,
+    register,
+    submitReview,
+    deleteReview,
+    getProduct,
+    submitOrder,
+    getTransactionsForUser,
+  };
 }

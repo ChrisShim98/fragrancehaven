@@ -20,13 +20,15 @@ export function useCartFunctions() {
 
   const getCart = async (username) => {
     dispatch(setLoading(true));
-    let response = await GetUserCart(username);
-    if (response?.error) {
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: response.message, isError: true }));
-    } else {
-      await dispatch(closePopup());
-      dispatch(addCart(response));
+    if (userLoggedIn) {
+      let response = await GetUserCart(username);
+      if (response?.error) {
+        await dispatch(closePopup());
+        dispatch(openPopup({ message: response.message, isError: true }));
+      } else {
+        await dispatch(closePopup());
+        dispatch(addCart(response));
+      }
     }
     dispatch(setLoading(false));
   };
@@ -62,7 +64,7 @@ export function useCartFunctions() {
         dispatch(openPopup({ message: response.message, isError: true }));
       } else {
         await dispatch(closePopup());
-      dispatch(openPopup({ message: product.name + " removed from cart" }));
+        dispatch(openPopup({ message: product.name + " removed from cart" }));
         dispatch(deleteProduct(product));
       }
       dispatch(setLoading(false));

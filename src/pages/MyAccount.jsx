@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PageHeader from "../components/PageHeader";
 
 import UpdatePassword from "./User/UpdatePassword";
+import Transactions from "./User/Transactions";
 
 const MyAccount = () => {
   let username = localStorage.getItem("username");
@@ -23,6 +24,13 @@ const MyAccount = () => {
             <span className="w-24 h-1 border-black border-t-[1px]" />
           </div>
           <UpdatePassword username={username} />
+        </div>
+        <div className="flex flex-col items-start gap-4 w-full">
+          <div className="flex flex-col gap-1 w-full max-w-[800px]">
+            <h1 className="font-medium text-lg lg:text-xl">Your Transactions</h1>
+            <span className="w-24 h-1 border-black border-t-[1px]" />
+          </div>
+          <Transactions username={username} />
         </div>
       </div>
     </div>

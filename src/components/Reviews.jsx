@@ -40,7 +40,6 @@ const Reviews = ({ reviews = [], productId, loadPage }) => {
                           starValue <= review.rating ? "#ffc107" : "#e4e5e9"
                         }
                         size={18}
-                        style={{ cursor: "pointer" }}
                       />
                     );
                   })}

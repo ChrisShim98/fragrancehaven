@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch, selectSearch } from "../redux/searchSlice";
 import { IoIosClose } from "react-icons/io";
 import { setfilter, clearFilters, selectfilter } from "../redux/filterSlice";
 
-const Filter = () => {
+const Filter = ({ getAllProducts }) => {
   const dispatch = useDispatch();
-  const filterDetails = useSelector(selectfilter);
   const searchDetails = useSelector(selectSearch);
+  const [productsWithReview, setProductsWithReview] = useState(false)
+  const [productsOnSale, setProductsOnSale] = useState(false)
+  const [productsInStock, setProductsInStock] = useState(false)
 
   const clearSearch = () => {
     dispatch(
@@ -17,6 +19,11 @@ const Filter = () => {
       })
     );
   };
+
+  useEffect(() => {
+    getAllProducts(1, "", "", productsWithReview, productsOnSale, productsInStock)   
+  }, [productsWithReview, productsOnSale, productsInStock])
+  
 
   return (
     <div className="flex flex-col items-start gap-2 px-4 text-sm sm:text-base rounded-lg bg-gray-100 p-6">
@@ -35,27 +42,15 @@ const Filter = () => {
           </button>
         )}
         <div className="flex gap-1">
-          {filterDetails && <input
-            disabled={false}
-            checked={filterDetails.isLiked}
-            onChange={() => {
-              dispatch(
-                setfilter({
-                  filterName: "isLiked",
-                  isFilterOn: !filterDetails.isLiked,
-                })
-              );
-            }}
-            type="checkbox"
-          />}
-          <p>Liked Products</p>
-        </div>
-        <div className="flex gap-1">
-          <input disabled={false} onChange={() => {}} type="checkbox" />
+          <input checked={productsOnSale} onChange={() => {setProductsOnSale(!productsOnSale)}} type="checkbox" />
           <p>On Sale</p>
         </div>
         <div className="flex gap-1">
-          <input disabled={false} onChange={() => {}} type="checkbox" />
+          <input checked={productsWithReview} onChange={() => {setProductsWithReview(!productsWithReview)}} type="checkbox" />
+          <p>With Reviews</p>
+        </div>
+        <div className="flex gap-1">
+          <input checked={productsInStock} onChange={() => {setProductsInStock(!productsInStock)}} type="checkbox" />
           <p>In Stock</p>
         </div>
       </div>

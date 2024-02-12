@@ -23,6 +23,7 @@ import Loading from "./components/Loading";
 import { selectLoading } from "./redux/loadingSlice";
 import { scrollToTop } from "./helpers/scrollToTop";
 import { useCartFunctions } from "./helpers/customHooks/CartFunctions";
+import PaymentSuccessful from "./pages/User/PaymentSuccessful";
 
 function App() {
   const { pathname } = useLocation();
@@ -96,6 +97,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyAccount />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/paymentSuccessful"
+            element={
+              <ProtectedRoute>
+                <PaymentSuccessful />
               </ProtectedRoute>
             }
           />

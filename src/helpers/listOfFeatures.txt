@@ -48,3 +48,27 @@ Liked products are retained
 View liked products list
 
 -- Site Admin User --
+
+-- List of stuff to work on -- 
+Add search functionality, mobile as well -- Done --
+Add potential filters to all products page -- Started --
+Update user cart in database -- Done --
+Add favorites page -- Done --
+Add authentication on routes (admin and user) -- Done --
+Complete my account page - update email, password, add address, see all transactions, add card? -- Started -- 
+Checkout to complete transaction, Add card details
+View All Transactions - admin
+View All transactions - customer
+Calculate Rating of product based on total reviews -- Done --
+Set featured product -- Random among top products -- -- Done --
+Delete reviews on products - admin -- Done --
+Subscribe for updates confirmation -- Done --
+Add items on sale, admin should be able to add sale option -- Done --
+Set main photo on customer pages -- Done -- 
+Add Favorites List?
+Remove hover effect on stars in reviews -- Done --
+Succesful payment clears cart, increase amount purchased on each product and redirects to receipt
+
+Print functionality on reciepts ?
+When user registers for new account, send their cart to database
+Amount in database should not be modified and should be user specific

@@ -3,9 +3,11 @@ import FormField from "./form/FormField";
 import { billingDetailsForm } from "../constants/formFields";
 import { formTitleParser } from "../helpers/formParser";
 import { fieldValidator } from "./form/formValidator";
+import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
 
 const BillingDetails = ({ placeOrder, setPlaceOrder = () => {} }) => {
   const [form, setForm] = useState();
+  const { submitOrder } = useApiCallFunctions();
 
   useEffect(() => {
     let initialForm = {};
@@ -33,13 +35,13 @@ const BillingDetails = ({ placeOrder, setPlaceOrder = () => {} }) => {
         updatedForm[key].value
       );
       if (updatedForm[key].errorMessage !== "") {
-        isFormValid = false
+        isFormValid = false;
       }
     }
 
     setPlaceOrder(false);
     if (isFormValid) {
-      console.log("Form submitted!");
+      submitOrder(form);
     }
     setForm(() => {
       return updatedForm;

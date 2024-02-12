@@ -43,7 +43,7 @@ const FormField = ({
           className="rounded-lg border py-2 px-4"
         />
       )}
-      <p className={error === "" ? "hidden" : "text-red-500 text-sm"}>
+      <p className={error === "" ? "hidden" : "text-red-500 text-xs"}>
         {error}
       </p>
     </div>

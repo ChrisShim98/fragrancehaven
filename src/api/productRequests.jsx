@@ -5,11 +5,16 @@ import { errorHandling } from "./errorHandling";
 export const GetAllProducts = (
   pageNumber = 1,
   searchQuery = "",
-  orderBy = ""
+  orderBy = "",
+  productsWithReview = false,
+  productsOnSale = false,
+  productsInStock = false
 ) => {
   let url = `${BASE_URL}/product?${
     searchQuery === "" ? "" : `SearchQuery=${searchQuery}&`
-  }PageNumber=${pageNumber}${orderBy === "" ? "" : `&OrderBy=${orderBy}`}`;
+  }PageNumber=${pageNumber}${
+    orderBy === "" ? "" : `&OrderBy=${orderBy}`
+  }&ProductsWithReview=${productsWithReview}&ProductsOnSale=${productsOnSale}&ProductsInStock=${productsInStock}`;
 
   return axios
     .get(url)

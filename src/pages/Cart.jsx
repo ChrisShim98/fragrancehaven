@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageHeader from "../components/PageHeader";
 import CartTile from "../components/CartTile";
 import { useSelector } from "react-redux";
 import { selectCart } from "../redux/cartSlice";
 import { cartTotalParse } from "../helpers/formParser";
+import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cart = useSelector(selectCart);
+  const { getCart } = useCartFunctions();
+  let username = localStorage.getItem("username");
+
+  useEffect(() => {
+    getCart(username);
+  }, []);
 
   return (
     <div className="w-full min-h-[50vh] xl:min-h-[80vh] flex flex-col gap-8 items-center">

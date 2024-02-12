@@ -55,6 +55,8 @@ export const formTitleParser = (input) => {
     return "TRN Number";
   } else if (input === "cvv") {
     return "CVV Code";
+  } else if (input === "expiryDate") {
+    return "Expiry Date (MM/YY)";
   }
   var words = input.split(/(?=[A-Z])/);
   var result = words.map(function (word) {

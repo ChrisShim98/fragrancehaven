@@ -39,6 +39,21 @@ export const billingDetailsForm = [
         type: "email",
         colSpan: 1
     },
+    {
+        title: "cardNumber",
+        type: "number",
+        colSpan: 2
+    },
+    {
+        title: "expiryDate",
+        type: "text",
+        colSpan: 1
+    },
+    {
+        title: "cvv",
+        type: "number",
+        colSpan: 1
+    },
 ]
 
 export const loginForm = [

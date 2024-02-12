@@ -20,12 +20,26 @@ const AllProducts = () => {
   const filterDetails = useSelector(selectfilter);
   const likedDetails = useSelector(selectLiked);
 
-  const getAllProducts = async (pageNumber = 1, searchQuery = "") => {
+  const getAllProducts = async (
+    pageNumber = 1,
+    searchQuery = "",
+    orderBy = "",
+    productsWithReview = false,
+    productsOnSale = false,
+    productsInStock = false
+  ) => {
     dispatch(setLoading(true));
     if (searchDetails.isActive) {
       searchQuery = searchDetails.query;
     }
-    let response = await GetAllProducts(pageNumber, searchQuery);
+    let response = await GetAllProducts(
+      pageNumber,
+      searchQuery,
+      orderBy,
+      productsWithReview,
+      productsOnSale,
+      productsInStock
+    );
     if (response?.error) {
       await dispatch(closePopup());
       dispatch(openPopup({ message: response.message, isError: true }));
@@ -77,7 +91,7 @@ const AllProducts = () => {
       <PageHeader pageHeader={"All Products"} />
       <div className="py-8 grid lg:grid-cols-8 gap-8">
         <div className="min-w-[300px] lg:min-w-0 lg:w-full px-8 lg:px-0 lg:col-span-2">
-          <Filter />
+          <Filter getAllProducts={getAllProducts}/>
         </div>
         <div className="flex flex-col lg:col-span-6 gap-6">
           {!filterDetails.isLiked && (
@@ -88,7 +102,9 @@ const AllProducts = () => {
           <div className="grid gap-4">
             {loadingDetails.loading === false &&
               (filterDetails.isLiked && likedDetails.length === 0 ? (
-                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">Nothing to show here</p>
+                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">
+                  Nothing to show here
+                </p>
               ) : filterDetails.isLiked && likedDetails.length > 0 ? (
                 likedDetails.map((product) => {
                   return (
@@ -98,7 +114,9 @@ const AllProducts = () => {
                   );
                 })
               ) : products.length === 0 ? (
-                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">Nothing to show here</p>
+                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">
+                  Nothing to show here
+                </p>
               ) : (
                 products.map((product) => {
                   return (
