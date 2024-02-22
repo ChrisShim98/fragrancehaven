@@ -20,7 +20,9 @@ const Transactions = ({ username }) => {
       ) : (
         transactions.map((transaction) => {
           return (
-            <TransactionCard transaction={transaction} />
+            <div key={transaction.id}>
+              <TransactionCard transaction={transaction} />
+            </div>
           );
         })
       )}

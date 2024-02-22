@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closePopup, openPopup } from "../../redux/popupSlice";
 import {
   addCart,
   addProduct,
   deleteProduct,
   deleteAll,
+  selectCart,
 } from "../../redux/cartSlice";
 import {
   GetUserCart,
@@ -17,6 +17,7 @@ import { setLoading } from "../../redux/loadingSlice";
 export function useCartFunctions() {
   const dispatch = useDispatch();
   let userLoggedIn = localStorage.getItem("token") !== null;
+  const cart = useSelector(selectCart);
 
   const getCart = async (username) => {
     dispatch(setLoading(true));
@@ -34,10 +35,14 @@ export function useCartFunctions() {
   };
 
   const addToCart = async (product) => {
+    if (product.mainPhoto === undefined) {
+      product.mainPhoto = product.photos.find((photo) => photo.isMain === true);
+    }
+
     if (userLoggedIn) {
       let username = localStorage.getItem("username");
       dispatch(setLoading(true));
-      let response = await PutUserCart(username, product.id, true);
+      let response = await PutUserCart(username, product.name, true);
       if (response?.error) {
         await dispatch(closePopup());
         dispatch(openPopup({ message: response.message, isError: true }));
@@ -48,9 +53,22 @@ export function useCartFunctions() {
       }
       dispatch(setLoading(false));
     } else {
-      await dispatch(closePopup());
-      dispatch(openPopup({ message: product.name + " added to cart" }));
-      dispatch(addProduct(product));
+      let foundProduct = cart.find(
+        (cartProduct) => cartProduct.name == product.name
+      );
+      if (
+        foundProduct !== undefined &&
+        foundProduct.amount + 1 > foundProduct.stock
+      ) {
+        await dispatch(closePopup());
+        dispatch(
+          openPopup({ message: "Insufficient items in stock", isError: true })
+        );
+      } else {
+        await dispatch(closePopup());
+        dispatch(openPopup({ message: product.name + " added to cart" }));
+        dispatch(addProduct(product));
+      }
     }
   };
 
@@ -58,7 +76,7 @@ export function useCartFunctions() {
     if (userLoggedIn) {
       let username = localStorage.getItem("username");
       dispatch(setLoading(true));
-      let response = await PutUserCart(username, product.id, false);
+      let response = await PutUserCart(username, product.name, false);
       if (response?.error) {
         await dispatch(closePopup());
         dispatch(openPopup({ message: response.message, isError: true }));

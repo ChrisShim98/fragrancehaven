@@ -71,8 +71,8 @@ export const GetUserCart = (username) => {
     });
 };
 
-export const PutUserCart = (username, productId, addProduct) => {
-  let url = `${BASE_URL}/account/cart/${productId}?username=${username}&addProduct=${addProduct}`;
+export const PutUserCart = (username, productName, addProduct) => {
+  let url = `${BASE_URL}/account/cart/${productName}?username=${username}&addProduct=${addProduct}`;
   const token = localStorage.getItem("token");
 
   const headers = {

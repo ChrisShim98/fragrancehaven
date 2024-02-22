@@ -10,8 +10,8 @@ const TransactionCard = ({ transaction }) => {
       <div>
         {transaction.productsPurchased.map((product) => {
           return (
-            <p>
-              {product.name} x {product.amount}
+            <p key={product.name + transaction.id}>
+              {product.name} x {product.amount} @ ${priceParse(product.purchasedPrice)} each
             </p>
           );
         })}

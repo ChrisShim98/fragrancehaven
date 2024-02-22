@@ -12,10 +12,11 @@ const ProductDetails = () => {
   const [product, setProduct] = useState();
 
   const liked = useSelector(selectLiked);
-  const isLiked = liked.findIndex((liked) => liked.id === product.id);
+  //let isLiked;
 
   let loadPage = async () => {
-    setProduct(await getProduct(productId));
+    await setProduct(await getProduct(productId));
+    //isLiked = liked.findIndex((liked) => liked.id === product.id);
   };
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const ProductDetails = () => {
               element={
                 <ProductDetailsCard
                   product={product}
-                  isLiked={isLiked !== -1}
+                  isLiked={false}
                   loadPage={loadPage}
                 />
               }

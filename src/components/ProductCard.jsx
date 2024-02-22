@@ -129,7 +129,7 @@ const ProductCard = ({ product, isDetailed = false }) => {
                 </span>
               </div>
               <div className="flex items-center w-full">
-                <h2 className="text-lg cursor-pointer">{product.name}</h2>
+                <h2 className="text-lg">{product.name}</h2>
               </div>
               <div>
                 <h1 className="text-gray-400 text-sm">{product.brand.name}</h1>

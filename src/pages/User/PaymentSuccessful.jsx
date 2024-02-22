@@ -2,6 +2,7 @@ import TransactionCard from "../../components/TransactionCard";
 import { useSelector } from "react-redux";
 import { selectTransaction } from "../../redux/cartSlice";
 import PageHeader from "../../components/PageHeader";
+import { Navigate } from "react-router-dom";
 
 const PaymentSuccessful = () => {
   const tranasactionDetails = useSelector(selectTransaction);
@@ -13,9 +14,9 @@ const PaymentSuccessful = () => {
           Here are your transaction details
         </h2>
         <span className="w-24 lg:w-48 h-1 border-black border-t-2 pb-4" />
-        <div className="pt-12">
+        {Object.keys(tranasactionDetails).length !== 0 ? <div className="pt-12">
           <TransactionCard transaction={tranasactionDetails} />
-        </div>
+        </div> : <Navigate to="/myAccount" replace />}
       </div>
     </div>
   );

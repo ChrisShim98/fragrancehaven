@@ -20,7 +20,7 @@ const Reviews = ({ reviews = [], productId, loadPage }) => {
           {reviews.map((review) => {
             return (
               <div
-                className="grid grid-cols-2 max-w-[30rem] rounded-lg gap-2 place-items-start border-b-[1px] pb-4 px-4 text-start"
+                className="grid grid-cols-2 max-w-[35 rem] rounded-lg gap-2 place-items-start border-b-[1px] pb-4 px-4 text-start"
                 key={review.id}
               >
                 <p>Username:</p>

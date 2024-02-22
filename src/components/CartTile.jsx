@@ -1,32 +1,20 @@
-import React, { useState, useEffect } from "react";
 import { totalUnitParse } from "../helpers/formParser";
-import { useDispatch } from "react-redux";
 import { priceParse } from "../helpers/formParser";
 import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
 
 const CartTile = ({ product }) => {
-  const dispatch = useDispatch();
-  const [mainPhoto, setMainPhoto] = useState(0);
   const { addToCart, deleteFromCart } = useCartFunctions();
-
-  useEffect(() => {
-    for (let i = 0; i < product.photos.length; i++) {
-      if (product.photos[i].isMain) {
-        setMainPhoto(i);
-      }
-    }
-  }, []);
 
   return (
     <div className="w-full grid p-4 place-items-center">
       <img
-        src={product.photos[mainPhoto].url}
+        src={product.mainPhoto.url}
         className="flex md:hidden p-2"
         alt={product.name}
       />
       <div className="grid grid-cols-2 w-[21rem] md:w-auto md:grid-cols-10 place-items-start md:place-items-center gap-2">
         <img
-          src={product.photos[mainPhoto].url}
+          src={product.mainPhoto.url}
           className="hidden md:flex p-2 w-full"
           alt={product.name}
         />
