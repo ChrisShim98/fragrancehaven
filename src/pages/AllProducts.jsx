@@ -7,10 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openPopup, closePopup } from "../redux/popupSlice";
 import { selectSearch } from "../redux/searchSlice";
 import { setLoading, selectLoading } from "../redux/loadingSlice";
-import { scrollToTop } from "../helpers/scrollToTop";
-import { selectfilter } from "../redux/filterSlice";
-import { selectLiked } from "../redux/cartSlice";
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import Pagination from "../components/Pagination";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -18,8 +15,6 @@ const AllProducts = () => {
   const loadingDetails = useSelector(selectLoading);
   const searchDetails = useSelector(selectSearch);
   const [pagination, setPagination] = useState({});
-  const filterDetails = useSelector(selectfilter);
-  const likedDetails = useSelector(selectLiked);
   const [sort, setSort] = useState("name_asc");
   const [productsWithReview, setProductsWithReview] = useState(false);
   const [productsOnSale, setProductsOnSale] = useState(false);
@@ -58,38 +53,6 @@ const AllProducts = () => {
     productsInStock,
   ]);
 
-  const setPaginationButtons = () => {
-    const buttons = [];
-
-    for (let i = 0; i < pagination.totalPages; i++) {
-      buttons.push(
-        <button
-          type="button"
-          onClick={() => {
-            if (searchDetails.isActive) {
-              getAllProducts(i + 1, searchDetails.query);
-              scrollToTop();
-            } else {
-              getAllProducts(i + 1);
-              scrollToTop();
-            }
-          }}
-          disabled={pagination.currentPage === i + 1}
-          key={i}
-          className={
-            pagination.currentPage === i + 1
-              ? "btn-disabled h-8 w-8 flex items-center justify-center"
-              : "btn btn-main h-8 w-8 flex items-center justify-center"
-          }
-        >
-          {i + 1}
-        </button>
-      );
-    }
-
-    return buttons;
-  };
-
   return (
     <div className="flex flex-col items-center w-screen gap-8">
       <PageHeader pageHeader={"All Products"} />
@@ -106,11 +69,11 @@ const AllProducts = () => {
         </div>
         <div className="flex flex-col lg:col-span-6 gap-6">
           <div className="flex text-xs items-center px-8">
-            {!filterDetails.isLiked && (
+            {
               <p className="mr-auto">
                 Showing page {pagination.currentPage} of {pagination.totalPages}
               </p>
-            )}
+            }
             <div className="flex gap-1 items-center">
               <p>Sort By:</p>
               <select
@@ -131,19 +94,7 @@ const AllProducts = () => {
 
           <div className="grid gap-4">
             {loadingDetails.loading === false &&
-              (filterDetails.isLiked && likedDetails.length === 0 ? (
-                <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">
-                  Nothing to show here
-                </p>
-              ) : filterDetails.isLiked && likedDetails.length > 0 ? (
-                likedDetails.map((product) => {
-                  return (
-                    <div key={product.id}>
-                      <ProductCard product={product} isDetailed={true} />
-                    </div>
-                  );
-                })
-              ) : products.length === 0 ? (
+              (products.length === 0 ? (
                 <p className="text-center w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px] rounded-xl p-6">
                   Nothing to show here
                 </p>
@@ -157,9 +108,14 @@ const AllProducts = () => {
                 })
               ))}
           </div>
-          {!filterDetails.isLiked && (
-            <div className="flex gap-2 px-8 py-12">
-              {setPaginationButtons()}
+
+          {Object.keys(pagination).length !== 0 && (
+            <div className="px-8">
+              <Pagination
+                pagination={pagination}
+                getAllProducts={getAllProducts}
+                searchDetails={searchDetails}
+              />
             </div>
           )}
         </div>

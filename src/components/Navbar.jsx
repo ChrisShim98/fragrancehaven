@@ -8,7 +8,6 @@ import { selectCart } from "../redux/cartSlice";
 import { setSearch } from "../redux/searchSlice";
 import { cartAmountParse } from "../helpers/formParser";
 import { logout } from "../helpers/parseJWT";
-import { clearFilters } from "../redux/filterSlice";
 import { scrollToTop } from "../helpers/scrollToTop";
 
 const Navbar = ({ display }) => {
@@ -24,7 +23,6 @@ const Navbar = ({ display }) => {
     localStorage.getItem("role") === "Admin";
 
   const searchProducts = async () => {
-    await dispatch(clearFilters());
     if (searchWord === "") {
       await dispatch(
         setSearch({

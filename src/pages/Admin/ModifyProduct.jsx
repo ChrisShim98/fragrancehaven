@@ -12,7 +12,8 @@ import ModifyProductCard from "../../components/admin/ModifyProductCard";
 import { BsSearch } from "react-icons/bs";
 import EditProduct from "../../components/admin/EditProduct";
 import AddPhoto from "../../components/admin/AddPhoto";
-import { scrollToTop } from "../../helpers/scrollToTop";
+import Pagination from "../../components/Pagination";
+import { setAdminSearch, selectAdminSearch } from "../../redux/searchSlice";
 
 const ModifyProduct = () => {
   const [products, setProducts] = useState([]);
@@ -23,10 +24,13 @@ const ModifyProduct = () => {
   const [productToEdit, setProductToEdit] = useState({});
   const [pagination, setPagination] = useState({});
   const [searchWord, setSearchWord] = useState("");
-  const [userSearched, setUserSearched] = useState(false);
+  const searchDetails = useSelector(selectAdminSearch);
 
   const getAllProducts = async (pageNumber = 1, searchQuery = "") => {
     dispatch(setLoading(true));
+    if (searchDetails.isActive) {
+      searchQuery = searchDetails.query;
+    }
     let response = await GetAllProducts(pageNumber, searchQuery);
     if (response?.error) {
       await dispatch(closePopup());
@@ -40,7 +44,7 @@ const ModifyProduct = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [searchDetails.query]);
 
   const deleteProduct = async (productId) => {
     dispatch(setLoading(true));
@@ -84,46 +88,22 @@ const ModifyProduct = () => {
     dispatch(setLoading(false));
   };
 
-  const searchProducts = () => {
+  const searchProducts = async () => {
     if (searchWord === "") {
-      getAllProducts(1);
-      setUserSearched(false);
+      await dispatch(
+        setAdminSearch({
+          query: "",
+          isActive: false,
+        })
+      );
     } else {
-      getAllProducts(1, searchWord);
-      setUserSearched(true);
-    }
-  };
-
-  const setPaginationButtons = () => {
-    const buttons = [];
-
-    for (let i = 0; i < pagination.totalPages; i++) {
-      buttons.push(
-        <button
-          type="button"
-          onClick={() => {
-            if (userSearched) {
-              getAllProducts(i + 1, searchWord);
-              scrollToTop();
-            } else {
-              getAllProducts(i + 1);
-              scrollToTop();
-            }
-          }}
-          key={i}
-          disabled={pagination.currentPage === i + 1}
-          className={
-            pagination.currentPage === i + 1
-              ? "btn-disabled h-8 w-8 flex items-center justify-center"
-              : "btn btn-main h-8 w-8 flex items-center justify-center"
-          }
-        >
-          {i + 1}
-        </button>
+      await dispatch(
+        setAdminSearch({
+          query: searchWord,
+          isActive: true,
+        })
       );
     }
-
-    return buttons;
   };
 
   return (
@@ -172,7 +152,13 @@ const ModifyProduct = () => {
             })
           ))}
       </div>
-      <div className="flex gap-2">{setPaginationButtons()}</div>
+      {Object.keys(pagination).length !== 0 && (
+        <Pagination
+          pagination={pagination}
+          getAllProducts={getAllProducts}
+          searchDetails={searchDetails}
+        />
+      )}
       {editModalOpened && (
         <EditProduct
           product={productToEdit}

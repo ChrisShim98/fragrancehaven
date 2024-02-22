@@ -2,22 +2,11 @@ import React from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setfilter } from "../redux/filterSlice";
 import { scrollToTop } from "../helpers/scrollToTop";
 
 const Footer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const likedProducts = () => {
-    dispatch(
-      setfilter({
-        filterName: "isLiked",
-        isFilterOn: true,
-      })
-    );
-    navigate("/allProducts");
-    scrollToTop();
-  };
 
   return (
     <div className="bg-undertone text-white mt-auto">

@@ -73,5 +73,7 @@ Print functionality on reciepts ?
 When user registers for new account, send their cart to database
 Amount in database should not be modified and should be user specific -- Done -- 
 Remove all webp photos -- Done --
-Add sort by filter
+Add sort by filter -- Done --
 Show all reviews of user on my account page
+Paginate receipts shown on myaccount page
+Limit pagination buttons to 5 then increase as the user advances

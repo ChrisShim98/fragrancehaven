@@ -3,14 +3,12 @@ import cartReducer from "./cartSlice";
 import popupReducer from "./popupSlice"
 import loadingReducer from "./loadingSlice"
 import searchReducer from "./searchSlice";
-import filterReducer from "./filterSlice";
 
 export default configureStore({
   reducer: {
     cart: cartReducer,
     popup: popupReducer,
     loading: loadingReducer,
-    search: searchReducer,
-    filter: filterReducer
+    search: searchReducer
   },
 });
