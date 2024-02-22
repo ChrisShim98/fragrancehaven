@@ -10,6 +10,7 @@ import { setLoading, selectLoading } from "../redux/loadingSlice";
 import { scrollToTop } from "../helpers/scrollToTop";
 import { selectfilter } from "../redux/filterSlice";
 import { selectLiked } from "../redux/cartSlice";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,15 +20,12 @@ const AllProducts = () => {
   const [pagination, setPagination] = useState({});
   const filterDetails = useSelector(selectfilter);
   const likedDetails = useSelector(selectLiked);
+  const [sort, setSort] = useState("name_asc");
+  const [productsWithReview, setProductsWithReview] = useState(false);
+  const [productsOnSale, setProductsOnSale] = useState(false);
+  const [productsInStock, setProductsInStock] = useState(false);
 
-  const getAllProducts = async (
-    pageNumber = 1,
-    searchQuery = "",
-    orderBy = "",
-    productsWithReview = false,
-    productsOnSale = false,
-    productsInStock = false
-  ) => {
+  const getAllProducts = async (pageNumber = 1, searchQuery = "") => {
     dispatch(setLoading(true));
     if (searchDetails.isActive) {
       searchQuery = searchDetails.query;
@@ -35,7 +33,7 @@ const AllProducts = () => {
     let response = await GetAllProducts(
       pageNumber,
       searchQuery,
-      orderBy,
+      sort,
       productsWithReview,
       productsOnSale,
       productsInStock
@@ -52,7 +50,13 @@ const AllProducts = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, [searchDetails.query]);
+  }, [
+    searchDetails.query,
+    sort,
+    productsWithReview,
+    productsOnSale,
+    productsInStock,
+  ]);
 
   const setPaginationButtons = () => {
     const buttons = [];
@@ -91,14 +95,40 @@ const AllProducts = () => {
       <PageHeader pageHeader={"All Products"} />
       <div className="py-8 grid lg:grid-cols-8 gap-8">
         <div className="min-w-[300px] lg:min-w-0 lg:w-full px-8 lg:px-0 lg:col-span-2">
-          <Filter getAllProducts={getAllProducts}/>
+          <Filter
+            productsWithReview={productsWithReview}
+            setProductsWithReview={setProductsWithReview}
+            productsOnSale={productsOnSale}
+            setProductsOnSale={setProductsOnSale}
+            productsInStock={productsInStock}
+            setProductsInStock={setProductsInStock}
+          />
         </div>
         <div className="flex flex-col lg:col-span-6 gap-6">
-          {!filterDetails.isLiked && (
-            <p className="text-xs px-8">
-              Showing page {pagination.currentPage} of {pagination.totalPages}
-            </p>
-          )}
+          <div className="flex text-xs items-center px-8">
+            {!filterDetails.isLiked && (
+              <p className="mr-auto">
+                Showing page {pagination.currentPage} of {pagination.totalPages}
+              </p>
+            )}
+            <div className="flex gap-1 items-center">
+              <p>Sort By:</p>
+              <select
+                onChange={(e) => setSort(e.target.value)}
+                defaultValue="name_asc"
+                id="sortBy"
+                className="border rounded-md p-1"
+              >
+                <option value="name_asc">Name ⇧</option>
+                <option value="name_desc">Name ⇩</option>
+                <option value="price_asc">Price ⇧</option>
+                <option value="price_desc">Price ⇩</option>
+                <option value="stock_asc">In Stock ⇧</option>
+                <option value="stock_desc">In Stock ⇩</option>
+              </select>
+            </div>
+          </div>
+
           <div className="grid gap-4">
             {loadingDetails.loading === false &&
               (filterDetails.isLiked && likedDetails.length === 0 ? (
