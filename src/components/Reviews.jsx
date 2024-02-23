@@ -11,7 +11,7 @@ const Reviews = ({ reviews = [], productId, loadPage }) => {
 
   return (
     <div className="col-span-2 flex flex-col items-center gap-2 sm:px-4 text-center place-self-center text-sm md:text-base">
-      <h2 className="font-medium text-xl sm:text-2xl pb-2">Reviews</h2>
+      <h2 className="font-medium text-xl sm:text-2xl pb-2 scroll-mt-28" id="reviews">Reviews</h2>
       <span className="w-12 h-1 border-black border-t-2 pb-4" />
       {reviews.length === 0 ? (
         <p>This product has no reviews as yet.</p>

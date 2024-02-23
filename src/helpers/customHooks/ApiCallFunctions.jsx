@@ -112,13 +112,13 @@ export function useApiCallFunctions() {
     dispatch(setLoading(false));
   };
 
-  const getTransactionsForUser = async (username) => {
-    let response = await GetTransaction(username);
+  const getTransactionsForUser = async (username, pageNumber) => {
+    let response = await GetTransaction(username, pageNumber);
     if (response?.error) {
       await dispatch(closePopup());
       dispatch(openPopup({ message: response.message, isError: true }));
     } else {
-      await getCart(username);
+      // await getCart(username);
       return response;
     }
     dispatch(setLoading(false));

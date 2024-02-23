@@ -79,3 +79,10 @@ Paginate receipts shown on myaccount page -- Done --
 Limit pagination buttons to 5 then increase as the user advances -- Done --
 Add super admin account that can delete regular admin accounts
 Add filters to admin products page -- Done --
+Promo codes on checkout
+Admin create promo codes
+Sort Rating by highest to lowest, newest to oldest
+Search transactions by id or username
+Replace the top brands section with an active coupon code banner
+Share to social media functionality on products
+Retain cart for non logged in users

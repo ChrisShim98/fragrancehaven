@@ -18,17 +18,17 @@ const MyAccount = () => {
         </div>
         <div className="flex flex-col items-center gap-4 w-full">
           <div className="flex flex-col gap-1 w-full max-w-[800px]">
+            <h1 className="font-medium text-lg lg:text-xl">Your Transactions</h1>
+            <span className="w-24 h-1 border-black border-t-[1px] pb-4" />
+            <Transactions username={username} />
+          </div>          
+        </div>
+        <div className="flex flex-col items-center gap-4 w-full">
+          <div className="flex flex-col gap-1 w-full max-w-[800px]">
             <h1 className="font-medium text-lg lg:text-xl">Update Password</h1>
             <span className="w-24 h-1 border-black border-t-[1px]" />
           </div>
           <UpdatePassword username={username} />
-        </div>
-        <div className="flex flex-col items-start gap-4 w-full">
-          <div className="flex flex-col gap-1 w-full max-w-[800px]">
-            <h1 className="font-medium text-lg lg:text-xl">Your Transactions</h1>
-            <span className="w-24 h-1 border-black border-t-[1px]" />
-          </div>
-          <Transactions username={username} />
         </div>
       </div>
     </div>

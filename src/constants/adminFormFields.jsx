@@ -2,7 +2,7 @@ export const addProductForm = [
     {
         title: "name",
         type: "text",
-        colSpan: 2
+        colSpan: 1
     },
     {
         title: "scent",
@@ -24,16 +24,16 @@ export const addProductForm = [
         title: "stock",
         type: "number",
         colSpan: 1
+    }, 
+    {
+        title: "salePercentage",
+        type: "int",
+        colSpan: 1
     },
     {
         title: "description",
         type: "text",
         textArea: true,
-        colSpan: 2
-    }, 
-    {
-        title: "salePercentage",
-        type: "int",
-        colSpan: 2
+        colSpan: 1
     }
 ]

@@ -39,9 +39,6 @@ export const cartSlice = createSlice({
     deleteAll: (state) => {
       state.products = [];
     },
-    addDetail: (state, action) => {
-      state.productDetail = action.payload;
-    },
     editLiked: (state, action) => {
       let likedIndex = state.liked.findIndex(
         (liked) => liked.id === action.payload?.id
@@ -59,11 +56,10 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addCart, addProduct, deleteProduct, deleteAll, addDetail, editLiked, addTransaction } =
+export const { addCart, addProduct, deleteProduct, deleteAll, editLiked, addTransaction } =
   cartSlice.actions;
 
 export const selectCart = (state) => state.cart.products;
-export const selectProductDetail = (state) => state.cart.productDetail;
 export const selectLiked = (state) => state.cart.liked;
 export const selectTransaction = (state) => state.cart.transaction;
 

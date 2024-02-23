@@ -188,7 +188,6 @@ const ProductCard = ({ product, isDetailed = false }) => {
             <div className="flex text-sm font-medium justify-end items-center gap-2">
               <Link
                 onClick={() => {
-                  dispatch(addDetail(product));
                   scrollToTop();
                 }}
                 to={`/productDetails/${product.id}`}

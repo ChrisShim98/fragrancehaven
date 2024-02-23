@@ -5,8 +5,10 @@ import {
   FaArrowAltCircleRight,
   FaPencilAlt,
   FaCamera,
+  FaRegEdit
 } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
+import { Link } from "react-router-dom";
 import { priceParse, dateParse, parseRating } from "../../helpers/formParser";
 
 const ModifyProductCard = ({
@@ -180,6 +182,12 @@ const ModifyProductCard = ({
             <FaCamera className="relative top-[-1.2px]" />
             Add Photo
           </button>
+          <Link to={`/productDetails/${product.id}#reviews`}
+            className="btn btn-main text-sm font-medium px-5 py-2 flex gap-1 items-center"
+          >
+            <FaRegEdit className="relative top-[-1.2px]" />
+            View Reviews
+          </Link>
         </div>
       </div>
     </div>

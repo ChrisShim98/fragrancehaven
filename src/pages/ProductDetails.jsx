@@ -4,6 +4,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectLiked } from "../redux/cartSlice";
 import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
+import ScrollToAnchor from "../helpers/ScrollToAnchor";
 
 const ProductDetails = () => {
   const { getProduct } = useApiCallFunctions();
@@ -26,6 +27,7 @@ const ProductDetails = () => {
   return (
     product && (
       <div className="flex flex-col items-center w-screen gap-8">
+        <ScrollToAnchor />
         <div className="w-full bg-gray-100 py-6 text-xl font-medium text-center">
           <h1 className="tracking-wide">Product Details</h1>
         </div>

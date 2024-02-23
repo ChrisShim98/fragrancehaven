@@ -152,9 +152,10 @@ const AddProduct = () => {
             })}
           <div className="border rounded-lg py-12 sm:py-0 sm:mt-6 lg:mt-7 flex flex-wrap place-items-center justify-center">
             <input
-              className="w-full"
+              className="w-full mx-4"
               multiple
               type="file"
+              accept="image/*"
               onChange={handleFileChange}
             />
           </div>
