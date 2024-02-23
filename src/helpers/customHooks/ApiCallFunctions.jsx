@@ -18,7 +18,7 @@ import { cartTotalParse } from "../formParser";
 export function useApiCallFunctions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { getCart } = useCartFunctions();
+  const { getCart, postCart } = useCartFunctions();
   const cart = useSelector(selectCart);
 
   const signIn = async (username, password) => {
@@ -40,6 +40,7 @@ export function useApiCallFunctions() {
       await dispatch(closePopup());
       dispatch(openPopup({ message: response.message, isError: true }));
     } else {
+      await postCart(response?.username, cart, response?.token);
       parseJWT(response?.token);
       localStorage.setItem("email", response?.email);
       await dispatch(closePopup());
@@ -105,7 +106,7 @@ export function useApiCallFunctions() {
       dispatch(openPopup({ message: response.message, isError: true }));
     } else {
       await dispatch(addTransaction(response));
-      await getCart(localStorage.getItem("username")); 
+      await getCart(localStorage.getItem("username"));
       navigate("/paymentSuccessful");
     }
     dispatch(setLoading(false));
@@ -122,7 +123,7 @@ export function useApiCallFunctions() {
     }
     dispatch(setLoading(false));
   };
-  
+
   return {
     signIn,
     register,

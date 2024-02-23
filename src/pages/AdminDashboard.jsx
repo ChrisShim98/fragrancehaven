@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import AddProduct from "./Admin/AddProduct";
 import ModifyProduct from "./Admin/ModifyProduct";
 import ViewTransactions from "./Admin/ViewTransactions";
+import ModifyAccount from "./Admin/ModifyAccount";
 
 const AdminDashboard = () => {
   return (
@@ -22,7 +23,7 @@ const AdminDashboard = () => {
         </div>
         <div className="lg:col-span-4 lg:border lg:rounded-lg lg:px-2 lg:py-6">
             <Routes>
-                <Route path="/" element={<h1 className="font-medium text-lg sm:text-xl pb-2 lg:text-center">Select an option</h1>} />
+                <Route path="/" element={<ModifyAccount />} />
                 <Route path="/addProduct" element={<AddProduct />} />
                 <Route path="/modifyProduct" element={<ModifyProduct />} />
                 <Route path="/viewTransactions" element={<ViewTransactions />} />

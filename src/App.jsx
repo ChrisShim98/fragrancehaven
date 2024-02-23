@@ -40,6 +40,7 @@ function App() {
   useEffect(() => {
     // Update Cart if user is logged in
     let username = localStorage.getItem("username");
+
     if (username !== null) {
       getCart(username);
     }

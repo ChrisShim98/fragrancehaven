@@ -89,6 +89,23 @@ export const PutUserCart = (username, productName, addProduct) => {
     });
 };
 
+export const PostUserCart = (username, cart, token) => {
+  let url = `${BASE_URL}/account/cart?username=${username}`;
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  return axios
+    .post(url, cart, { headers })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};
+
 export const DeleteUserCart = (username) => {
   let url = `${BASE_URL}/account/cart?username=${username}`;
   const token = localStorage.getItem("token");

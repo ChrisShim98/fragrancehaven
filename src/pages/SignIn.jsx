@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PageHeader from "../components/PageHeader";
 import {
   loginForm,
@@ -8,11 +8,7 @@ import {
 import { formTitleParser } from "../helpers/formParser";
 import { fieldValidator } from "../components/form/formValidator";
 import FormField from "../components/form/FormField";
-import { PostLogin, PostRegister } from "../api/accountRequests";
 import { useDispatch, useSelector } from "react-redux";
-import { openPopup, closePopup } from "../redux/popupSlice";
-import { Navigate } from "react-router-dom";
-import { parseJWT } from "../helpers/parseJWT";
 import { setLoading, selectLoading } from "../redux/loadingSlice";
 import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
 

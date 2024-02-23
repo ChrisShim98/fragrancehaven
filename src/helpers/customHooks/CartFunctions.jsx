@@ -9,6 +9,7 @@ import {
 } from "../../redux/cartSlice";
 import {
   GetUserCart,
+  PostUserCart,
   PutUserCart,
   DeleteUserCart,
 } from "../../api/accountRequests";
@@ -30,6 +31,19 @@ export function useCartFunctions() {
         await dispatch(closePopup());
         dispatch(addCart(response));
       }
+    }
+    dispatch(setLoading(false));
+  };
+
+  const postCart = async (username, cart, token) => {
+    dispatch(setLoading(true));
+    let response = await PostUserCart(username, cart, token);
+    if (response?.error) {
+      await dispatch(closePopup());
+      dispatch(openPopup({ message: response.message, isError: true }));
+    } else {
+      await dispatch(closePopup());
+      dispatch(addCart(response));
     }
     dispatch(setLoading(false));
   };
@@ -107,5 +121,5 @@ export function useCartFunctions() {
     }
   };
 
-  return { getCart, addToCart, deleteFromCart, deleteCart };
+  return { getCart, postCart, addToCart, deleteFromCart, deleteCart };
 }
