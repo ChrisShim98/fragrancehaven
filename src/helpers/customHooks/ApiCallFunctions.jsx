@@ -122,6 +122,7 @@ export function useApiCallFunctions() {
     }
     dispatch(setLoading(false));
   };
+  
   return {
     signIn,
     register,

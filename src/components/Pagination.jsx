@@ -2,7 +2,11 @@ import React from "react";
 import { scrollToTop } from "../helpers/scrollToTop";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const Pagination = ({ pagination, getAllProducts, searchDetails }) => {
+const Pagination = ({
+  pagination,
+  getAllProducts,
+  searchDetails = { isActive: false, query: "" },
+}) => {
   const setPaginationButtons = () => {
     const buttons = [];
     let startingButton;

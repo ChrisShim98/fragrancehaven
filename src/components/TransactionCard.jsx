@@ -1,7 +1,7 @@
 import React from "react";
 import { priceParse, dateParse } from "../helpers/formParser";
 
-const TransactionCard = ({ transaction }) => {
+const TransactionCard = ({ transaction, isAdmin }) => {
   return (
     <div className="grid grid-cols-2 w-full max-w-[50rem] rounded-lg gap-2 place-items-start border-b-[1px] pb-4 px-4 text-start text-xs sm:text-sm">
       <p>Reciept Number:</p>
@@ -11,7 +11,8 @@ const TransactionCard = ({ transaction }) => {
         {transaction.productsPurchased.map((product) => {
           return (
             <p key={product.name + transaction.id}>
-              {product.name} x {product.amount} @ ${priceParse(product.purchasedPrice)} each
+              {product.name} x {product.amount} @ $
+              {priceParse(product.purchasedPrice)} each
             </p>
           );
         })}
@@ -24,6 +25,14 @@ const TransactionCard = ({ transaction }) => {
       <p>{transaction.status}</p>
       <p>Date Purchased:</p>
       <p>{dateParse(transaction.datePurchased)}</p>
+      {isAdmin && (
+        <div className="grid grid-cols-2 w-full gap-2 col-span-2">
+          <p>Customer Name:</p>
+          <p>{transaction.userName}</p>
+          <p>Customer Email:</p>
+          <p>{transaction.userEmail}</p>
+        </div>
+      )}
     </div>
   );
 };

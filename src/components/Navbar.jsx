@@ -9,6 +9,7 @@ import { setSearch } from "../redux/searchSlice";
 import { cartAmountParse } from "../helpers/formParser";
 import { logout } from "../helpers/parseJWT";
 import { scrollToTop } from "../helpers/scrollToTop";
+import SearchBar from "./SearchBar";
 
 const Navbar = ({ display }) => {
   const navigate = useNavigate();
@@ -22,8 +23,8 @@ const Navbar = ({ display }) => {
     localStorage.getItem("role") !== null &&
     localStorage.getItem("role") === "Admin";
 
-  const searchProducts = async () => {
-    if (searchWord === "") {
+  const searchProducts = async (searchKey) => {
+    if (searchKey === "") {
       await dispatch(
         setSearch({
           query: "",
@@ -33,7 +34,7 @@ const Navbar = ({ display }) => {
     } else {
       await dispatch(
         setSearch({
-          query: searchWord,
+          query: searchKey,
           isActive: true,
         })
       );
@@ -58,26 +59,11 @@ const Navbar = ({ display }) => {
         />
         {/* Desktop View */}
         <div className="hidden lg:grid gap-2 mt-[30px] py-2 justify-center">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              searchProducts();
-            }}
-            className="flex"
-          >
-            <input
-              type="text"
-              onChange={(e) => setSearchWord(e.target.value)}
-              className="rounded-l-md h-8 w-[50vw] max-w-[50rem] px-2 outline-1 outline"
-              placeholder="Search Products"
-            />
-            <button
-              type="submit"
-              className="grid place-content-center bg-undertone text-white h-8 w-8 transition-colors duration-300 rounded-r-md outline outline-1 outline-undertone hover:cursor-pointer hover:bg-primary hover:text-undertone"
-            >
-              <BsSearch />
-            </button>
-          </form>
+          <SearchBar
+            searchProducts={searchProducts}
+            searchWord={searchWord}
+            setSearchWord={setSearchWord}
+          />
           <div className="grid grid-flow-col font-medium justify-center items-center gap-8">
             <Link to="/" className="link">
               Home
@@ -97,7 +83,7 @@ const Navbar = ({ display }) => {
           </div>
         </div>
 
-        <ul className="lg:flex gap-4 font-medium hidden place-content-end">
+        <ul className="lg:flex gap-4 font-medium hidden place-content-end whitespace-nowrap">
           <Link
             to={
               adminCheck
@@ -193,10 +179,10 @@ const Navbar = ({ display }) => {
       <div
         className={
           navOpened && userLoggedIn
-            ? "w-full bg-white text-undertone h-[14rem] overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
+            ? "w-full bg-white text-undertone h-[14rem] lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
             : navOpened
-            ? "w-full bg-white text-undertone h-[12rem] overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
-            : "w-full bg-gray-100 text-undertone h-0 overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
+            ? "w-full bg-white text-undertone h-[12rem] lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
+            : "w-full bg-gray-100 text-undertone h-0 lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
         }
       >
         <ul className="lg:hidden gap-2 grid place-items-center text-lg font-medium">
@@ -270,31 +256,16 @@ const Navbar = ({ display }) => {
       <div
         className={
           searchOpened
-            ? "w-full bg-white h-[6rem] flex justify-center py-8 overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
-            : "w-full bg-gray-100 h-0 flex justify-center overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
+            ? "w-full bg-white h-[6rem] flex lg:hidden justify-center py-8 overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
+            : "w-full bg-gray-100 h-0 flex lg:hidden justify-center overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
         }
       >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            searchProducts();
-            setSearchOpened(false);
-          }}
-          className="flex"
-        >
-          <input
-            type="text"
-            onChange={(e) => setSearchWord(e.target.value)}
-            className="rounded-l-md h-8 w-[70vw] max-w-[50rem] px-2 outline-1 outline"
-            placeholder="Search Products"
-          />
-          <button
-            type="submit"
-            className="grid place-content-center bg-undertone text-white h-8 w-8 transition-colors duration-300 rounded-r-md outline outline-1 outline-undertone hover:cursor-pointer hover:bg-primary hover:text-undertone"
-          >
-            <BsSearch />
-          </button>
-        </form>
+        <SearchBar
+          searchProducts={searchProducts}
+          searchWord={searchWord}
+          setSearchWord={setSearchWord}
+          isMobile={true}
+        />
       </div>
     </div>
   );

@@ -75,5 +75,7 @@ Amount in database should not be modified and should be user specific -- Done --
 Remove all webp photos -- Done --
 Add sort by filter -- Done --
 Show all reviews of user on my account page
-Paginate receipts shown on myaccount page
-Limit pagination buttons to 5 then increase as the user advances
+Paginate receipts shown on myaccount page -- Done --
+Limit pagination buttons to 5 then increase as the user advances -- Done --
+Add super admin account that can delete regular admin accounts
+Add filters to admin products page -- Done --

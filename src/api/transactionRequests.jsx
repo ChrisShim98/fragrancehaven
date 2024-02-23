@@ -20,8 +20,8 @@ export const PostTransaction = (transaction) => {
     });
 };
 
-export const GetTransactionAdmin = () => {
-  let url = `${BASE_URL}/transaction`;
+export const GetTransactionAdmin = (pageNumber = 1) => {
+  let url = `${BASE_URL}/transaction?PageNumber=${pageNumber}`;
   const token = localStorage.getItem("token");
 
   const headers = {
@@ -31,15 +31,18 @@ export const GetTransactionAdmin = () => {
   return axios
     .get(url, { headers })
     .then((response) => {
-      return response.data;
+      return {
+        data: response.data,
+        pagination: JSON.parse(response.headers.pagination),
+      };
     })
     .catch((error) => {
       return errorHandling(error);
     });
 };
 
-export const GetTransaction = (username) => {
-  let url = `${BASE_URL}/transaction/${username}`;
+export const GetTransaction = (username, pageNumber = 1) => {
+  let url = `${BASE_URL}/transaction/${username}?PageNumber=${pageNumber}`;
   const token = localStorage.getItem("token");
 
   const headers = {
@@ -49,7 +52,10 @@ export const GetTransaction = (username) => {
   return axios
     .get(url, { headers })
     .then((response) => {
-      return response.data;
+      return {
+        data: response.data,
+        pagination: JSON.parse(response.headers.pagination),
+      };
     })
     .catch((error) => {
       return errorHandling(error);

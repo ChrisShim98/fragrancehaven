@@ -68,29 +68,29 @@ const AllProducts = () => {
           />
         </div>
         <div className="flex flex-col lg:col-span-6 gap-6">
-          <div className="flex text-xs items-center px-8">
-            {
-              <p className="mr-auto">
+          {pagination.totalPages > 0 && (
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 text-xs sm:items-center px-8">
+              <p className="sm:mr-auto">
                 Showing page {pagination.currentPage} of {pagination.totalPages}
               </p>
-            }
-            <div className="flex gap-1 items-center">
-              <p>Sort By:</p>
-              <select
-                onChange={(e) => setSort(e.target.value)}
-                defaultValue="name_asc"
-                id="sortBy"
-                className="border rounded-md p-1"
-              >
-                <option value="name_asc">Name ⇧</option>
-                <option value="name_desc">Name ⇩</option>
-                <option value="price_asc">Price ⇧</option>
-                <option value="price_desc">Price ⇩</option>
-                <option value="stock_asc">In Stock ⇧</option>
-                <option value="stock_desc">In Stock ⇩</option>
-              </select>
+              <div className="flex gap-1 items-center">
+                <p>Sort By:</p>
+                <select
+                  onChange={(e) => setSort(e.target.value)}
+                  defaultValue="name_asc"
+                  id="sortBy"
+                  className="border rounded-md p-1"
+                >
+                  <option value="name_asc">Name ⇧</option>
+                  <option value="name_desc">Name ⇩</option>
+                  <option value="price_asc">Price ⇧</option>
+                  <option value="price_desc">Price ⇩</option>
+                  <option value="stock_asc">In Stock ⇧</option>
+                  <option value="stock_desc">In Stock ⇩</option>
+                </select>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="grid gap-4">
             {loadingDetails.loading === false &&

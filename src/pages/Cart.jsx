@@ -6,11 +6,14 @@ import { selectCart } from "../redux/cartSlice";
 import { cartTotalParse } from "../helpers/formParser";
 import { useCartFunctions } from "../helpers/customHooks/CartFunctions";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate()
   const cart = useSelector(selectCart);
   const { getCart } = useCartFunctions();
   let username = localStorage.getItem("username");
+  let userLoggedIn = localStorage.getItem("token") !== null;
 
   useEffect(() => {
     getCart(username);
@@ -61,9 +64,15 @@ const Cart = () => {
           }
         >
           <h2>Grand Total: ${cartTotalParse(cart)}</h2>
-          <Link to="/checkout" className="btn btn-main px-4 py-2">
-            Checkout
-          </Link>
+          {userLoggedIn ? (
+            <Link to="/checkout" className="btn btn-main px-4 py-2">
+              Checkout
+            </Link>
+          ) : (
+            <button className="btn btn-main px-4 py-2" onClick={() => navigate("/signIn")}>
+              Checkout
+            </button>
+          )}
         </div>
       </div>
     </div>
