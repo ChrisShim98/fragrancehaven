@@ -41,7 +41,7 @@ const Transactions = ({ username, isAdmin = false }) => {
           {transactions.map((transaction) => {
             return (
               <div key={transaction.id}>
-                <TransactionCard transaction={transaction} isAdmin={isAdmin} />
+                <TransactionCard transaction={transaction} isAdmin={isAdmin} GetTransactions={GetTransactions} currentPage={pagination.currentPage} />
               </div>
             );
           })}

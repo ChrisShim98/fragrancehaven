@@ -61,3 +61,21 @@ export const GetTransaction = (username, pageNumber = 1) => {
       return errorHandling(error);
     });
 };
+
+export const PutRefundTransaction = (transactionId) => {
+  let url = `${BASE_URL}/transaction/${transactionId}`;
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  return axios
+    .put(url, null, { headers })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return errorHandling(error);
+    });
+};

@@ -86,3 +86,12 @@ Search transactions by id or username
 Replace the top brands section with an active coupon code banner
 Share to social media functionality on products
 Retain cart for non logged in users
+Dashboard for sales tracker
+Admin should be able to refund order and status should be changed to refunded
+
+-- Data for revenue --
+Should be able to filter per year
+return no data for the month if there is none
+Amount of new users
+
+Refunding transaction should have a popup to confirm and also log the user that did the refund
