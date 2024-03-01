@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductDetailsCard from "../components/ProductDetailsCard";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectLiked } from "../redux/cartSlice";
 import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";

@@ -61,7 +61,7 @@ const ProductDetailsCard = ({ product, isLiked = false, loadPage }) => {
               ? product.photos[currentImage].url
               : "/noImage.png"
           }
-          className="w-full relative col-span-4"
+          className="w-[90vw] sm:w-[640px] lg:w-[700px] xl:w-[840px]  relative col-span-4"
           alt={product.name}
         />
         {product.salePercentage > 0 && (

@@ -20,13 +20,12 @@ const TimeframeSelector = ({
 
   const handleDatePicker = (date, isStart) => {
     if (isStart) {
-      date.setHours(0, 0, 0, 0);
-      //const utcString = date.toUTCString();
-      setStartDateHolder(date);
+      setStartDateHolder(new Date(date.setHours(0, 0, 0)));
+      console.log(date)
     } else {
-      date.setHours(23, 59, 59, 999);
-      //const utcString = date.toUTCString();
-      setEndDateHolder(date);
+      const utcString = date.setHours(23, 59, 59);
+      console.log(new Date(utcString))
+      setEndDateHolder(new Date(utcString));
     }
   };
 

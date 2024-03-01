@@ -21,8 +21,8 @@ const Analytics = () => {
   useEffect(() => {
     getAnalyticsAsync(
       selectedOption,
-      startDate.toUTCString(),
-      endDate.toUTCString()
+      startDate.toISOString(),
+      endDate.toISOString()
     );
   }, [selectedOption, startDate, endDate]);
 
@@ -93,7 +93,7 @@ const Analytics = () => {
               ]}
               periodLabel={analytics.periodLabel}
               label={["Total Gain (USD)", "Total Loss (USD)"]}
-              backgroundColor={["#4ddd48", "#ff2b2b"]}
+              backgroundColor={["#E4A0F7", "#ff2b1b"]}
             />
             <div className="flex flex-col items-center">
               <p className="font-semibold text-sm lg:text-base">
@@ -123,8 +123,8 @@ const Analytics = () => {
                 analytics.totalUnitsRefunded,
               ]}
               periodLabel={["Amount Of Units Sold", "Amount Of Units Refunded"]}
-              label={"# of Votes"}
-              backgroundColor={["#4ddd48", "#ff2b2b"]}
+              label={"Number of Units"}
+              backgroundColor={["#E4A0F7", "#ff2b1b"]}
             />
             <LineChartAnalytics
               values={[
@@ -133,13 +133,13 @@ const Analytics = () => {
               ]}
               periodLabel={analytics.periodLabel}
               label={["Amount Of Units Sold", "Amount Of Units Refunded"]}
-              backgroundColor={["#4ddd48", "#ff2b2b"]}
+              backgroundColor={["#E4A0F7", "#ff2b1b"]}
             />
           </div>
         </div>
       )}
     </React.Fragment>
-  );
+  );1``
 };
 
 export default Analytics;
