@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   GetAllProducts,
   DeleteProduct,
@@ -17,8 +17,8 @@ import SearchBar from "../../components/SearchBar";
 import Filter from "../../components/Filter";
 
 const ModifyProduct = () => {
-  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
   const loadingDetails = useSelector(selectLoading);
   const [editModalOpened, setEditModalOpened] = useState(false);
   const [photoModalOpened, setPhotoModalOpened] = useState(false);

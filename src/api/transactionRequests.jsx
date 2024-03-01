@@ -20,8 +20,10 @@ export const PostTransaction = (transaction) => {
     });
 };
 
-export const GetTransactionAdmin = (pageNumber = 1) => {
-  let url = `${BASE_URL}/transaction?PageNumber=${pageNumber}`;
+export const GetTransactionAdmin = (pageNumber = 1, searchQuery = "") => {
+  let url = `${BASE_URL}/transaction?${
+    searchQuery === "" ? "" : `SearchQuery=${searchQuery}&`
+  }PageNumber=${pageNumber}`;
   const token = localStorage.getItem("token");
 
   const headers = {

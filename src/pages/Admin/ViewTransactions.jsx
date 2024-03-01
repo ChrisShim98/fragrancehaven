@@ -1,4 +1,3 @@
-import React from "react";
 import Transactions from "../User/Transactions";
 
 const ViewTransactions = () => {
@@ -8,7 +7,7 @@ const ViewTransactions = () => {
         View Transactions
       </h1>
       <span className="w-24 h-4 border-black border-t-2 pb-4" />
-      <div className="w-full lg:px-8">
+      <div className="w-full lg:px-8 space-y-8">
         <Transactions isAdmin={true} />
       </div>
     </div>

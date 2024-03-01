@@ -7,8 +7,8 @@ import { GetAnalytics } from "../../api/analyticsRequests";
 export function useAdminApiCallFunctions() {
   const dispatch = useDispatch();
 
-  const getTransactionsForAdmin = async (pageNumber = 1) => {
-    let response = await GetTransactionAdmin(pageNumber);
+  const getTransactionsForAdmin = async (pageNumber = 1, searchQuery = "") => {
+    let response = await GetTransactionAdmin(pageNumber, searchQuery);
     if (response?.error) {
       await dispatch(closePopup());
       dispatch(openPopup({ message: response.message, isError: true }));

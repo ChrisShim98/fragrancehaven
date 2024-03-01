@@ -1,4 +1,3 @@
-import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -8,6 +7,7 @@ const SearchBar = ({
   setSearchWord,
   isAdmin = false,
   isMobile = false,
+  placeHolder = "Search Products"
 }) => {
   return (
     <form
@@ -28,7 +28,7 @@ const SearchBar = ({
             ? "w-[70vw] max-w-[50rem]"
             : "lg:w-[40vw] xl:w-[50vw] max-w-[50rem]"
         }`}
-        placeholder="Search Products"
+        placeholder={placeHolder}
       />
       <div className="flex absolute top-0 right-0 lg:right-8">
         <div className="h-8 w-8 ">
