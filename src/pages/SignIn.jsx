@@ -159,6 +159,32 @@ const SignIn = () => {
           >
             {isSignIn ? "Sign In" : isForgetPassword ? "Submit" : "Register"}
           </button>
+          {isSignIn && (
+            <div className="grid grid-cols-2 gap-4 w-full">
+              <button
+                type="button"
+                onClick={() => {
+                  validateForm(() => {
+                    signIn("admin", "Pa$$w0rd");
+                  });
+                }}
+                className="btn btn-main text-sm font-medium px-5 py-2"
+              >
+                Admin Test
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  validateForm(() => {
+                    signIn("michael789", "Pa$$w0rd");
+                  });
+                }}
+                className="btn btn-main text-sm font-medium px-5 py-2"
+              >
+                User Test
+              </button>
+            </div>
+          )}
           <button
             type="button"
             onClick={() => {

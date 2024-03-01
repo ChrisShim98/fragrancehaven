@@ -57,6 +57,8 @@ export const formTitleParser = (input) => {
     return "CVV Code";
   } else if (input === "expiryDate") {
     return "Expiry Date (MM/YY)";
+  } else if (input === "cardNumber") {
+    return "Card Number - Any 16 digits"
   }
   var words = input.split(/(?=[A-Z])/);
   var result = words.map(function (word) {
