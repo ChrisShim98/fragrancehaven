@@ -149,6 +149,7 @@ const Navbar = ({ display }) => {
             onClick={() => {
               setSearchOpened(false);
               setNavOpened(false);
+              scrollToTop()
             }}
             to="/cart"
             className="flex relative top-[-1px]"
@@ -193,6 +194,7 @@ const Navbar = ({ display }) => {
             to="/"
             onClick={() => {
               setNavOpened(false);
+              scrollToTop();
             }}
             className="link"
           >
@@ -208,6 +210,7 @@ const Navbar = ({ display }) => {
             }
             onClick={() => {
               setNavOpened(false);
+              scrollToTop();
             }}
             className="link"
           >
@@ -221,6 +224,7 @@ const Navbar = ({ display }) => {
             to="/allProducts"
             onClick={() => {
               setNavOpened(false);
+              scrollToTop();
             }}
             className="link"
           >
@@ -230,6 +234,7 @@ const Navbar = ({ display }) => {
             to="/aboutUs"
             onClick={() => {
               setNavOpened(false);
+              scrollToTop();
             }}
             className="link"
           >
@@ -239,6 +244,7 @@ const Navbar = ({ display }) => {
             to="/faqs"
             onClick={() => {
               setNavOpened(false);
+              scrollToTop();
             }}
             className="link"
           >

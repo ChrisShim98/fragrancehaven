@@ -53,17 +53,20 @@ const SignIn = () => {
     setForm(updatedForm);
   };
 
-  const validateForm = (postFunction) => {
+  const validateForm = (postFunction, demo = false) => {
     dispatch(setLoading(true));
     let isFormValid = true;
     let updatedForm = { ...form };
-    for (let key in updatedForm) {
-      updatedForm[key].errorMessage = fieldValidator(
-        key,
-        updatedForm[key].value
-      );
-      if (updatedForm[key].errorMessage !== "") {
-        isFormValid = false;
+    
+    if (!demo) {
+      for (let key in updatedForm) {
+        updatedForm[key].errorMessage = fieldValidator(
+          key,
+          updatedForm[key].value
+        );
+        if (updatedForm[key].errorMessage !== "") {
+          isFormValid = false;
+        }
       }
     }
 
