@@ -52,7 +52,7 @@ const Navbar = ({ display }) => {
       }
     >
       <div className="grid grid-flow-col items-center px-6 py-1">
-        <Link to="/">
+        <Link to="/" onClick={() => scrollToTop()}>
           <img
             src="/logo.png"
             alt="Logo"
@@ -68,19 +68,19 @@ const Navbar = ({ display }) => {
             setSearchWord={setSearchWord}
           />
           <div className="grid grid-flow-col font-medium justify-center items-center gap-8">
-            <Link to="/" className="link">
+            <Link to="/" onClick={() => scrollToTop()} className="link">
               Home
             </Link>
             <p>|</p>
-            <Link to="/allProducts" className="link">
+            <Link to="/allProducts" onClick={() => scrollToTop()} className="link">
               All Products
             </Link>
             <p>|</p>
-            <Link to="/aboutUs" className="link">
+            <Link to="/aboutUs" onClick={() => scrollToTop()} className="link">
               About Us
             </Link>
             <p>|</p>
-            <Link to="/faqs" className="link">
+            <Link to="/faqs" onClick={() => scrollToTop()} className="link">
               FAQs
             </Link>
           </div>
@@ -95,6 +95,7 @@ const Navbar = ({ display }) => {
                   ? "/myAccount"
                   : "/signIn"
             }
+            onClick={() => scrollToTop()}
             className="link"
           >
             {adminCheck
@@ -105,6 +106,7 @@ const Navbar = ({ display }) => {
           </Link>
           <Link
             to="/cart"
+            onClick={() => scrollToTop()}
             className="flex place-items-center gap-1 link relative"
           >
             <BsCart />
@@ -149,7 +151,7 @@ const Navbar = ({ display }) => {
             onClick={() => {
               setSearchOpened(false);
               setNavOpened(false);
-              scrollToTop()
+              scrollToTop();
             }}
             to="/cart"
             className="flex relative top-[-1px]"
