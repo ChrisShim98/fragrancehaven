@@ -52,11 +52,14 @@ const Navbar = ({ display }) => {
       }
     >
       <div className="grid grid-flow-col items-center px-6 py-1">
-        <img
-          src="/logo.png"
-          alt="Logo"
-          className="h-16 md:h-20 lg:h-24 relative left-[-0.5rem] pr-8"
-        />
+        <Link to="/">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="h-16 md:h-20 lg:h-24 relative left-[-0.5rem] pr-8 hover:cursor-pointer"
+          />
+        </Link>
+
         {/* Desktop View */}
         <div className="hidden lg:grid gap-2 mt-[30px] py-2 justify-center">
           <SearchBar
@@ -89,16 +92,16 @@ const Navbar = ({ display }) => {
               adminCheck
                 ? "./adminDashboard"
                 : userLoggedIn
-                ? "/myAccount"
-                : "/signIn"
+                  ? "/myAccount"
+                  : "/signIn"
             }
             className="link"
           >
             {adminCheck
               ? "Admin Dashboard"
               : userLoggedIn
-              ? "My Account"
-              : "Sign In"}
+                ? "My Account"
+                : "Sign In"}
           </Link>
           <Link
             to="/cart"
@@ -181,8 +184,8 @@ const Navbar = ({ display }) => {
           navOpened && userLoggedIn
             ? "w-full bg-white text-undertone h-[14rem] lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
             : navOpened
-            ? "w-full bg-white text-undertone h-[12rem] lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
-            : "w-full bg-gray-100 text-undertone h-0 lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
+              ? "w-full bg-white text-undertone h-[12rem] lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem] shadow-lg"
+              : "w-full bg-gray-100 text-undertone h-0 lg:hidden overflow-hidden duration-1000 absolute top-[4.4rem] md:top-[5.3rem]"
         }
       >
         <ul className="lg:hidden gap-2 grid place-items-center text-lg font-medium">
@@ -200,8 +203,8 @@ const Navbar = ({ display }) => {
               adminCheck
                 ? "./adminDashboard"
                 : userLoggedIn
-                ? "/myAccount"
-                : "/signIn"
+                  ? "/myAccount"
+                  : "/signIn"
             }
             onClick={() => {
               setNavOpened(false);
@@ -211,8 +214,8 @@ const Navbar = ({ display }) => {
             {adminCheck
               ? "Admin Dashboard"
               : userLoggedIn
-              ? "My Account"
-              : "Sign In"}
+                ? "My Account"
+                : "Sign In"}
           </Link>
           <Link
             to="/allProducts"

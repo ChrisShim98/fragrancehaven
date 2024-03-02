@@ -1,6 +1,7 @@
 import React from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "../helpers/scrollToTop";
 
 const Footer = () => {
   return (
@@ -36,22 +37,22 @@ const Footer = () => {
             <div>
               <p className="font-medium tracking-wide">USEFUL LINKS</p>
               <ul className="mt-2 space-y-2 text-sm">
-                <li>
+                <li onClick={() => scrollToTop()}>
                   <Link to="/" className="link">
                     Home
                   </Link>
                 </li>
-                <li>
+                <li onClick={() => scrollToTop()}>
                   <Link to="/allProducts" className="link">
                     All Products
                   </Link>
                 </li>
-                <li>
+                <li onClick={() => scrollToTop()}>
                   <Link to="/myAccount" className="link">
                     My Account
                   </Link>
                 </li>
-                <li>
+                <li onClick={() => scrollToTop()}>
                   <Link to="/faqs" className="link">
                     FAQs
                   </Link>
