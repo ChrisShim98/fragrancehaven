@@ -68,7 +68,7 @@ export function useCartFunctions() {
       dispatch(setLoading(false));
     } else {
       let foundProduct = cart.find(
-        (cartProduct) => cartProduct.name == product.name
+        (cartProduct) => cartProduct.name === product.name
       );
       if (
         foundProduct !== undefined &&

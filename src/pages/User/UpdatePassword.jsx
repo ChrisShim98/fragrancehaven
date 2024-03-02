@@ -3,7 +3,7 @@ import FormField from "../../components/form/FormField";
 import { updatePasswordForm } from "../../constants/formFields";
 import { formTitleParser } from "../../helpers/formParser";
 import { fieldValidator } from "../../components/form/formValidator";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLoading } from "../../redux/loadingSlice";
 import { PostUpdatePassword } from "../../api/accountRequests";
 import { closePopup, openPopup } from "../../redux/popupSlice";

@@ -34,7 +34,7 @@ const Homepage = () => {
   
   return (
     products.length > 0 && (
-      <div>
+      <div className="flex flex-col">
         <CarouselComp />
         <FeaturedProduct products={products} />
         <TopProduct products={products} />

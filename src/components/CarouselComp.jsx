@@ -1,9 +1,7 @@
-import React, { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const CarouselComp = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   return (
     <div className="h-[30rem] w-screen">
       <Carousel
@@ -15,7 +13,6 @@ const CarouselComp = () => {
         transitionTime={1000}
         interval={5000}
         animationHandler={"fade"}
-        onChange={setCurrentSlide}
         swipeable={false}
         autoPlay
         className="p-0"

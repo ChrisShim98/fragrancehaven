@@ -7,7 +7,7 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { addDetail, selectLiked, editLiked } from "../redux/cartSlice";
+import { selectLiked, editLiked } from "../redux/cartSlice";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../helpers/scrollToTop";
 import { priceParse, parseRating } from "../helpers/formParser";
@@ -29,7 +29,7 @@ const ProductCard = ({ product, isDetailed = false }) => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center h-full">
       <div
         className={
           isDetailed

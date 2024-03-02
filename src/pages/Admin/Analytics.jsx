@@ -139,7 +139,7 @@ const Analytics = () => {
         </div>
       )}
     </React.Fragment>
-  );1``
+  );
 };
 
 export default Analytics;

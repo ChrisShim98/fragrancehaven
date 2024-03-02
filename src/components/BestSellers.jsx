@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { Link } from "react-router-dom";
 
@@ -12,10 +11,10 @@ const BestSellers = ({ products }) => {
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 place-content-center gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center gap-8">
         {products.slice(0, 6).map((product) => {
           return (
-            <div className="flex h-full items-end" key={product.id}>
+            <div className="flex items-end" key={product.id}>
               <ProductCard product={product} />
             </div>
           );
