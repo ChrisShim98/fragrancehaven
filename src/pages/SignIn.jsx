@@ -169,7 +169,7 @@ const SignIn = () => {
                 onClick={() => {
                   validateForm(() => {
                     signIn("admin", "Pa$$w0rd");
-                  });
+                  }, true);
                 }}
                 className="btn btn-main text-sm font-medium px-5 py-2"
               >
@@ -180,7 +180,7 @@ const SignIn = () => {
                 onClick={() => {
                   validateForm(() => {
                     signIn("michael789", "Pa$$w0rd");
-                  });
+                  }, true);
                 }}
                 className="btn btn-main text-sm font-medium px-5 py-2"
               >

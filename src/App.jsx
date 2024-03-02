@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import AboutUs from "./pages/AboutUs";
 import ProductDetails from "./pages/ProductDetails";
@@ -21,12 +21,10 @@ import AdminProtectedRoute from "./helpers/AdminProtectedRoute";
 import AdminDashboard from "./pages/AdminDashboard";
 import Loading from "./components/Loading";
 import { selectLoading } from "./redux/loadingSlice";
-import { scrollToTop } from "./helpers/scrollToTop";
 import { useCartFunctions } from "./helpers/customHooks/CartFunctions";
 import PaymentSuccessful from "./pages/User/PaymentSuccessful";
 
 function App() {
-  const { pathname } = useLocation();
   const [scrollPosition, setScrollPosition] = useState(0);
   const popupDetails = useSelector(selectPopup);
   const loadingDetails = useSelector(selectLoading);
@@ -51,11 +49,6 @@ function App() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    scrollToTop();
-    window.history.scrollRestoration = "manual";
-  }, [pathname]);
 
   const toTop = () => {
     document.documentElement.scrollTo({
