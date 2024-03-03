@@ -1,6 +1,6 @@
 # Fragrance Haven - E-Commerce Web Application
  <p align="center">
- <b>Developed with .NET Core 7.0 x Bootstrap 5 x React.js</b>
+ <b>Developed with .NET Core 7.0 x Tailwind.CSS x React.js</b>
  <img src="https://res.cloudinary.com/dhpo94oka/image/upload/v1709399843/Github/Description/m52d4ld8nwaugu6zruum.png" alt="Tech Stacks">
  </p>
 
