@@ -7,6 +7,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Checkout = () => {
   const [placeOrder, setPlaceOrder] = useState(false);
+  const [isError, setIsError] = useState(false)
   return (
     <div className="flex flex-col w-screen gap-8 pb-8">
       <PageHeader pageHeader={"Checkout"} />
@@ -16,6 +17,7 @@ const Checkout = () => {
             <BillingDetails
               placeOrder={placeOrder}
               setPlaceOrder={setPlaceOrder}
+              setIsError={setIsError}
             />
           </div>
           <div className="md:col-span-2 flex flex-col">
@@ -37,6 +39,7 @@ const Checkout = () => {
               <FaArrowLeft />
               Go Back
             </Link>
+           {isError && <p className="text-red-500 pt-4">Check form for errors!</p>}
           </div>
         </div>
       </div>

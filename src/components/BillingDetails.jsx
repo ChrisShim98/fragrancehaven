@@ -5,7 +5,11 @@ import { formTitleParser } from "../helpers/formParser";
 import { fieldValidator } from "./form/formValidator";
 import { useApiCallFunctions } from "../helpers/customHooks/ApiCallFunctions";
 
-const BillingDetails = ({ placeOrder, setPlaceOrder = () => {} }) => {
+const BillingDetails = ({
+  placeOrder,
+  setPlaceOrder = () => {},
+  setIsError = () => {},
+}) => {
   const [form, setForm] = useState();
   const { submitOrder } = useApiCallFunctions();
 
@@ -44,6 +48,7 @@ const BillingDetails = ({ placeOrder, setPlaceOrder = () => {} }) => {
       submitOrder(form);
     }
     setForm(() => {
+      setIsError(true);
       return updatedForm;
     });
   };
