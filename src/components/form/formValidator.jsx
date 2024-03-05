@@ -61,7 +61,7 @@ export const passwordValidation = (password) => {
   let result;
   /^(?=.*[0-9])(?=.*[!@#$%^&*-])[a-zA-Z0-9!@#$%^&*-]{8,}$/.test(password)
     ? (result = "")
-    : (result = "Password is invalid");
+    : (result = "Password must be at least 8 characters long and contain at least one number and one special character (!@#$%^&*-)");
   return result;
 };
 
@@ -80,7 +80,10 @@ export const fieldValidator = (fieldName, value) => {
     return expiryDateValidation(value);
   } else if (fieldName === "cvv") {
     return cvvValidation(value);
-  } else {
+  } else if (fieldName === "password") {
+     return passwordValidation(value);
+  }
+  else {
     return "";
   }
 };
